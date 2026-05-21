@@ -1,0 +1,10 @@
+indice.txt
+
+# Project Index
+
+This file maps the documentation hierarchy located in the `_docs` folder.
+
+- UI Screens index: `_docs/0200_Indice_Telas.md`
+- Hooks & utilities index: `_docs/0300_Indice_Hooks.md`
+- Supabase client documentation: `_docs/0301_useSupabaseClients.md`
+- Todos page documentation: `_docs/0201_Todos.md`
