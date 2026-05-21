@@ -17,8 +17,8 @@ export const createClient = (request: NextRequest) => {
       },
       setAll(cookiesToSet) {
         // Apply Supabase's Set-Cookie headers to the outgoing response
-        cookiesToSet.forEach(({ name, value, options }) =>
-          request.cookies.set(name, value, options)
+        cookiesToSet.forEach(({ name, value }) =>
+          request.cookies.set(name, value)
         );
         supabaseResponse = NextResponse.next({ request });
         cookiesToSet.forEach(({ name, value, options }) =>
