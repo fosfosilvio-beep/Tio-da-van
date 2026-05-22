@@ -1,15 +1,16 @@
-/* Custom variables for a premium dark space theme */
+/* Custom variables for a premium warm pastel theme inspired by the Mockups */
 :root {
-  --background: 220 33% 8%; /* Slate-black background */
-  --foreground: 210 40% 98%;
-  --primary: 263.4 83.3% 57.8%; /* Deep neon indigo/purple */
-  --primary-glow: hsla(263, 83%, 58%, 0.15);
-  --secondary: 190 90% 50%; /* Electric cyan */
-  --secondary-glow: hsla(190, 90%, 50%, 0.15);
-  --success: 142.1 70.6% 45.3%; /* Emerald green */
-  --danger: 0 84.2% 60.2%; /* Coral red */
-  --card-bg: rgba(15, 23, 42, 0.45); /* Glassmorphism background */
-  --card-border: rgba(255, 255, 255, 0.08);
+  --background: 45 28% 97%; /* Soft warm off-white sand-beige #FAF8F3 */
+  --foreground: 210 40% 10%; /* Dark Charcoal slate #0F1B24 */
+  --primary: 172 58% 77%; /* Soft Mint Teal/Cyan #A2E8DF */
+  --primary-glow: rgba(162, 232, 223, 0.35);
+  --secondary: 206 58% 51%; /* Ocean Blue #3E8AC8 */
+  --secondary-glow: rgba(62, 138, 200, 0.25);
+  --success: 142 71% 45%; /* Soft green */
+  --danger: 0 84% 60%; /* Soft red */
+  --warning: 43 89% 64%; /* Golden Honey Yellow #F5C754 */
+  --card-bg: #ffffff;
+  --card-border: #E8E4D9;
   --font-family-title: var(--font-outfit), system-ui, sans-serif;
   --font-family-body: var(--font-inter), system-ui, sans-serif;
 }
@@ -36,21 +37,19 @@ body {
   overflow-x: hidden;
   padding: 2rem;
   background-image: 
-    radial-gradient(at 0% 0%, hsla(263, 83%, 58%, 0.12) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, hsla(190, 90%, 50%, 0.12) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(162, 232, 223, 0.25) 0px, transparent 60%),
+    radial-gradient(at 100% 100%, rgba(62, 138, 200, 0.15) 0px, transparent 60%);
 }
 
-/* Main Container with glassmorphism */
+/* Main Container styled with warm card overlays */
 .app-container {
   width: 100%;
-  max-width: 550px;
+  max-width: 600px;
   background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 15px 35px rgba(15, 27, 36, 0.06), 0 5px 15px rgba(15, 27, 36, 0.02);
   animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -62,22 +61,19 @@ body {
 
 .app-title {
   font-family: var(--font-family-title);
-  font-weight: 700;
-  font-size: 2.2rem;
-  background: linear-gradient(135deg, #fff 30%, hsl(var(--primary)) 70%, hsl(var(--secondary)) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.5px;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: hsl(var(--foreground));
+  letter-spacing: -1px;
 }
 
 .app-subtitle {
-  color: hsla(210, 40%, 98%, 0.6);
-  font-size: 0.95rem;
-  font-weight: 400;
+  color: rgba(15, 27, 36, 0.6);
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-/* Todo List Container */
+/* Todo List / Launchpad items */
 .todo-list {
   list-style: none;
   display: flex;
@@ -86,51 +82,38 @@ body {
   margin-top: 1.5rem;
 }
 
-/* Todo Item with micro-animations */
+/* Todo Item with warm rounded design matching Mockups */
 .todo-item {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 14px;
-  padding: 1.1rem 1.4rem;
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.todo-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--secondary)));
-  border-radius: 4px 0 0 4px;
-  opacity: 0.8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.015);
 }
 
 .todo-item:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: #FAF9F6;
+  border-color: #DCD8CB;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(15, 27, 36, 0.08);
 }
 
 .todo-name {
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 600;
   color: hsl(var(--foreground));
-  letter-spacing: -0.2px;
 }
 
 .todo-id {
   font-size: 0.8rem;
   font-family: monospace;
-  color: hsla(210, 40%, 98%, 0.4);
-  background: rgba(255, 255, 255, 0.04);
+  color: rgba(15, 27, 36, 0.5);
+  background: rgba(15, 27, 36, 0.04);
   padding: 0.2rem 0.5rem;
   border-radius: 6px;
 }
@@ -143,20 +126,40 @@ body {
   gap: 1rem;
   padding: 3rem 1.5rem;
   text-align: center;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.01);
+  border: 1px dashed #DCD8CB;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .empty-icon {
   font-size: 2.5rem;
-  opacity: 0.7;
   animation: pulse 2s infinite ease-in-out;
 }
 
 .empty-text {
-  color: hsla(210, 40%, 98%, 0.5);
+  color: rgba(15, 27, 36, 0.5);
   font-size: 0.95rem;
+}
+
+/* Primary Button Styled like Prints */
+.btn-mock {
+  background-color: hsl(var(--secondary));
+  color: white;
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  box-shadow: 0 4px 10px rgba(62, 138, 200, 0.25);
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.btn-mock:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(62, 138, 200, 0.35);
 }
 
 /* Animations */
@@ -185,11 +188,11 @@ body {
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.6;
+    opacity: 0.7;
   }
   50% {
-    transform: scale(1.08);
-    opacity: 0.9;
+    transform: scale(1.06);
+    opacity: 1;
   }
 }
 

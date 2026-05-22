@@ -25,11 +25,11 @@ export default async function Page(): Promise<React.JSX.Element> {
       title: "Painel Master (Admin)",
       path: "/dashboard",
       icon: "🚐",
-      description: "Visão consolidada do negócio. KPIs de faturamento, gráficos de receita compostos e distribuição de transportadores.",
-      badge: "WowDash Premium",
-      color: "hsl(263, 83%, 68%)",
-      glowColor: "rgba(139, 92, 246, 0.15)",
-      borderColor: "rgba(139, 92, 246, 0.25)"
+      description: "Visão unificada do negócio. KPIs de faturamento, gráficos de receita compostos e distribuição de transportadores.",
+      badge: "Mockup Style",
+      color: "hsl(172, 58%, 57%)", /* Mint Teal */
+      glowColor: "rgba(162, 232, 223, 0.1)",
+      textColor: "hsl(var(--foreground))"
     },
     {
       title: "Gestão de Motoristas",
@@ -37,9 +37,9 @@ export default async function Page(): Promise<React.JSX.Element> {
       icon: "👥",
       description: "Controle cadastral de frotas escolares, capacidade máxima de passageiros, controle de status CNH e áreas cobertas.",
       badge: "Base Relacional",
-      color: "hsl(190, 90%, 55%)",
-      glowColor: "rgba(6, 182, 212, 0.15)",
-      borderColor: "rgba(6, 182, 212, 0.25)"
+      color: "hsl(206, 58%, 51%)", /* Ocean Blue */
+      glowColor: "rgba(62, 138, 200, 0.08)",
+      textColor: "hsl(var(--foreground))"
     },
     {
       title: "Cobranças & Pix Sim",
@@ -47,9 +47,9 @@ export default async function Page(): Promise<React.JSX.Element> {
       icon: "💸",
       description: "Faturamento preventivo automatizado com D+3 de vencimento. Simuladores de webhooks Mercado Pago e Pix.",
       badge: "Mercado Pago Split",
-      color: "hsl(142, 71%, 55%)",
-      glowColor: "rgba(16, 185, 129, 0.15)",
-      borderColor: "rgba(16, 185, 129, 0.25)"
+      color: "hsl(142, 71%, 45%)", /* Green */
+      glowColor: "rgba(16, 185, 129, 0.08)",
+      textColor: "hsl(var(--foreground))"
     },
     {
       title: "Faturamento & Splits",
@@ -57,9 +57,9 @@ export default async function Page(): Promise<React.JSX.Element> {
       icon: "📈",
       description: "Divisão de receitas inteligente: taxa de comissão da plataforma (5%) e repasse para contas de motoristas (95%).",
       badge: "Fintech Engine",
-      color: "hsl(0, 84%, 68%)",
-      glowColor: "rgba(239, 68, 68, 0.15)",
-      borderColor: "rgba(239, 68, 68, 0.25)"
+      color: "hsl(0, 84%, 60%)", /* Red */
+      glowColor: "rgba(239, 68, 68, 0.08)",
+      textColor: "hsl(var(--foreground))"
     }
   ];
 
@@ -71,9 +71,10 @@ export default async function Page(): Promise<React.JSX.Element> {
       alignItems: "center",
       justifyContent: "center",
       padding: "2rem 1rem",
-      position: "relative"
+      position: "relative",
+      zIndex: 1
     }}>
-      {/* Decorative Blur Orbs */}
+      {/* Decorative Warm Blur Orbs */}
       <div style={{
         position: "absolute",
         top: "10%",
@@ -81,8 +82,8 @@ export default async function Page(): Promise<React.JSX.Element> {
         width: "300px",
         height: "300px",
         borderRadius: "50%",
-        background: "hsla(263, 83%, 58%, 0.15)",
-        filter: "blur(80px)",
+        background: "rgba(162, 232, 223, 0.25)",
+        filter: "blur(90px)",
         pointerEvents: "none",
         zIndex: 0
       }} />
@@ -93,8 +94,8 @@ export default async function Page(): Promise<React.JSX.Element> {
         width: "350px",
         height: "350px",
         borderRadius: "50%",
-        background: "hsla(190, 90%, 50%, 0.12)",
-        filter: "blur(90px)",
+        background: "rgba(62, 138, 200, 0.15)",
+        filter: "blur(100px)",
         pointerEvents: "none",
         zIndex: 0
       }} />
@@ -102,13 +103,11 @@ export default async function Page(): Promise<React.JSX.Element> {
       <main style={{
         width: "100%",
         maxWidth: "920px",
-        background: "rgba(10, 15, 30, 0.45)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
-        border: "1px solid rgba(255, 255, 255, 0.07)",
+        background: "#ffffff",
+        border: "1px solid var(--card-border)",
         borderRadius: "32px",
         padding: "3.5rem 3rem",
-        boxShadow: "0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+        boxShadow: "0 25px 55px rgba(15, 27, 36, 0.06), 0 5px 15px rgba(15, 27, 36, 0.02)",
         position: "relative",
         zIndex: 1,
         animation: "fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
@@ -119,37 +118,34 @@ export default async function Page(): Promise<React.JSX.Element> {
             display: "inline-flex",
             alignItems: "center",
             gap: "0.5rem",
-            background: "linear-gradient(135deg, hsla(263, 83%, 58%, 0.2), hsla(190, 90%, 50%, 0.1))",
-            border: "1px solid hsla(263, 83%, 58%, 0.25)",
-            padding: "0.35rem 1rem",
+            background: "rgba(162, 232, 223, 0.25)",
+            border: "1px solid rgba(162, 232, 223, 0.4)",
+            padding: "0.4rem 1.25rem",
             borderRadius: "50px",
-            fontSize: "0.75rem",
+            fontSize: "0.78rem",
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "1px",
-            color: "hsl(263, 83%, 80%)",
+            color: "rgba(15, 27, 36, 0.8)",
             marginBottom: "1rem"
           }}>
             ⚡ Console de Controle Master
           </div>
           <h1 style={{
             fontSize: "3.2rem",
-            fontWeight: 800,
+            fontWeight: 850,
             margin: 0,
             letterSpacing: "-1.5px",
             fontFamily: "var(--font-family-title)",
-            background: "linear-gradient(135deg, #ffffff 20%, hsl(263, 83%, 72%) 70%, hsl(190, 90%, 50%) 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "0 4px 20px rgba(139, 92, 246, 0.15)"
+            color: "hsl(var(--foreground))"
           }}>
             Tio da Van
           </h1>
           <p style={{
-            color: "rgba(255, 255, 255, 0.65)",
+            color: "rgba(15, 27, 36, 0.6)",
             fontSize: "1.15rem",
             marginTop: "0.5rem",
-            fontWeight: 400,
+            fontWeight: 500,
             lineHeight: "1.4"
           }}>
             Engenharia Financeira, Gestão de Frotas e Logística Escolar em Tempo Real
@@ -166,24 +162,24 @@ export default async function Page(): Promise<React.JSX.Element> {
             display: "flex",
             alignItems: "center",
             gap: "0.6rem",
-            background: "rgba(255, 255, 255, 0.03)",
-            border: "1px solid rgba(255, 255, 255, 0.06)",
+            background: "#FAF8F3",
+            border: "1px solid var(--card-border)",
             padding: "0.5rem 1.25rem",
             borderRadius: "14px",
             fontSize: "0.85rem",
-            fontWeight: 500,
+            fontWeight: 600,
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.02)"
           }}>
             <span style={{
               width: "8px",
               height: "8px",
               borderRadius: "50%",
-              background: isDbConnected ? "hsl(142, 71%, 55%)" : "hsl(0, 84%, 60%)",
-              boxShadow: isDbConnected ? "0 0 10px hsl(142, 71%, 55%)" : "0 0 10px hsl(0, 84%, 60%)",
+              background: isDbConnected ? "hsl(142, 71%, 45%)" : "hsl(0, 84%, 60%)",
+              boxShadow: isDbConnected ? "0 0 10px rgba(16, 185, 129, 0.5)" : "0 0 10px rgba(239, 68, 68, 0.5)",
               display: "inline-block"
             }} />
-            <span style={{ color: "rgba(255, 255, 255, 0.45)" }}>Telemetria Supabase:</span>
-            <span style={{ color: isDbConnected ? "hsl(142, 71%, 55%)" : "rgba(255, 255, 255, 0.7)", fontWeight: 600 }}>
+            <span style={{ color: "rgba(15, 27, 36, 0.5)" }}>Telemetria Supabase:</span>
+            <span style={{ color: isDbConnected ? "#10B981" : "#EF4444", fontWeight: 700 }}>
               {dbStatus}
             </span>
           </div>
@@ -213,18 +209,19 @@ export default async function Page(): Promise<React.JSX.Element> {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  background: "rgba(255, 255, 255, 0.02)",
-                  border: `1px solid rgba(255, 255, 255, 0.05)`,
-                  borderLeft: `4px solid ${mod.color}`,
-                  borderRadius: "20px",
+                  background: "#ffffff",
+                  border: `1px solid var(--card-border)`,
+                  borderLeft: `5px solid ${mod.color}`,
+                  borderRadius: "22px",
                   padding: "1.8rem",
-                  transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                  transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                   cursor: "pointer",
                   position: "relative",
-                  overflow: "hidden"
+                  overflow: "hidden",
+                  boxShadow: "0 4px 12px rgba(15, 27, 36, 0.015)"
                 }}
               >
-                {/* Glow Overlay behind cards on hover (triggers dynamically using CSS inside app-container) */}
+                {/* Glow Overlay behind cards on hover */}
                 <div style={{
                   position: "absolute",
                   top: 0,
@@ -232,7 +229,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                   width: "100%",
                   height: "100%",
                   background: `radial-gradient(circle at 100% 0%, ${mod.glowColor}, transparent 60%)`,
-                  opacity: 0.5,
+                  opacity: 0.8,
                   pointerEvents: "none",
                   zIndex: 0
                 }} />
@@ -249,25 +246,25 @@ export default async function Page(): Promise<React.JSX.Element> {
                       width: "48px",
                       height: "48px",
                       borderRadius: "14px",
-                      background: `rgba(255, 255, 255, 0.03)`,
-                      border: `1px solid rgba(255, 255, 255, 0.06)`,
+                      background: `#FAF8F3`,
+                      border: `1px solid var(--card-border)`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       fontSize: "1.6rem",
-                      boxShadow: "0 8px 16px rgba(0,0,0,0.15)"
+                      boxShadow: "0 3px 8px rgba(0,0,0,0.03)"
                     }}>
                       {mod.icon}
                     </div>
                     <span style={{
-                      fontSize: "0.68rem",
+                      fontSize: "0.7rem",
                       fontWeight: 700,
                       textTransform: "uppercase",
                       padding: "0.3rem 0.75rem",
                       borderRadius: "8px",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      color: "rgba(255, 255, 255, 0.5)",
-                      border: "1px solid rgba(255, 255, 255, 0.07)",
+                      background: "rgba(15, 27, 36, 0.03)",
+                      color: "rgba(15, 27, 36, 0.5)",
+                      border: "1px solid var(--card-border)",
                       letterSpacing: "0.5px"
                     }}>
                       {mod.badge}
@@ -277,11 +274,11 @@ export default async function Page(): Promise<React.JSX.Element> {
                   {/* Title & Description */}
                   <h3 style={{
                     fontSize: "1.35rem",
-                    fontWeight: 700,
+                    fontWeight: 800,
                     margin: "0 0 0.6rem 0",
                     letterSpacing: "-0.4px",
                     fontFamily: "var(--font-family-title)",
-                    color: "#ffffff"
+                    color: "hsl(var(--foreground))"
                   }}>
                     {mod.title}
                   </h3>
@@ -289,7 +286,7 @@ export default async function Page(): Promise<React.JSX.Element> {
                     margin: 0,
                     fontSize: "0.92rem",
                     lineHeight: "1.5",
-                    color: "rgba(255, 255, 255, 0.6)"
+                    color: "rgba(15, 27, 36, 0.65)"
                   }}>
                     {mod.description}
                   </p>
@@ -300,9 +297,9 @@ export default async function Page(): Promise<React.JSX.Element> {
                   position: "relative",
                   zIndex: 1,
                   alignSelf: "flex-end",
-                  fontSize: "0.82rem",
+                  fontSize: "0.85rem",
                   fontWeight: 700,
-                  color: mod.color,
+                  color: mod.color === "hsl(172, 58%, 57%)" ? "hsl(206, 58%, 51%)" : mod.color, /* fallback teal to blue for high contrast text */
                   display: "flex",
                   alignItems: "center",
                   gap: "0.35rem",
@@ -320,9 +317,9 @@ export default async function Page(): Promise<React.JSX.Element> {
         <footer style={{
           marginTop: "3rem",
           textAlign: "center",
-          fontSize: "0.8rem",
-          color: "rgba(255, 255, 255, 0.3)",
-          borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+          fontSize: "0.82rem",
+          color: "rgba(15, 27, 36, 0.4)",
+          borderTop: "1px solid var(--card-border)",
           paddingTop: "1.5rem",
           display: "flex",
           justifyContent: "space-between",
@@ -330,12 +327,12 @@ export default async function Page(): Promise<React.JSX.Element> {
           flexWrap: "wrap",
           gap: "1rem"
         }}>
-          <span>Tio da Van &copy; 2026 • Painel Admin Master</span>
+          <span style={{ fontWeight: 600 }}>Tio da Van &copy; 2026 • Painel Admin Master</span>
           <span style={{
-            fontSize: "0.75rem",
-            color: "rgba(255, 255, 255, 0.2)"
+            fontSize: "0.78rem",
+            color: "rgba(15, 27, 36, 0.3)"
           }}>
-            WowDash High-Fidelity Conversion • Next.js 16 (Turbopack)
+            Mockup Palette Integration • Next.js 16 (Turbopack)
           </span>
         </footer>
       </main>
