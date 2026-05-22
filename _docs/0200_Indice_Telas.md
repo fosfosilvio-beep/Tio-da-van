@@ -6,3 +6,4 @@
 - **0205_Motoristas.md** – Documenta a tela de Gestão de Motoristas (status, tabela, alerta CNH).
 - **0206_Cobrancas.md** – Documenta a tela de Gestão de Cobranças (KPIs, simulação Pix e Cron).
 - **0207_Faturamento.md** – Documenta a tela de Faturamento & Payouts (splits, comissões, gráfico CSS).
+- **0209_Roteamento_Dinamico.md** – Documenta o Roteamento Dinâmico e Responsivo (Mobile-First e Overrides).

@@ -196,8 +196,10 @@ body {
   }
 }
 
-/* ── Dashboard override: desativa centering do body ──────────────── */
-body:has(.dashboard-layout) {
+/* ── Layout overrides: desativa centering do body ──────────────── */
+body:has(.dashboard-layout),
+body:has(.smartphone-status-bar),
+body:has(#admin-panel) {
   display: block;
   align-items: initial;
   justify-content: initial;

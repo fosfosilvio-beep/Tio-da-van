@@ -22,4 +22,6 @@ This file maps the documentation hierarchy located in the `_docs` folder.
 - Faturamento & Payouts: `_docs/0207_Faturamento.md`
 - Módulos Financeiros (APIs/Webhooks): `_docs/0402_API_Financeira.md`
 - Simulador Interativo de Mockup: `_docs/0208_Simulador_Mockup.md`
+- Roteamento Dinâmico e Responsivo: `_docs/0209_Roteamento_Dinamico.md`
+
 
