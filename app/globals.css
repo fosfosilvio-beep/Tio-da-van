@@ -192,3 +192,13 @@ body {
     opacity: 0.9;
   }
 }
+
+/* ── Dashboard override: desativa centering do body ──────────────── */
+body:has(.dashboard-layout) {
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+  padding: 0;
+  background-image: none;
+  overflow-x: hidden;
+}

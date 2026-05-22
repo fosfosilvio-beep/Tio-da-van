@@ -1,0 +1,21 @@
+[2026-05-22 17:08:00] [INFO] Inicialização do aprendizado de escopo do projeto Tio da Van.
+[2026-05-22 17:08:15] [INFO] Criado arquivo de documentação de escopo: _docs/0100_Escopo_Projeto.md contendo detalhes sobre perfis de usuários (Pais, Motoristas, Admin), arquitetura de dados (Usuários, Motoristas, Alunos, Cobranças) e funcionalidades essenciais (busca inteligente, avisos de faltas, notificações preventivas, rastreamento de rotas em tempo real, automação Asaas com split de 5%).
+[2026-05-22 17:08:30] [INFO] Atualizado o arquivo de índice mestre na raiz do projeto (indice.txt) para registrar o novo arquivo de documentação de escopo.
+[2026-05-22 17:15:00] [INFO] Criados documentos de arquitetura detalhados: 0102_Arquitetura_Stack.md (diagrama de módulos e stack) e 0103_Integracoes.md (Webhooks Mercado Pago e WebSockets GPS).
+[2026-05-22 17:15:05] [INFO] Criado documento de roadmap de produção com 5 fases de desenvolvimento: 0104_Roadmap.md.
+[2026-05-22 17:15:10] [INFO] Criado diagrama de Entidade-Relacionamento e schema de banco de dados no Supabase: 0401_Schema_Banco.md (Tabelas: usuarios, motoristas, alunos, cobrancas, posicao_motorista).
+[2026-05-22 17:15:15] [INFO] Atualizado o arquivo de índice mestre na raiz do projeto (indice.txt) para registrar os novos arquivos de documentação arquitetural e de banco de dados.
+[2026-05-22 17:21:00] [INFO] Auditoria e mapeamento do template gerencial WowDash NEXT JS realizados. Relatório criado em _docs/0203_Auditoria_WowDash_Template.md destacando componentes-chave a serem utilizados no Módulo C (Painel Administrativo Master) e sugerindo extração seletiva.
+[2026-05-22 17:25:00] [INFO] Executado 'git status' a pedido do usuário. Foram identificados o arquivo modificado (indice.txt) e os arquivos recém-criados/não rastreados (pasta de logs, novos arquivos em _docs e o template WowDash).
+[2026-05-22 17:35:00] [INFO] Acesso ao Supabase via ferramenta MCP realizado (Projeto: xexxnfhukprktdzkhnhi). Confirmado que o banco de dados está vazio (0 tabelas).
+[2026-05-22 17:38:00] [INFO] Criado e submetido o Plano Master de Implementação focando na infraestrutura Supabase (Fase 1) e extração estrutural (Cherry-Picking) do WowDash (Fase 2). Aguardando revisão do usuário.
+[2026-05-22 17:44:00] [INFO] FASE 1 COMPLETA — Schema SQL executado no Supabase via MCP. 5 tabelas criadas (usuarios, motoristas, alunos, cobrancas, posicao_motorista), ENUMs, índices e RLS habilitado.
+[2026-05-22 17:52:00] [INFO] FASE 2 INICIADA — Gerados tipos TypeScript via MCP (lib/supabase/database.types.ts).
+[2026-05-22 17:53:00] [INFO] Criados tipos de domínio (lib/types/index.ts) e mocks tipados (lib/mocks/dashboard.ts).
+[2026-05-22 17:55:00] [INFO] Criado design system completo (app/dashboard/dashboard.css) com dark theme premium, glassmorphism e componentes responsivos.
+[2026-05-22 17:56:00] [INFO] Criados 6 componentes TypeScript: Sidebar, Header, KpiCard, MotoristasTable, RevenueChart, DriverStatusDonut (todos em components/dashboard/).
+[2026-05-22 17:57:00] [INFO] Criados layout master (app/dashboard/layout.tsx) e páginas: /dashboard e /dashboard/motoristas.
+[2026-05-22 17:57:30] [INFO] Build Next.js (Turbopack) concluído com sucesso — 0 erros TypeScript, 6 rotas geradas.
+[2026-05-22 17:58:00] [INFO] FASE 2 COMPLETA — Documentação criada: 0204_Dashboard.md e 0205_Motoristas.md. Índices atualizados.
+[2026-05-22 18:10:00] [INFO] FASE 3 INICIADA — Desenvolvimento da Engenharia Financeira e Integração Mercado Pago.
+[2026-05-22 18:25:00] [INFO] FASE 3 COMPLETA — Engenharia Financeira integrada, webhooks de Pix Mercado Pago conciliados, cron de faturamento configurado, e telas de UI conectadas com o banco real do Supabase.
