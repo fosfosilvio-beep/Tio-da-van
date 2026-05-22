@@ -21,3 +21,5 @@
 [2026-05-22 18:25:00] [INFO] FASE 3 COMPLETA — Engenharia Financeira integrada, webhooks de Pix Mercado Pago conciliados, cron de faturamento configurado, e telas de UI conectadas com o banco real do Supabase.
 [2026-05-22 18:31:00] [INFO] FASE 3 DEPLOY — Executado build de produção com sucesso sem erros TypeScript. Puxado código para o repositório remoto Git.
 [2026-05-22 18:32:00] [INFO] FASE 3 COMPROMISSO — Sincronização e deploy total realizados. Repositório local e remoto perfeitamente alinhados.
+[2026-05-22 18:45:00] [INFO] PORTAL DE LANÇAMENTO — Otimizada a rota principal / para atuar como um Launchpad completo dos módulos de Dashboard, Faturamento, Cobranças e Motoristas, com telemetria live do Supabase.
+
