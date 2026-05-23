@@ -22,10 +22,10 @@ export default function AbsenceButton({
     <button
       onClick={handleToggle}
       disabled={isPending}
-      className={`relative w-full overflow-hidden rounded-2xl py-4 font-bold text-white transition-all active:scale-95 disabled:opacity-70 ${
+      className={`relative w-full overflow-hidden rounded-2xl py-4 font-bold transition-all active:scale-95 disabled:opacity-70 ${
         isAusenteHoje
-          ? "bg-red-500 hover:bg-red-600 shadow-[0_4px_14px_0_rgba(239,68,68,0.39)]"
-          : "bg-blue-500 hover:bg-blue-600 shadow-[0_4px_14px_0_rgba(59,130,246,0.39)]"
+          ? "bg-danger hover:bg-danger/90 text-white shadow-[0_4px_14px_0_rgba(239,68,68,0.39)]"
+          : "bg-primary hover:bg-primary/90 text-foreground shadow-glow"
       }`}
     >
       <div className="flex items-center justify-center gap-2 relative z-10">

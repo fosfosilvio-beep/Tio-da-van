@@ -1,5 +1,10 @@
-/* Global CSS Reset & Modern Baseline for Tio da Van */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@config "../tailwind.config.ts";
+
+/* Global CSS Reset & Modern Baseline for Tio da Van */
 :root {
   /* Dynamic pastel palette */
   --background: #FAF8F3;     /* Warm Sand-Beige */

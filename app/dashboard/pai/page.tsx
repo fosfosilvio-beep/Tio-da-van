@@ -53,98 +53,122 @@ export default async function DashboardPaiPage() {
   const placa = aluno?.motoristas_perfil?.placa_veiculo;
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans pb-24">
-      {/* Header Fixo */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200 px-6 py-4 shadow-sm">
-        <div className="max-w-md mx-auto flex justify-between items-center">
-          <div>
-            <p className="text-sm font-medium text-slate-500">Bem-vindo(a),</p>
-            <h1 className="text-xl font-bold text-slate-800">{nome}</h1>
+    <div className="relative min-h-[100dvh] w-full bg-background overflow-hidden flex flex-col">
+      {/* Background Dinâmico de Mapa (Glassmorphism Base) */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-multiply" 
+           style={{ 
+             backgroundImage: 'radial-gradient(circle at 50% 50%, #A2E8DF 10%, transparent 11%), radial-gradient(circle at 10% 80%, #3E8AC8 5%, transparent 6%), radial-gradient(circle at 80% 20%, #F5C754 5%, transparent 6%)', 
+             backgroundSize: '100px 100px',
+             filter: 'blur(3px)'
+           }}>
+      </div>
+      
+      {/* Grade abstrata do mapa */}
+      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none"
+           style={{ backgroundImage: 'radial-gradient(#0F1B24 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
+      </div>
+
+      <div className="relative z-10 flex flex-col h-[100dvh]">
+        {/* Header Glassmorphism */}
+        <header className="sticky top-0 z-50 bg-white/40 backdrop-blur-xl border-b border-white/60 px-6 py-5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
+          <div className="max-w-md mx-auto flex justify-between items-center">
+            <div>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Bem-vindo(a)</p>
+              <h1 className="text-2xl font-title text-foreground tracking-tight">{nome}</h1>
+            </div>
+            <LogoutButton />
           </div>
-          <LogoutButton />
-        </div>
-      </header>
+        </header>
 
-      <main className="max-w-md mx-auto p-6 space-y-6">
-        {aluno ? (
-          <>
-            {/* Status do Trajeto */}
-            <section className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-slate-700">Status de Hoje</h2>
-                <span className={`px-3 py-1 text-xs font-bold rounded-full ${aluno.embarcado_hoje ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                  {aluno.embarcado_hoje ? "Embarcado" : "Aguardando Van"}
-                </span>
-              </div>
+        <main className="flex-1 max-w-md w-full mx-auto p-6 space-y-6 overflow-y-auto pb-24 scrollbar-hide">
+          {aluno ? (
+            <>
+              {/* Card de Status Flutuante Premium */}
+              <section className="bg-white/70 backdrop-blur-2xl rounded-3xl p-6 shadow-glass border border-white/80 transition-all hover:shadow-[0_8px_40px_0_rgba(31,38,135,0.1)] relative overflow-hidden">
+                {/* Glow Effect */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl pointer-events-none"></div>
+                
+                <div className="flex items-center justify-between mb-6 relative z-10">
+                  <h2 className="font-title text-xl text-foreground">Status do Trajeto</h2>
+                  <span className={`px-4 py-1.5 text-xs font-bold rounded-full border shadow-sm ${aluno.embarcado_hoje ? 'bg-success/10 text-success border-success/20' : 'bg-warning/10 text-amber-600 border-warning/20'}`}>
+                    {aluno.embarcado_hoje ? "Embarcado" : "Aguardando"}
+                  </span>
+                </div>
+                
+                <div className="flex items-center gap-5 bg-white/50 border border-white/60 p-4 rounded-2xl shadow-sm relative z-10">
+                  <div className="h-14 w-14 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/30 shadow-glow">
+                    <span className="text-2xl">🚐</span>
+                  </div>
+                  <div>
+                    <p className="text-base font-bold text-foreground font-title">
+                      Tio {motorista?.nome_completo?.split(" ")[0] || "Motorista"}
+                    </p>
+                    <p className="text-xs font-medium text-slate-500 mt-0.5">Placa: <span className="text-foreground">{placa}</span></p>
+                  </div>
+                </div>
+
+                {/* Tracking Visualizer */}
+                <div className="mt-6 flex flex-col items-center justify-center py-4 bg-gradient-to-b from-white/30 to-transparent rounded-2xl border border-white/40">
+                  <div className="h-16 w-16 bg-white rounded-full shadow-lg flex items-center justify-center relative animate-bounce border-2 border-primary">
+                    <span className="text-2xl">📍</span>
+                    <div className="absolute -bottom-2 h-3 w-8 bg-black/10 blur-md rounded-[100%]"></div>
+                  </div>
+                  <div className="mt-4 px-5 py-2 bg-foreground text-background rounded-full shadow-md text-sm font-bold tracking-wide">
+                    {aluno.embarcado_hoje ? "A caminho da escola" : "Van a 3 min de distância"}
+                  </div>
+                </div>
+              </section>
+
+              {/* Ações Rápidas em Grid */}
+              <section className="space-y-4 pt-4">
+                <h3 className="font-title text-lg text-foreground px-1">Ações Rápidas</h3>
+                
+                <div className="grid grid-cols-1 gap-4">
+                  <AbsenceButton 
+                    alunoId={aluno.id} 
+                    isAusenteHoje={aluno.notificar_ausencia_hoje || false} 
+                  />
+
+                  <button className="w-full flex items-center justify-center gap-3 rounded-2xl py-4 font-bold text-secondary bg-white/60 backdrop-blur-md border border-white/80 shadow-sm hover:shadow-md hover:bg-white/80 transition-all active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                    Pagar Mensalidade
+                  </button>
+                </div>
+              </section>
+            </>
+          ) : (
+            <div className="text-center mt-12 py-16 bg-white/60 backdrop-blur-2xl rounded-[2.5rem] shadow-glass border border-white/80 px-8 relative overflow-hidden">
+              <div className="absolute -top-20 -left-20 w-48 h-48 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
               
-              <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl">
-                <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xl">🚐</span>
+              <div className="relative z-10 flex flex-col items-center">
+                <div className="h-24 w-24 bg-white rounded-full flex items-center justify-center shadow-lg border border-white mb-8 relative">
+                  <span className="text-5xl">🚐</span>
+                  <div className="absolute -right-2 -bottom-2 h-8 w-8 bg-warning rounded-full border-4 border-white flex items-center justify-center">
+                    <span className="text-white text-lg font-bold">!</span>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-slate-800">
-                    Tio {motorista?.nome_completo?.split(" ")[0] || "Motorista"}
-                  </p>
-                  <p className="text-xs text-slate-500">Placa: {placa}</p>
-                </div>
+                
+                <h2 className="text-2xl font-title font-bold text-foreground mb-3">Nenhum Tio vinculado</h2>
+                <p className="text-slate-500 mb-10 text-sm leading-relaxed font-medium">
+                  Encontre o motorista ideal que atenda a escola do seu filho e a sua região para começar a rastrear.
+                </p>
+                
+                <Link 
+                  href="/dashboard/pai/buscar"
+                  className="inline-flex items-center justify-center gap-3 w-full bg-primary text-foreground hover:bg-primary/90 rounded-2xl py-4 font-bold tracking-wide shadow-glow transition-all active:scale-[0.98]"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                  </svg>
+                  Localizar Vans na Região
+                </Link>
               </div>
-            </section>
-
-            {/* MOCK MAPA ESTRUTURAL */}
-            <section className="relative w-full h-64 rounded-3xl overflow-hidden shadow-inner border border-slate-200 bg-slate-100">
-              {/* Grid fake simulando mapa */}
-              <div className="absolute inset-0 opacity-20" 
-                   style={{ backgroundImage: 'radial-gradient(#cbd5e1 2px, transparent 2px)', backgroundSize: '24px 24px' }}>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-100/80 to-transparent z-0"></div>
-              
-              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                <div className="h-14 w-14 bg-white rounded-full shadow-lg flex items-center justify-center relative animate-bounce">
-                  <span className="text-2xl">📍</span>
-                  <div className="absolute -bottom-1 h-3 w-8 bg-black/10 blur-sm rounded-[100%]"></div>
-                </div>
-                <div className="mt-4 px-4 py-2 bg-white/90 backdrop-blur rounded-full shadow-sm text-sm font-medium text-slate-700">
-                  Van a 3 min de distância
-                </div>
-              </div>
-            </section>
-
-            {/* Ações Rápidas */}
-            <section className="space-y-4 pt-2">
-              <h3 className="font-semibold text-slate-700 px-1">Ações Rápidas</h3>
-              
-              <AbsenceButton 
-                alunoId={aluno.id} 
-                isAusenteHoje={aluno.notificar_ausencia_hoje || false} 
-              />
-
-              <button className="w-full flex items-center justify-center gap-2 rounded-2xl py-4 font-bold text-slate-700 bg-white border-2 border-slate-200 hover:border-slate-300 transition-all active:scale-95">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                Pagar Mensalidade
-              </button>
-            </section>
-          </>
-        ) : (
-          <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-slate-100 p-8">
-            <span className="text-5xl mb-6 block">🚐</span>
-            <h2 className="text-xl font-bold text-slate-800 mb-2">Nenhum Tio da Van vinculado</h2>
-            <p className="text-slate-500 mb-8 text-sm">
-              Encontre o motorista ideal que atenda a escola do seu filho e a sua região.
-            </p>
-            <Link 
-              href="/dashboard/pai/buscar"
-              className="inline-flex items-center justify-center gap-2 w-full bg-blue-500 hover:bg-blue-600 text-white rounded-2xl py-4 font-bold shadow-[0_4px_14px_0_rgba(59,130,246,0.39)] transition-all active:scale-95"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-              </svg>
-              Buscar Tio da Van
-            </Link>
-          </div>
-        )}
-      </main>
+            </div>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
