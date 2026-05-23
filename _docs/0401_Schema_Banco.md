@@ -1,62 +1,66 @@
-# Schema de Banco de Dados e RBAC (Supabase)
+# Schema de Banco de Dados: Tio da Van
 
-Este documento documenta o esquema relacional, políticas de segurança e regras de negócio do banco de dados PostgreSQL (Supabase) utilizado no **Tio da Van**.
+Este documento define a infraestrutura e a modelagem consolidada do banco de dados relacional PostgreSQL gerido pela plataforma Supabase. O schema foi otimizado para suportar o modelo de transporte de Arapongas com integrações do Asaas.
 
----
+## 1. Entidades de Base (ENUMs)
 
-## 1. Tipos Customizados (ENUMs)
-
-- `tipo_usuario`: Define o nível hierárquico e acesso da conta (`admin`, `motorista`, `responsavel`).
-- `status_cobranca`: Estado da liquidação financeira (`pendente`, `pago`, `vencido`, `cancelado`).
-
----
-
-## 2. Entidades Principais
-
-### `perfis`
-Tabela primária de usuários estendida do `auth.users`. 
-- **População Automática**: Preenchida via trigger `handle_new_user()` após registro no Supabase Auth.
-- **Campos Importantes**:
-  - `id` (UUID - Chave Estrangeira de `auth.users`)
-  - `nome_completo` (Mapeado dos metadados do Auth)
-  - `tipo` (tipo_usuario - Determina a Rota de Destino)
-
-### `motoristas_perfil`
-Metadados estendidos para usuários do tipo `motorista`.
-- **Busca Cruzada**: Usa `bairros_atendidos` (TEXT[]) e `escolas_atendidas` (TEXT[]) para match relacional no Supabase via operador `@>`.
-- **Campos Importantes**:
-  - `id_perfil` (UUID - Unique)
-  - `capacidade` (INT)
-  - `asaas_wallet_id` (Chave de subconta para o Split)
-
-### `alunos`
-Entidade de amarração N:M conectando a Mãe/Pai (Responsável) ao Motorista.
-- **Flags Diárias (Tempo Real)**:
-  - `notificar_ausencia_hoje` (Pai avisa que o aluno não vai)
-  - `embarcado_hoje` (Motorista confirma que o aluno entrou na van)
-
-### `cobrancas`
-O Ledger financeiro do sistema, sincronizado via webhook com o Asaas.
-- **Campos Importantes**:
-  - `valor_split_admin` (A comissão de 5% da plataforma)
-  - `valor_split_motorista` (O payout líquido de 95%)
-  - `pix_copia_cola` (Token de pagamento para o cliente)
+- `tipo_usuario`: 'admin', 'motorista', 'responsavel'
+- `status_boleto`: 'pendente', 'pago', 'vencido'
+- `status_motorista`: 'analise', 'ativo', 'bloqueado'
 
 ---
 
-## 3. Matriz de Segurança (Row Level Security - RLS)
+## 2. Tabelas Core
 
-O princípio de **Mínimo Privilégio** foi aplicado utilizando políticas RLS para garantir a modularidade e segurança de ponta a ponta:
+### 2.1. `perfis`
+Extensão direta da tabela de autenticação `auth.users`. Populada via trigger.
+- **id** (UUID): PK, FK para `auth.users(id)`
+- **nome_completo** (TEXT): Opcional
+- **telefone** (TEXT): Opcional
+- **tipo** (tipo_usuario): DEFAULT 'responsavel'
 
-| Tabela | Responsável (Pai) | Motorista | Admin |
-| --- | --- | --- | --- |
-| **perfis** | UPDATE/SELECT no próprio id | UPDATE/SELECT no próprio id | ALL |
-| **motoristas_perfil** | SELECT (Busca de Vans) | UPDATE/SELECT no próprio perfil | ALL |
-| **alunos** | SELECT/INSERT filhos próprios | SELECT filhos na sua rota | ALL |
-| **cobrancas** | SELECT faturas próprias | SELECT faturas emitidas | ALL |
+### 2.2. `motoristas_perfil`
+Entidade estendida para condutores, contendo regras logísticas.
+- **id** (UUID): PK, FK para `perfis(id)` (Acesso estrito)
+- **placa_veiculo** (TEXT)
+- **capacidade_maxima** (INT): DEFAULT 15
+- **bairros_atendidos** (TEXT[]): Ex: `{'Centro', 'Jardim Primavera'}`
+- **escolas_atendidas** (TEXT[]): Ex: `{'Colégio Prisma'}`
+- **status_cadastro** (status_motorista): DEFAULT 'analise'
+- **asaas_wallet_id** (TEXT): Chave de recebimento do split.
+
+### 2.3. `alunos`
+O elo logístico e humano (M-N).
+- **id** (UUID): PK
+- **nome_aluno** (TEXT)
+- **escola_destino** (TEXT)
+- **periodo_letivo** (TEXT): Matutino, Vespertino, Noturno
+- **id_responsavel** (UUID): FK -> `perfis(id)`
+- **id_motorista** (UUID): FK -> `motoristas_perfil(id)`
+- **notificar_ausencia_hoje** (BOOLEAN): DEFAULT false (Pais acionam isso no app)
+- **embarcado_hoje** (BOOLEAN): DEFAULT false (Motorista aciona no check-in)
+
+### 2.4. `cobrancas`
+O Ledger financeiro automatizado atrelado aos webhooks do Asaas.
+- **id** (UUID): PK
+- **id_aluno** (UUID): FK -> `alunos(id)`
+- **valor_mensalidade** (NUMERIC)
+- **data_vencimento** (DATE)
+- **status_pagamento** (status_boleto): DEFAULT 'pendente'
+- **asaas_id_cobranca** (TEXT)
+- **pix_copia_cola** (TEXT)
+- **pago_em** (TIMESTAMPTZ)
 
 ---
 
-## 4. Integração Auth e Triggers
+## 3. Row Level Security (RLS) Consolidadas
 
-Sempre que um usuário é criado usando `supabase.auth.signUp()`, a trigger `on_auth_user_created` captura o `id` e insere em `perfis`, permitindo transações limpas do banco e do Middleware sem duplicação de responsabilidades.
+Para blindagem do backend contra APIs falsificadas, as seguintes lógicas foram travadas:
+
+- **Alunos**: 
+  - Pais inserem e veem apenas seus filhos (`id_responsavel = auth.uid()`).
+  - Motoristas veem apenas alunos vinculados (`id_motorista = auth.uid()`).
+  - Motoristas só podem atualizar a própria fila, e exclusivamente os estados de embarque.
+- **Cobranças**:
+  - Pais só leem faturas onde o aluno atrelado pertença ao `id_responsavel = auth.uid()`.
+  - Motoristas leem faturas a receber dos alunos atrelados ao `id_motorista = auth.uid()`.
