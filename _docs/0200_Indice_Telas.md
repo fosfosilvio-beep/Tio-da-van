@@ -1,9 +1,21 @@
-# Índice de Telas (UI)
+# Índice de Telas (UI) - Nova Fase: Ponto de Partida Limpo (Clean Slate)
 
-- **0201_Todos.md** – Documenta a tela de listagem de Todos.
-- **0202_Teste.md** – Documenta a tela de teste do Next.js.
-- **0204_Dashboard.md** – Documenta o Painel Master (Dashboard principal com KPIs, gráficos e tabela).
-- **0205_Motoristas.md** – Documenta a tela de Gestão de Motoristas (status, tabela, alerta CNH).
-- **0206_Cobrancas.md** – Documenta a tela de Gestão de Cobranças (KPIs, simulação Pix e Cron).
-- **0207_Faturamento.md** – Documenta a tela de Faturamento & Payouts (splits, comissões, gráfico CSS).
-- **0209_Roteamento_Dinamico.md** – Documenta o Roteamento Dinâmico e Responsivo (Mobile-First e Overrides).
+Este documento centraliza o mapeamento de telas e rotas ativas do Módulo C (Painel Administrativo Master) e da interface da aplicação Next.js. A estrutura de rotas antiga foi totalmente limpa para permitir o desenvolvimento planejado e robusto de cada interface a partir de um baseline do zero.
+
+---
+
+## 1. Rotas Ativas Atualmente
+
+| Rota | Tipo / Responsabilidade | Status | Descrição |
+| --- | --- | --- | --- |
+| `/` | Portal de Boas-vindas (Root Page) | **Ativo** | Tela de entrada minimalista com indicador de conexão real em tempo real ao banco de dados Supabase. |
+
+---
+
+## 2. Próximas Telas a Serem Criadas (Mapeadas no Escopo)
+
+| Rota Pretendida | Componentes do WowDash a Utilizar | Função |
+| --- | --- | --- |
+| **`/dashboard`** (Painel Master) | KPI Cards, ApexCharts de Faturamento, Gráficos Lineares | Visão unificada de ganhos totais da plataforma, comissões de 5% retidas e splits. |
+| **`/motoristas`** (Gestão de Frota) | Bootstrap Tables, Document View Modals | Listagem de condutores de vans de Arapongas, aprovação cadastral e alertas de vencimento de CNH. |
+| **`/cobrancas`** (Financeiro) | Invoice Lists, DataTables | Relatórios de boletos gerados e liquidações Pix processadas de forma automática pelo Asaas/Mercado Pago. |
