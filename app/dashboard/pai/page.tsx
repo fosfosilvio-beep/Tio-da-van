@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import LogoutButton from "@/app/components/LogoutButton";
 import AbsenceButton from "./components/AbsenceButton";
+import Link from "next/link";
 import { Database } from "@/lib/supabase/database.types";
 
 export default async function DashboardPaiPage() {
@@ -126,12 +127,21 @@ export default async function DashboardPaiPage() {
             </section>
           </>
         ) : (
-          <div className="text-center py-20">
-            <span className="text-4xl mb-4 block">🎒</span>
-            <h2 className="text-xl font-bold text-slate-800">Nenhum aluno vinculado</h2>
-            <p className="text-slate-500 mt-2">
-              Aguarde o administrador ou motorista vincular seu filho(a) ao seu perfil.
+          <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-slate-100 p-8">
+            <span className="text-5xl mb-6 block">🚐</span>
+            <h2 className="text-xl font-bold text-slate-800 mb-2">Nenhum Tio da Van vinculado</h2>
+            <p className="text-slate-500 mb-8 text-sm">
+              Encontre o motorista ideal que atenda a escola do seu filho e a sua região.
             </p>
+            <Link 
+              href="/dashboard/pai/buscar"
+              className="inline-flex items-center justify-center gap-2 w-full bg-blue-500 hover:bg-blue-600 text-white rounded-2xl py-4 font-bold shadow-[0_4px_14px_0_rgba(59,130,246,0.39)] transition-all active:scale-95"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+              </svg>
+              Buscar Tio da Van
+            </Link>
           </div>
         )}
       </main>

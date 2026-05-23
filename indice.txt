@@ -17,6 +17,7 @@ This file maps the documentation hierarchy located in the `_docs` folder.
 - Portal Geral: `_docs/0201_Todos.md`
 - Next.js test page documentation: `_docs/0202_Teste.md`
 - Dashboard Master (Painel Admin): `_docs/0204_Dashboard.md`
+- Buscar Tio da Van (Pais): `_docs/0204B_Buscar_Motorista.md`
 - Gestão de Motoristas: `_docs/0205_Motoristas.md`
 - Gestão de Cobranças: `_docs/0206_Cobrancas.md`
 - Faturamento & Payouts: `_docs/0207_Faturamento.md`
