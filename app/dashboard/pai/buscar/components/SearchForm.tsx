@@ -20,44 +20,41 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="bg-white/60 backdrop-blur-2xl rounded-3xl p-6 shadow-glass border border-white/80 flex flex-col gap-5 relative overflow-hidden">
-      {/* Decorative Glow */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl pointer-events-none -mr-10 -mt-10"></div>
-
-      <div className="relative z-10">
-        <label className="block text-sm font-bold text-foreground font-title mb-1.5 ml-1">Seu Bairro</label>
+    <form onSubmit={handleSearch} className="flex flex-col gap-4">
+      <div className="relative">
+        <label className="block text-xs font-bold text-slate-400 font-title mb-1.5 ml-1 uppercase tracking-wider">Selecione o Bairro</label>
         <div className="relative group">
           <select 
             value={bairro}
             onChange={(e) => setBairro(e.target.value)}
-            className="w-full appearance-none bg-white/70 backdrop-blur-sm border border-white/80 text-foreground rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-medium shadow-sm transition-all group-hover:bg-white/90"
+            className="w-full appearance-none bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-medium shadow-sm transition-all text-sm"
             required
           >
-            <option value="" disabled>Selecione seu bairro...</option>
+            <option value="" disabled>Bairro Residencial...</option>
             <option value="Centro">Centro</option>
             <option value="Jardim Primavera">Jardim Primavera</option>
             <option value="Vila Nova">Vila Nova</option>
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-slate-400">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10">
-        <label className="block text-sm font-bold text-foreground font-title mb-1.5 ml-1">Escola de Destino</label>
+      <div className="relative">
+        <label className="block text-xs font-bold text-slate-400 font-title mb-1.5 ml-1 uppercase tracking-wider">Selecione a Escola</label>
         <div className="relative group">
           <select 
             value={escola}
             onChange={(e) => setEscola(e.target.value)}
-            className="w-full appearance-none bg-white/70 backdrop-blur-sm border border-white/80 text-foreground rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-medium shadow-sm transition-all group-hover:bg-white/90"
+            className="w-full appearance-none bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-4 py-3.5 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-medium shadow-sm transition-all text-sm"
             required
           >
-            <option value="" disabled>Selecione a escola...</option>
+            <option value="" disabled>Escola de Destino...</option>
             <option value="Mãe do Divino Amor">Mãe do Divino Amor</option>
             <option value="Colégio Prisma">Colégio Prisma</option>
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-slate-400">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
           </div>
         </div>
@@ -66,10 +63,10 @@ export default function SearchForm() {
       <button 
         type="submit"
         disabled={!bairro || !escola}
-        className="mt-3 relative z-10 w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-foreground rounded-2xl py-4 font-bold shadow-glow transition-all active:scale-95 tracking-wide"
+        className="mt-4 w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl py-3.5 font-bold shadow-md transition-all active:scale-95 text-sm"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         Localizar Vans
       </button>

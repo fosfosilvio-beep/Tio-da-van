@@ -6,13 +6,13 @@
 
 /* Global CSS Reset & Modern Baseline for Tio da Van */
 :root {
-  /* Dynamic pastel palette */
-  --background: #FAF8F3;     /* Warm Sand-Beige */
-  --foreground: #0F1B24;     /* Dark Slate Charcoal */
-  --primary: #A2E8DF;        /* Soft Mint Teal */
-  --secondary: #3E8AC8;      /* Ocean Blue */
-  --warning: #F5C754;        /* Golden Honey Yellow */
-  --danger: #EF4444;         /* Soft Crimson Red */
+  /* Dark Premium Palette (Escolar Pro Style) */
+  --background: #0B1120;     /* Deep Slate Navy (Slate 950) */
+  --foreground: #F8FAFC;     /* Off-White (Slate 50) */
+  --primary: #3B82F6;        /* Royal Blue (Blue 500) */
+  --secondary: #1E293B;      /* Card Background (Slate 800) */
+  --warning: #EAB308;        /* Warning Yellow */
+  --danger: #EF4444;         /* Destructive Red */
   --success: #10B981;        /* Emerald Green */
   
   /* Font tokens mapped from Next.js fonts */
