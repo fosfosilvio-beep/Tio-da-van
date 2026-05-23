@@ -8,7 +8,7 @@ Este documento centraliza o mapeamento de telas e rotas ativas do Módulo C (Pai
 
 | Rota | Tipo / Responsabilidade | Status | Descrição |
 | --- | --- | --- | --- |
-| `/` | Portal de Boas-vindas (Root Page) | **Ativo** | Tela de entrada minimalista com indicador de conexão real em tempo real ao banco de dados Supabase. |
+| `/` | Portal Unificado (Login / Root Page) | **Ativo** | Tela limpa e minimalista contendo um formulário para Supabase Auth. Executa o roteamento (RBAC) via proxy.ts após o login. Referência: `_docs/0201_Login.md` |
 
 ---
 

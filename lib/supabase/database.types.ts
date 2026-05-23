@@ -7,6 +7,8 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
@@ -14,270 +16,196 @@ export type Database = {
     Tables: {
       alunos: {
         Row: {
-          created_at: string | null
-          endereco_embarque: string
+          atualizado_em: string | null
+          bairro_embarque: string
+          criado_em: string | null
+          embarcado_hoje: boolean | null
           escola: string
           id: string
-          latitude_embarque: number | null
-          longitude_embarque: number | null
-          motorista_id: string | null
-          nome: string
-          pai_id: string
-          serie_turma: string | null
-          status_vinculo: Database["public"]["Enums"]["vinculo_status"]
-          turno: Database["public"]["Enums"]["turno_aluno"]
-          updated_at: string | null
+          id_motorista: string | null
+          id_responsavel: string
+          nome_aluno: string
+          notificar_ausencia_hoje: boolean | null
         }
         Insert: {
-          created_at?: string | null
-          endereco_embarque: string
+          atualizado_em?: string | null
+          bairro_embarque: string
+          criado_em?: string | null
+          embarcado_hoje?: boolean | null
           escola: string
           id?: string
-          latitude_embarque?: number | null
-          longitude_embarque?: number | null
-          motorista_id?: string | null
-          nome: string
-          pai_id: string
-          serie_turma?: string | null
-          status_vinculo?: Database["public"]["Enums"]["vinculo_status"]
-          turno: Database["public"]["Enums"]["turno_aluno"]
-          updated_at?: string | null
+          id_motorista?: string | null
+          id_responsavel: string
+          nome_aluno: string
+          notificar_ausencia_hoje?: boolean | null
         }
         Update: {
-          created_at?: string | null
-          endereco_embarque?: string
+          atualizado_em?: string | null
+          bairro_embarque?: string
+          criado_em?: string | null
+          embarcado_hoje?: boolean | null
           escola?: string
           id?: string
-          latitude_embarque?: number | null
-          longitude_embarque?: number | null
-          motorista_id?: string | null
-          nome?: string
-          pai_id?: string
-          serie_turma?: string | null
-          status_vinculo?: Database["public"]["Enums"]["vinculo_status"]
-          turno?: Database["public"]["Enums"]["turno_aluno"]
-          updated_at?: string | null
+          id_motorista?: string | null
+          id_responsavel?: string
+          nome_aluno?: string
+          notificar_ausencia_hoje?: boolean | null
         }
         Relationships: [
           {
-            foreignKeyName: "alunos_motorista_id_fkey"
-            columns: ["motorista_id"]
+            foreignKeyName: "alunos_id_motorista_fkey"
+            columns: ["id_motorista"]
             isOneToOne: false
-            referencedRelation: "motoristas"
+            referencedRelation: "motoristas_perfil"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "alunos_pai_id_fkey"
-            columns: ["pai_id"]
+            foreignKeyName: "alunos_id_responsavel_fkey"
+            columns: ["id_responsavel"]
             isOneToOne: false
-            referencedRelation: "usuarios"
+            referencedRelation: "perfis"
             referencedColumns: ["id"]
           },
         ]
       }
       cobrancas: {
         Row: {
-          aluno_id: string
-          created_at: string | null
+          asaas_payment_id: string | null
+          criado_em: string | null
+          data_vencimento: string
           id: string
-          mercadopago_payment_id: string | null
-          motorista_id: string
+          id_aluno: string
+          id_motorista: string
+          id_responsavel: string
           pago_em: string | null
-          pai_id: string
           pix_copia_cola: string | null
-          referencia_mes: string
-          status: Database["public"]["Enums"]["cobranca_status"]
-          valor_motorista: number
-          valor_plataforma: number
-          valor_total: number
-          vencimento: string
+          status: Database["public"]["Enums"]["status_cobranca"]
+          valor: number
+          valor_split_admin: number
+          valor_split_motorista: number
         }
         Insert: {
-          aluno_id: string
-          created_at?: string | null
+          asaas_payment_id?: string | null
+          criado_em?: string | null
+          data_vencimento: string
           id?: string
-          mercadopago_payment_id?: string | null
-          motorista_id: string
+          id_aluno: string
+          id_motorista: string
+          id_responsavel: string
           pago_em?: string | null
-          pai_id: string
           pix_copia_cola?: string | null
-          referencia_mes: string
-          status?: Database["public"]["Enums"]["cobranca_status"]
-          valor_motorista: number
-          valor_plataforma: number
-          valor_total: number
-          vencimento: string
+          status?: Database["public"]["Enums"]["status_cobranca"]
+          valor: number
+          valor_split_admin: number
+          valor_split_motorista: number
         }
         Update: {
-          aluno_id?: string
-          created_at?: string | null
+          asaas_payment_id?: string | null
+          criado_em?: string | null
+          data_vencimento?: string
           id?: string
-          mercadopago_payment_id?: string | null
-          motorista_id?: string
+          id_aluno?: string
+          id_motorista?: string
+          id_responsavel?: string
           pago_em?: string | null
-          pai_id?: string
           pix_copia_cola?: string | null
-          referencia_mes?: string
-          status?: Database["public"]["Enums"]["cobranca_status"]
-          valor_motorista?: number
-          valor_plataforma?: number
-          valor_total?: number
-          vencimento?: string
+          status?: Database["public"]["Enums"]["status_cobranca"]
+          valor?: number
+          valor_split_admin?: number
+          valor_split_motorista?: number
         }
         Relationships: [
           {
-            foreignKeyName: "cobrancas_aluno_id_fkey"
-            columns: ["aluno_id"]
+            foreignKeyName: "cobrancas_id_aluno_fkey"
+            columns: ["id_aluno"]
             isOneToOne: false
             referencedRelation: "alunos"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "cobrancas_motorista_id_fkey"
-            columns: ["motorista_id"]
+            foreignKeyName: "cobrancas_id_motorista_fkey"
+            columns: ["id_motorista"]
             isOneToOne: false
-            referencedRelation: "motoristas"
+            referencedRelation: "motoristas_perfil"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "cobrancas_pai_id_fkey"
-            columns: ["pai_id"]
+            foreignKeyName: "cobrancas_id_responsavel_fkey"
+            columns: ["id_responsavel"]
             isOneToOne: false
-            referencedRelation: "usuarios"
+            referencedRelation: "perfis"
             referencedColumns: ["id"]
           },
         ]
       }
-      motoristas: {
+      motoristas_perfil: {
         Row: {
+          asaas_wallet_id: string | null
+          atualizado_em: string | null
           bairros_atendidos: string[] | null
           capacidade: number
-          cnh_categoria: string
-          cnh_numero: string
-          cnh_validade: string
-          created_at: string | null
+          criado_em: string | null
           escolas_atendidas: string[] | null
           id: string
-          mercadopago_account_id: string | null
-          modelo_van: string
+          id_perfil: string
           placa: string
-          status: Database["public"]["Enums"]["motorista_status"]
-          updated_at: string | null
-          usuario_id: string | null
         }
         Insert: {
+          asaas_wallet_id?: string | null
+          atualizado_em?: string | null
           bairros_atendidos?: string[] | null
           capacidade: number
-          cnh_categoria: string
-          cnh_numero: string
-          cnh_validade: string
-          created_at?: string | null
+          criado_em?: string | null
           escolas_atendidas?: string[] | null
           id?: string
-          mercadopago_account_id?: string | null
-          modelo_van: string
+          id_perfil: string
           placa: string
-          status: Database["public"]["Enums"]["motorista_status"]
-          updated_at?: string | null
-          usuario_id?: string | null
         }
         Update: {
+          asaas_wallet_id?: string | null
+          atualizado_em?: string | null
           bairros_atendidos?: string[] | null
           capacidade?: number
-          cnh_categoria?: string
-          cnh_numero?: string
-          cnh_validade?: string
-          created_at?: string | null
+          criado_em?: string | null
           escolas_atendidas?: string[] | null
           id?: string
-          mercadopago_account_id?: string | null
-          modelo_van?: string
+          id_perfil?: string
           placa?: string
-          status?: Database["public"]["Enums"]["motorista_status"]
-          updated_at?: string | null
-          usuario_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "motoristas_usuario_id_fkey"
-            columns: ["usuario_id"]
+            foreignKeyName: "motoristas_perfil_id_perfil_fkey"
+            columns: ["id_perfil"]
             isOneToOne: true
-            referencedRelation: "usuarios"
+            referencedRelation: "perfis"
             referencedColumns: ["id"]
           },
         ]
       }
-      posicao_motorista: {
+      perfis: {
         Row: {
-          heading: number | null
+          atualizado_em: string | null
+          criado_em: string | null
           id: string
-          latitude: number
-          longitude: number
-          motorista_id: string | null
-          rota_ativa: boolean
-          speed: number | null
-          updated_at: string | null
-        }
-        Insert: {
-          heading?: number | null
-          id?: string
-          latitude: number
-          longitude: number
-          motorista_id?: string | null
-          rota_ativa?: boolean
-          speed?: number | null
-          updated_at?: string | null
-        }
-        Update: {
-          heading?: number | null
-          id?: string
-          latitude?: number
-          longitude?: number
-          motorista_id?: string | null
-          rota_ativa?: boolean
-          speed?: number | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "posicao_motorista_motorista_id_fkey"
-            columns: ["motorista_id"]
-            isOneToOne: true
-            referencedRelation: "motoristas"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      usuarios: {
-        Row: {
-          avatar_url: string | null
-          created_at: string | null
-          email: string
-          id: string
-          nome_completo: string
-          role: Database["public"]["Enums"]["user_role"]
+          nome_completo: string | null
           telefone: string | null
-          updated_at: string | null
+          tipo: Database["public"]["Enums"]["tipo_usuario"]
         }
         Insert: {
-          avatar_url?: string | null
-          created_at?: string | null
-          email: string
-          id?: string
-          nome_completo: string
-          role: Database["public"]["Enums"]["user_role"]
+          atualizado_em?: string | null
+          criado_em?: string | null
+          id: string
+          nome_completo?: string | null
           telefone?: string | null
-          updated_at?: string | null
+          tipo?: Database["public"]["Enums"]["tipo_usuario"]
         }
         Update: {
-          avatar_url?: string | null
-          created_at?: string | null
-          email?: string
+          atualizado_em?: string | null
+          criado_em?: string | null
           id?: string
-          nome_completo?: string
-          role?: Database["public"]["Enums"]["user_role"]
+          nome_completo?: string | null
           telefone?: string | null
-          updated_at?: string | null
+          tipo?: Database["public"]["Enums"]["tipo_usuario"]
         }
         Relationships: []
       }
@@ -289,11 +217,10 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      cobranca_status: "pendente" | "pago" | "vencido" | "cancelado"
-      motorista_status: "pendente" | "aprovado" | "suspenso"
-      turno_aluno: "manha" | "tarde" | "integral"
-      user_role: "pai" | "motorista" | "admin"
-      vinculo_status: "pendente" | "ativo" | "inativo"
+      status_boleto: "pendente" | "pago" | "vencido"
+      status_cobranca: "pendente" | "pago" | "vencido" | "cancelado"
+      status_motorista: "pendente" | "aprovado" | "suspenso"
+      tipo_usuario: "admin" | "motorista" | "responsavel"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -421,11 +348,10 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      cobranca_status: ["pendente", "pago", "vencido", "cancelado"],
-      motorista_status: ["pendente", "aprovado", "suspenso"],
-      turno_aluno: ["manha", "tarde", "integral"],
-      user_role: ["pai", "motorista", "admin"],
-      vinculo_status: ["pendente", "ativo", "inativo"],
+      status_boleto: ["pendente", "pago", "vencido"],
+      status_cobranca: ["pendente", "pago", "vencido", "cancelado"],
+      status_motorista: ["pendente", "aprovado", "suspenso"],
+      tipo_usuario: ["admin", "motorista", "responsavel"],
     },
   },
 } as const

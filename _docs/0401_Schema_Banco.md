@@ -1,87 +1,62 @@
-# Esquema de Banco de Dados (Supabase / PostgreSQL)
+# Schema de Banco de Dados e RBAC (Supabase)
 
-## Propósito
-Definir a estrutura das tabelas do **Tio da Van** no Supabase, contendo perfis, motoristas, alunos e controle financeiro de mensalidades.
-
----
-
-## Estrutura Criada (Fase 4 - Nova Modelagem de Perfis)
-
-### 1. Tipos Customizados (Enums)
-* **`tipo_usuario`**: `'admin'`, `'motorista'`, `'responsavel'`
-* **`status_boleto`**: `'pendente'`, `'pago'`, `'vencido'`
-* **`status_motorista`**: `'pendente'`, `'aprovado'`, `'suspenso'`
+Este documento documenta o esquema relacional, políticas de segurança e regras de negócio do banco de dados PostgreSQL (Supabase) utilizado no **Tio da Van**.
 
 ---
 
-### 2. Tabela `perfis`
-Tabela vinculada ao cadastro de autenticação central (`auth.users`).
+## 1. Tipos Customizados (ENUMs)
 
-| Coluna | Tipo | Restrições | Descrição |
+- `tipo_usuario`: Define o nível hierárquico e acesso da conta (`admin`, `motorista`, `responsavel`).
+- `status_cobranca`: Estado da liquidação financeira (`pendente`, `pago`, `vencido`, `cancelado`).
+
+---
+
+## 2. Entidades Principais
+
+### `perfis`
+Tabela primária de usuários estendida do `auth.users`. 
+- **População Automática**: Preenchida via trigger `handle_new_user()` após registro no Supabase Auth.
+- **Campos Importantes**:
+  - `id` (UUID - Chave Estrangeira de `auth.users`)
+  - `nome_completo` (Mapeado dos metadados do Auth)
+  - `tipo` (tipo_usuario - Determina a Rota de Destino)
+
+### `motoristas_perfil`
+Metadados estendidos para usuários do tipo `motorista`.
+- **Busca Cruzada**: Usa `bairros_atendidos` (TEXT[]) e `escolas_atendidas` (TEXT[]) para match relacional no Supabase via operador `@>`.
+- **Campos Importantes**:
+  - `id_perfil` (UUID - Unique)
+  - `capacidade` (INT)
+  - `asaas_wallet_id` (Chave de subconta para o Split)
+
+### `alunos`
+Entidade de amarração N:M conectando a Mãe/Pai (Responsável) ao Motorista.
+- **Flags Diárias (Tempo Real)**:
+  - `notificar_ausencia_hoje` (Pai avisa que o aluno não vai)
+  - `embarcado_hoje` (Motorista confirma que o aluno entrou na van)
+
+### `cobrancas`
+O Ledger financeiro do sistema, sincronizado via webhook com o Asaas.
+- **Campos Importantes**:
+  - `valor_split_admin` (A comissão de 5% da plataforma)
+  - `valor_split_motorista` (O payout líquido de 95%)
+  - `pix_copia_cola` (Token de pagamento para o cliente)
+
+---
+
+## 3. Matriz de Segurança (Row Level Security - RLS)
+
+O princípio de **Mínimo Privilégio** foi aplicado utilizando políticas RLS para garantir a modularidade e segurança de ponta a ponta:
+
+| Tabela | Responsável (Pai) | Motorista | Admin |
 | --- | --- | --- | --- |
-| `id` | `uuid` | PK, REFERENCES `auth.users` | Chave primária vinculada ao Auth |
-| `nome` | `text` | NOT NULL | Nome completo do usuário |
-| `telefone` | `text` | — | WhatsApp / Telefone de contato |
-| `tipo` | `tipo_usuario` | NOT NULL, DEFAULT `'responsavel'` | Tipo de perfil do usuário |
-| `criado_em` | `timestamptz` | DEFAULT `now()` | Data de criação do perfil |
+| **perfis** | UPDATE/SELECT no próprio id | UPDATE/SELECT no próprio id | ALL |
+| **motoristas_perfil** | SELECT (Busca de Vans) | UPDATE/SELECT no próprio perfil | ALL |
+| **alunos** | SELECT/INSERT filhos próprios | SELECT filhos na sua rota | ALL |
+| **cobrancas** | SELECT faturas próprias | SELECT faturas emitidas | ALL |
 
 ---
 
-### 3. Tabela `motoristas_perfil`
-Extensão de `perfis` contendo os dados específicos do transportador e do veículo.
+## 4. Integração Auth e Triggers
 
-| Coluna | Tipo | Restrições | Descrição |
-| --- | --- | --- | --- |
-| `id` | `uuid` | PK, REFERENCES `perfis(id)` ON DELETE CASCADE | ID do perfil correspondente |
-| `documento_van` | `text` | — | Documento ou placa da van escolar |
-| `capacidade_maxima` | `int` | DEFAULT `15` | Lotação máxima permitida |
-| `bairros_atendidos` | `text[]` | — | Vetor contendo a lista de bairros atendidos |
-| `escolas_atendidas` | `text[]` | — | Vetor contendo a lista de escolas atendidas |
-| `status_cadastro` | `status_motorista` | NOT NULL, DEFAULT `'pendente'` | Status de moderação do motorista |
-| `asaas_wallet_id` | `text` | — | Chave de carteira Asaas para split de pagamentos |
-| `criado_em` | `timestamptz` | DEFAULT `now()` | Data de criação |
-
----
-
-### 4. Tabela `alunos`
-Estudantes cadastrados pelos responsáveis e vinculados a um motorista.
-
-| Coluna | Tipo | Restrições | Descrição |
-| --- | --- | --- | --- |
-| `id` | `uuid` | PK, DEFAULT `gen_random_uuid()` | Chave primária do aluno |
-| `nome_aluno` | `text` | NOT NULL | Nome completo do aluno |
-| `escola` | `text` | NOT NULL | Escola onde estuda |
-| `periodo` | `text` | — | Turno escolar (Matutino, Vespertino, Noturno) |
-| `id_responsavel` | `uuid` | FK → `perfis(id)` ON DELETE RESTRICT | Responsável do aluno |
-| `id_motorista` | `uuid` | FK → `motoristas_perfil(id)` ON DELETE SET NULL | Motorista que realiza o transporte |
-| `ativo` | `boolean` | DEFAULT `true` | Situação de transporte ativo |
-| `criado_em` | `timestamptz` | DEFAULT `now()` | Data de vinculação |
-
----
-
-### 5. Tabela `cobrancas`
-Faturas Pix automatizadas integradas ao Asaas.
-
-| Coluna | Tipo | Restrições | Descrição |
-| --- | --- | --- | --- |
-| `id` | `uuid` | PK, DEFAULT `gen_random_uuid()` | Identificador único |
-| `id_aluno` | `uuid` | FK → `alunos(id)` ON DELETE RESTRICT | Aluno correspondente à cobrança |
-| `valor` | `numeric(10,2)` | NOT NULL | Valor mensal cobrado |
-| `data_vencimento` | `date` | NOT NULL | Data limite para pagamento |
-| `status` | `status_boleto` | NOT NULL, DEFAULT `'pendente'` | Estado do pagamento |
-| `asaas_id_cobranca` | `text` | — | Identificador na API externa do Asaas |
-| `pix_copia_cola` | `text` | — | Código Pix copia e cola gerado |
-| `pago_em` | `timestamptz` | — | Data/Hora de conciliação |
-| `criado_em` | `timestamptz` | DEFAULT `now()` | Data de emissão da cobrança |
-
----
-
-## Segurança (Row Level Security)
-
-A segurança baseada em linhas (RLS) foi habilitada em todas as novas tabelas:
-```sql
-ALTER TABLE perfis ENABLE ROW LEVEL SECURITY;
-ALTER TABLE motoristas_perfil ENABLE ROW LEVEL SECURITY;
-ALTER TABLE alunos ENABLE ROW LEVEL SECURITY;
-ALTER TABLE cobrancas ENABLE ROW LEVEL SECURITY;
-```
+Sempre que um usuário é criado usando `supabase.auth.signUp()`, a trigger `on_auth_user_created` captura o `id` e insere em `perfis`, permitindo transações limpas do banco e do Middleware sem duplicação de responsabilidades.
