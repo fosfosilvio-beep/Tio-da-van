@@ -101,7 +101,7 @@ export default async function DashboardPaiPage() {
                 {/* Tracking Radar */}
                 <div className="mt-5 flex flex-col items-center justify-center py-6 bg-[#0B0F19]/50 rounded-2xl border border-zinc-800/80 shadow-inner">
                   <div className="h-14 w-14 bg-[#121826] rounded-full flex items-center justify-center relative border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} style={{ width: '24px', height: '24px' }} className="text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
                     <div className="absolute inset-0 rounded-full border border-blue-400/50 animate-ping opacity-20"></div>
@@ -136,7 +136,7 @@ export default async function DashboardPaiPage() {
               {/* Estado Vazio Escolar Pro (Centro da Tela) */}
               <div className="bg-[#1A2333]/60 backdrop-blur-lg border border-zinc-700/30 p-8 rounded-[24px] w-full shadow-xl">
                 
-                <svg xmlns="http://www.w3.org/2000/svg" className="text-blue-500 w-10 h-10 mb-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} style={{ width: '40px', height: '40px' }} className="text-blue-500 mb-4 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 
