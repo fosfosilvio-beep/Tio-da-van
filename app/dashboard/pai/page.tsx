@@ -53,96 +53,100 @@ export default async function DashboardPaiPage() {
   const placa = aluno?.motoristas_perfil?.placa_veiculo;
 
   return (
-    <div className="min-h-[100dvh] w-full bg-background flex flex-col">
-      <div className="relative z-10 flex flex-col h-full">
-        {/* Header Dark Premium */}
-        <header className="sticky top-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-white/5 px-6 py-5 shadow-lg">
-          <div className="max-w-md mx-auto flex justify-between items-center">
+    <div className="min-h-[100dvh] w-full bg-slate-950 sm:p-4 md:p-8 flex items-center justify-center">
+      {/* Contêiner Pai - Simulador de Smartphone de Ponta */}
+      <div className="w-full max-w-md mx-auto min-h-[100dvh] sm:min-h-[850px] bg-slate-900 sm:rounded-[2.5rem] sm:border-[8px] sm:border-slate-800 shadow-2xl overflow-hidden relative flex flex-col">
+        
+        {/* Header Premium */}
+        <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-6 py-5">
+          <div className="flex justify-between items-center">
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Bem-vindo(a)</p>
-              <h1 className="text-2xl font-title text-foreground tracking-tight">{nome}</h1>
+              <h1 className="text-xl font-title font-bold text-white tracking-tight">
+                Olá, {nome}
+              </h1>
             </div>
             <LogoutButton />
           </div>
         </header>
 
-        <main className="flex-1 max-w-md w-full mx-auto p-6 space-y-6 overflow-y-auto pb-24 scrollbar-hide">
+        <main className="flex-1 w-full flex flex-col p-6 overflow-y-auto scrollbar-hide">
           {aluno ? (
-            <>
+            <div className="space-y-6">
               {/* Card de Status Dark Premium */}
-              <section className="bg-secondary rounded-2xl p-6 border border-white/10 shadow-lg relative overflow-hidden">
-                <div className="flex items-center justify-between mb-6 relative z-10">
-                  <h2 className="font-title text-xl text-foreground">Status do Trajeto</h2>
-                  <span className={`px-4 py-1.5 text-xs font-bold rounded-lg border ${aluno.embarcado_hoje ? 'bg-success/20 text-emerald-400 border-success/30' : 'bg-warning/20 text-yellow-400 border-warning/30'}`}>
+              <section className="bg-slate-800/80 backdrop-blur border border-slate-700/50 rounded-2xl p-6 shadow-lg">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="font-title text-lg text-slate-100 font-bold">Status do Trajeto</h2>
+                  <span className={`px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-lg border ${aluno.embarcado_hoje ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>
                     {aluno.embarcado_hoje ? "Embarcado" : "Aguardando"}
                   </span>
                 </div>
                 
-                <div className="flex items-center gap-5 bg-black/20 border border-white/5 p-4 rounded-xl relative z-10">
-                  <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="flex items-center gap-4 bg-slate-900/50 border border-slate-700/50 p-4 rounded-xl">
+                  <div className="h-12 w-12 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0 border border-blue-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                     </svg>
                   </div>
-                  <div>
-                    <p className="text-base font-bold text-foreground font-title">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-base font-bold text-slate-100 font-title truncate">
                       Tio {motorista?.nome_completo?.split(" ")[0] || "Motorista"}
                     </p>
-                    <p className="text-xs font-medium text-slate-400 mt-0.5">Placa: <span className="text-slate-200">{placa}</span></p>
+                    <p className="text-xs font-medium text-slate-400 mt-0.5 truncate">
+                      Placa: <span className="text-slate-300">{placa}</span>
+                    </p>
                   </div>
                 </div>
 
-                {/* Tracking Visualizer Simples */}
-                <div className="mt-6 flex flex-col items-center justify-center py-5 bg-slate-900/50 rounded-xl border border-white/5">
-                  <div className="h-14 w-14 bg-slate-800 rounded-full flex items-center justify-center relative border border-primary">
-                    <span className="text-xl">📍</span>
+                {/* Tracking Visualizer */}
+                <div className="mt-5 flex flex-col items-center justify-center py-5 bg-slate-900/80 rounded-xl border border-slate-700/50 shadow-inner">
+                  <div className="h-12 w-12 bg-slate-800 rounded-full flex items-center justify-center relative border border-slate-700 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
                   </div>
-                  <div className="mt-4 px-5 py-2 bg-primary text-white rounded-lg shadow-md text-sm font-bold tracking-wide">
+                  <div className="mt-3 px-4 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold tracking-wide shadow-lg">
                     {aluno.embarcado_hoje ? "A caminho da escola" : "Van a 3 min de distância"}
                   </div>
                 </div>
               </section>
 
-              {/* Ações Rápidas em Grid */}
-              <section className="space-y-4 pt-4">
-                <h3 className="font-title text-lg text-slate-200 px-1">Ações Rápidas</h3>
+              {/* Ações Rápidas */}
+              <section className="space-y-4 pt-2">
+                <h3 className="font-title text-sm font-bold text-slate-400 uppercase tracking-widest px-1">Ações Rápidas</h3>
                 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="flex flex-col gap-3">
                   <AbsenceButton 
                     alunoId={aluno.id} 
                     isAusenteHoje={aluno.notificar_ausencia_hoje || false} 
                   />
 
-                  <button className="w-full flex items-center justify-center gap-3 rounded-xl py-4 font-bold text-slate-300 bg-secondary border border-white/10 hover:bg-slate-700 transition-colors active:scale-95">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-400" viewBox="0 0 20 20" fill="currentColor">
+                  <button className="w-full flex items-center justify-center gap-2 rounded-xl py-3.5 font-bold text-slate-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 hover:text-white transition-all active:scale-95 shadow-sm text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
                     Pagar Mensalidade
                   </button>
                 </div>
               </section>
-            </>
+            </div>
           ) : (
-            <div className="text-center mt-12 py-12 bg-secondary rounded-2xl border border-white/10 px-6">
-              <div className="flex flex-col items-center">
-                <div className="h-20 w-20 bg-slate-900 rounded-2xl flex items-center justify-center border border-white/5 mb-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            <div className="flex-1 flex items-center justify-center pb-12">
+              <div className="w-full bg-slate-800/50 backdrop-blur border border-slate-700/50 p-8 rounded-2xl text-center shadow-xl">
+                <div className="mx-auto h-16 w-16 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
                 
-                <h2 className="text-2xl font-title font-bold text-foreground mb-3">Nenhum Tio vinculado</h2>
-                <p className="text-slate-400 mb-8 text-sm leading-relaxed font-medium">
-                  Encontre o motorista ideal que atenda a escola do seu filho para começar a rastrear.
+                <h2 className="text-zinc-200 font-semibold text-lg font-title mb-2">Nenhum Tio Vinculado</h2>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-8">
+                  Encontre o motorista ideal que atenda a escola do seu filho e a sua região para começar a rastrear.
                 </p>
                 
                 <Link 
                   href="/dashboard/pai/buscar"
-                  className="inline-flex items-center justify-center gap-2 w-full bg-primary text-white hover:bg-blue-600 rounded-xl py-4 font-bold tracking-wide transition-colors active:scale-95"
+                  className="block w-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm py-3.5 px-4 rounded-xl transition-all shadow-lg active:scale-95"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                  </svg>
                   Localizar Vans na Região
                 </Link>
               </div>
