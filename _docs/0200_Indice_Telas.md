@@ -9,6 +9,9 @@ Este documento centraliza o mapeamento de telas e rotas ativas do Módulo C (Pai
 | Rota | Tipo / Responsabilidade | Status | Descrição |
 | --- | --- | --- | --- |
 | `/` | Portal Unificado (Login / Root Page) | **Ativo** | Tela limpa e minimalista contendo um formulário para Supabase Auth. Executa o roteamento (RBAC) via proxy.ts após o login. Referência: `_docs/0201_Login.md` |
+| `/dashboard/pai` | Painel do Responsável | **Ativo** | Casca Estrutural (Minimalista). Referência: `_docs/0204_Dashboard_Pai.md` |
+| `/dashboard/motorista` | Painel do Motorista | **Ativo** | Casca Estrutural (Minimalista). Referência: `_docs/0205_Dashboard_Motorista.md` |
+| `/admin` | Console de Administração | **Ativo** | Casca Estrutural (Minimalista). Referência: `_docs/0206_Dashboard_Admin.md` |
 
 ---
 

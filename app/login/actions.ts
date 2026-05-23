@@ -29,3 +29,12 @@ export async function logIn(formData: FormData) {
   // de forma completamente segura (RBAC).
   redirect("/");
 }
+
+export async function logOut() {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
+  await supabase.auth.signOut();
+  redirect("/");
+}
+
