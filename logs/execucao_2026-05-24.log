@@ -1,0 +1,43 @@
+[2026-05-24 14:49] INFO: Iniciando implementação Fase 1 — Tio da Van 2.0 Elite
+[2026-05-24 14:50] INFO: Next.js 16.2.6 inicializado em tio-da-van-app/ (TypeScript + Tailwind v4)
+[2026-05-24 14:51] INFO: Supabase conectado — Projeto xexxnfhukprktdzkhnhi (ACTIVE_HEALTHY)
+[2026-05-24 14:51] INFO: Enums PostgreSQL criados (11 tipos)
+[2026-05-24 14:52] INFO: Tabela perfis criada com trigger on_auth_user_created
+[2026-05-24 14:52] INFO: Tabela motoristas_perfil criada (RLS habilitado)
+[2026-05-24 14:52] INFO: Tabela rotas criada com trigger updated_at
+[2026-05-24 14:52] INFO: Tabela pontos_embarque criada
+[2026-05-24 14:52] INFO: Tabela alunos criada com trigger handle_checkin_change
+[2026-05-24 14:52] INFO: Tabela notificacoes criada, trigger trg_alunos_checkin ativado
+[2026-05-24 14:52] INFO: Tabelas cobrancas + despesas criadas
+[2026-05-24 14:53] INFO: Tabelas ocorrencias + contratos criadas com trigger de notificação
+[2026-05-24 14:53] INFO: RLS policies aplicadas para todas as 10 tabelas
+[2026-05-24 14:53] INFO: Helper functions meu_perfil_id() e meu_motorista_id() criadas
+[2026-05-24 14:53] INFO: 15 índices estratégicos criados
+[2026-05-24 14:53] INFO: npm install: @supabase/supabase-js @supabase/ssr recharts @react-google-maps/api @react-pdf/renderer @phosphor-icons/react — 117 pacotes instalados
+[2026-05-24 14:53] INFO: .env.local criado com credenciais Supabase
+[2026-05-24 14:54] INFO: lib/supabase/client.ts criado (createBrowserClient)
+[2026-05-24 14:54] INFO: lib/supabase/server.ts criado (createServerClient)
+[2026-05-24 14:55] INFO: database.types.ts gerado via MCP (gerado do banco real)
+[2026-05-24 14:55] INFO: src/proxy.ts criado (Next.js 16 auth guard)
+[2026-05-24 14:56] INFO: types/index.ts criado (tipos de domínio derivados do DB)
+[2026-05-24 14:56] INFO: lib/mocks/index.ts criado (mocks tipados: alunos, rotas, cobranças, despesas, ocorrências)
+[2026-05-24 14:57] INFO: providers/AuthProvider.tsx criado (useAuth hook + context)
+[2026-05-24 14:57] INFO: app/globals.css criado (Design System Dark Premium Glassmorfismo)
+[2026-05-24 14:57] INFO: app/layout.tsx criado (root layout com AuthProvider)
+[2026-05-24 14:58] INFO: app/page.tsx criado (redirect root → login/dashboard)
+[2026-05-24 14:58] INFO: app/(auth)/login/page.tsx criado (tela de login Dark Premium)
+[2026-05-24 14:59] INFO: components/layout/Sidebar.tsx criado (nav glassmorfismo + mobile drawer)
+[2026-05-24 14:59] INFO: components/layout/Header.tsx criado (header sticky + notificações)
+[2026-05-24 15:00] INFO: app/(motorista)/layout.tsx criado (grupo motorista)
+[2026-05-24 15:00] INFO: app/(motorista)/dashboard/page.tsx criado (dashboard completo com KPIs)
+[2026-05-24 15:01] INFO: indice.txt criado na raiz (governança)
+[2026-05-24 15:01] INFO: TypeScript check: 0 erros
+[2026-05-24 15:02] INFO: Storage buckets criados: avatars, alunos-fotos, documentos, contratos, recibos, comprovantes
+[2026-05-24 15:02] INFO: Dev server rodando em http://localhost:3000
+[2026-05-24 15:03] INFO: Fase 1 concluída — 12/12 tarefas ✅
+[2026-05-24 16:11] INFO: Correção de contas de teste: admin@tiodavan.com, motorista@tiodavan.com, responsavel@tiodavan.com
+[2026-05-24 16:12] INFO: Ajustados instance_id ('00000000-0000-0000-0000-000000000000') e colunas vazias de GoTrue no banco
+[2026-05-24 16:13] INFO: Verificação de login efetuada via script: todos os 3 acessos (admin, motorista, responsavel) autenticando e direcionando 100% com sucesso!
+[2026-05-24 17:15] INFO: Iniciando execução do build de produção via 'npm run build' em tio-da-van-app/
+[2026-05-24 17:16] INFO: Build de produção concluído com sucesso (Next.js 16.2.6, Turbopack, compile em 6.2s, TypeScript em 7.2s, 16 rotas estáticas/dinâmicas geradas)
+[2026-05-24 17:17] INFO: Servidor de desenvolvimento dev reativado na subpasta 'tio-da-van-app' após reinício do host.

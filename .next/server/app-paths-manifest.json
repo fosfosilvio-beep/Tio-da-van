@@ -1,0 +1,9 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/dashboard/motorista/page": "app/dashboard/motorista/page.js",
+  "/dashboard/pai/buscar/page": "app/dashboard/pai/buscar/page.js",
+  "/dashboard/pai/page": "app/dashboard/pai/page.js",
+  "/page": "app/page.js"
+}

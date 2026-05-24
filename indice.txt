@@ -1,0 +1,43 @@
+# ÍNDICE DO PROJETO — Tio da Van 2.0 Elite
+# Criado: 2026-05-24 | Versão: 2.0
+
+## MAPA DO REPOSITÓRIO
+
+### /tio-da-van-app        → Aplicação Next.js 15 (código de produção)
+### /_docs                 → Documentação de arquitetura (Sistema de Quarteirões)
+### /wowdash-*/            → Template de referência visual (NÃO editar)
+### /open-design/          → Assets de design (wireframes, prints)
+
+## DOCUMENTAÇÃO — SISTEMA DE QUARTEIRÕES
+
+/_docs/0000_Plano_Arquitetural_v2.md   → Plano mestre do projeto
+/_docs/0100_Infra/                     → Configurações e variáveis
+/_docs/0200_Telas/                     → Documentação de cada tela
+/_docs/0300_Hooks/                     → Documentação de cada hook
+/_docs/0400_Supabase/                  → Tabelas, RLS, triggers
+
+## SUPABASE
+
+Project ID: xexxnfhukprktdzkhnhi
+URL: https://xexxnfhukprktdzkhnhi.supabase.co
+Tabelas: perfis, motoristas_perfil, rotas, pontos_embarque,
+         alunos, cobrancas, despesas, ocorrencias, contratos, notificacoes
+
+## STACK
+
+Framework: Next.js 15 (App Router)
+Linguagem: TypeScript (strict)
+Estilização: Tailwind CSS v4 + CSS custom (Dark Premium Glassmorfismo)
+Backend: Supabase (PostgreSQL 17 + Auth + Storage + Realtime)
+WhatsApp: Evolution API
+Mapas: Google Maps API
+Pagamentos: Asaas API (Fase 3)
+Deploy: Vercel
+
+## REGRAS DE GOVERNANÇA (LEIA ANTES DE CODAR)
+
+1. Nunca edite arquivos de infra sem ler o bloquinho doc correspondente em _docs/
+2. Nunca faça chamadas Supabase diretas em page.tsx — use hooks + Server Actions
+3. Nunca use @ts-ignore sem justificativa — use mocks tipados em lib/mocks/
+4. Todo novo componente/tela/tabela deve ter seu .md em _docs/ (mesmo commit)
+5. Logs diários em /logs/execucao_AAAA-MM-DD.log

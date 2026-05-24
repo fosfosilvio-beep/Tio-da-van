@@ -1,0 +1,48 @@
+{
+  "node": {
+    "406a4cb8fd5deae4247644277c8a711d085769c899": {
+      "workers": {
+        "app/page": {
+          "moduleId": 93776,
+          "async": false,
+          "exportedName": "logIn",
+          "filename": "app/login/actions.ts"
+        }
+      },
+      "filename": "app/login/actions.ts",
+      "exportedName": "logIn"
+    },
+    "00fb6b621e1d71eb0ee6bf03d85d8d0d67f96a1299": {
+      "workers": {
+        "app/admin/page": {
+          "moduleId": 87027,
+          "async": false,
+          "exportedName": "logOut",
+          "filename": "app/login/actions.ts"
+        },
+        "app/dashboard/pai/page": {
+          "moduleId": 71747,
+          "async": false,
+          "exportedName": "logOut",
+          "filename": "app/login/actions.ts"
+        }
+      },
+      "filename": "app/login/actions.ts",
+      "exportedName": "logOut"
+    },
+    "60d17210be9ef6ba9fd272b6d416afd50944209f0e": {
+      "workers": {
+        "app/dashboard/pai/page": {
+          "moduleId": 71747,
+          "async": false,
+          "exportedName": "toggleAusencia",
+          "filename": "app/dashboard/pai/actions.ts"
+        }
+      },
+      "filename": "app/dashboard/pai/actions.ts",
+      "exportedName": "toggleAusencia"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "hT0ehPvzZRz1vs72Qr71/k4fl4+UvxaJ+bZJfUhCSpY="
+}
