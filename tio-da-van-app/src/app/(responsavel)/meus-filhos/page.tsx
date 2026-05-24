@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { QRCodeGenerator } from '@/components/qrcode/QRCodeGenerator'
-import { MapPin, Bus, CheckCircle, Warning, X } from '@phosphor-icons/react/dist/ssr'
+import { MapPin, Bus, CheckCircle, Warning, X, Van } from '@phosphor-icons/react/dist/ssr'
 
 export default function MeusFilhosPage() {
   const [modalOpen, setModalOpen] = useState(false)
