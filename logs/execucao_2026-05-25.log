@@ -12,3 +12,4 @@
 [2026-05-25 20:23:29] INFO: Fix CSS issues (Tailwind v4 theme import e typography tokens) e recriacao de cache Next.js.
 [2026-05-25 20:34:57] INFO: Criado 0101_Troubleshooting_CSS.md em _docs/. Documentado incidente de CSS duplicado e layout quebrado da landing page (2026-05-25). Correcao: reescrita de globals.css + inline styles no page.tsx.
 [2026-05-25 20:49:00] INFO: Copiado e registrado o Prompt Mestre para Jules em _docs/prompt_jules_implementacao_completa.md.
+[2026-05-25 21:00:00] INFO: Complementado o Prompt Mestre para Jules com a lista detalhada de rotas e checklist de navigabilidade.

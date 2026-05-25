@@ -95,66 +95,65 @@ Implementar **todas as telas internas da aplicação** (dashboard do motorista, 
 
 ---
 
-### 🌐 Páginas Públicas
+### 🌐 Grupo Público e Autenticação `(public)` & `(auth)`
 
-| # | Rota | Arquivo | Status | Observação |
-|---|------|---------|--------|------------|
-| 1 | `/` | `src/app/page.tsx` | ✅ | Landing Page — NÃO MEXER, foi refatorada hoje |
-| 2 | `/vans` | `src/app/vans/page.tsx` | 🔧 | Lista pública de vans — revisar UI e usar mocks de `landing.ts` |
-
----
-
-### 🔐 Auth
-
-| # | Rota | Arquivo | Status | Observação |
-|---|------|---------|--------|------------|
-| 3 | `/login` | `src/app/(auth)/login/page.tsx` | 🔧 | Tela de login — garantir design Elite e funcionalidade de auth via Supabase |
-| 4 | `/signup` | `src/app/(auth)/signup/page.tsx` | 🔧 | Tela de cadastro — formulário de signup com seleção de tipo (motorista/responsavel) |
+| # | Rota | Arquivo | Status | Propósito / Descrição |
+|---|------|---------|--------|-----------------------|
+| 1 | `/` | `src/app/page.tsx` | ✅ | **Landing Page & Marketplace:** Apresentar o serviço e captar novos usuários. Hero com proposta de valor, busca pública de vans (Ex: Arapongas por escola), e cards de resultados com CTA "Chamar no WhatsApp". **NÃO EDITAR**. |
+| 2 | `/vans` | `src/app/vans/page.tsx` | 🔧 | **Busca de Vans:** Exibe resultados filtrados com cards dos motoristas e link direto para WhatsApp. |
+| 3 | `/login` | `src/app/(auth)/login/page.tsx` | 🔧 | **Portal de Acesso:** Login unificado via Google (Supabase Auth) ou Email/Senha. Design Soft UI limpo, fundo `bg-slate-50`, cartões `rounded-3xl` flutuantes. |
+| 4 | `/signup` | `src/app/(auth)/signup/page.tsx` | 🔧 | **Registro Inicial:** Seleção de perfil inicial ("Sou Motorista" ou "Sou Pai"). |
+| 5 | `/convite/[token]` | `src/app/(auth)/convite/[token]/page.tsx` | 🆕 | **Landing de Convite:** Tela de captura de leads. O pai clica no link do WhatsApp do motorista, acessa o formulário de cadastro pré-vinculado à van/motorista correto. |
 
 ---
 
-### 🚐 Grupo Motorista `(motorista)`
+### 🚐 Grupo Motorista & Dono de Frota `(motorista)`
 
-**Layout:** `src/app/(motorista)/layout.tsx` — Sidebar (Deep Blue) + Header + conteúdo. Precisa refatorar para usar variáveis CSS corretas.
+**Layout:** `src/app/(motorista)/layout.tsx` — Sidebar (Deep Blue) + Header funcional + área de conteúdo. Usar variáveis CSS do `:root`.
 
-| # | Rota | Arquivo | Status | Descrição |
-|---|------|---------|--------|-----------|
-| 5 | `/dashboard` | `src/app/(motorista)/dashboard/page.tsx` | 🔧 | Dashboard principal — Stat cards (total alunos, embarcados, receita, lucro), gráfico de receita (Recharts), lista de próximas cobranças, card de onboarding se `status_onboarding === false`. Usar `mockDashboardStats` + `mockCobrancas` |
-| 6 | `/dashboard/cadastro` | `src/app/(motorista)/dashboard/cadastro/page.tsx` | 🔧 | Formulário KYC 3 etapas (query param `?step=1,2,3`). **Step 1:** Dados Pessoais (nome, CPF, RG, WhatsApp, endereço). **Step 2:** Documentos (upload CNH frente/verso, selfie — MOCKAR upload com preview local). **Step 3:** Pagamento (Chave Pix, banco — MOCKAR Asaas). |
-| 7 | `/dashboard/frota/nova` | `src/app/(motorista)/dashboard/frota/nova/page.tsx` | 🔧 | Formulário de cadastro de veículo com 4 abas: Dados, Fotos, Documentos, Rotas/Horários (ver contrato `Veiculo` na doc 0207). MOCKAR uploads com preview local. |
-| 8 | `/chamada` | `src/app/(motorista)/chamada/page.tsx` | 🔧 | Lista de alunos da rota atual, com botões "Embarcar"/"Desembarcar" por aluno. Seletor de rota + turno no topo. Usar `mockAlunos` + `mockRotas`. Mostrar contagem: X embarcados, Y aguardando, Z ausentes. |
-| 9 | `/chamada/scanner` | `src/app/(motorista)/chamada/scanner/page.tsx` | 🆕 | Scanner QR Code (`html5-qrcode`). Ao escanear, faz mock de check-in do aluno. MOCKAR: exibir Toast "Aluno X embarcado ✅". |
-| 10 | `/alunos` | `src/app/(motorista)/alunos/page.tsx` | 🔧 | Tabela de alunos com: avatar, nome, escola, série, status, rota. Filtros por rota e status. Botão "➕ Novo Aluno" abre modal de cadastro (inline). Usar `mockAlunos`. |
-| 11 | `/rotas` | `src/app/(motorista)/rotas/page.tsx` | 🔧 | Lista de rotas em cards. Cada card: nome, turno, horário, nº de pontos, nº de alunos. Botão "➕ Nova Rota" abre modal. Clicar no card expande para ver pontos de embarque (accordion/collapsible). Usar `mockRotas`. |
-| 12 | `/financeiro` | `src/app/(motorista)/financeiro/page.tsx` | 🔧 | **3 abas:** (1) Cobranças — tabela com status pill (pago/pendente/vencido), botão "➕ Nova Cobrança". (2) Despesas — tabela + botão adicionar. (3) Resumo — cards de receita/despesa/lucro + gráfico Recharts (barras mensal). Usar `mockCobrancas` + `mockDespesas` + `mockDashboardStats`. |
-| 13 | `/ocorrencias` | `src/app/(motorista)/ocorrencias/page.tsx` | 🔧 | Lista de ocorrências em cards/timeline. Cada uma: aluno, tipo (badge), severidade (cor), data, descrição. Botão "➕ Registrar Ocorrência" abre modal. Usar `mockOcorrencias`. |
-| 14 | `/contratos` | `src/app/(motorista)/contratos/page.tsx` | 🔧 | Lista de contratos com status (rascunho/ativo/encerrado). Botão "📄 Gerar Contrato PDF" (MOCKAR — usar `@react-pdf/renderer` para gerar um PDF básico com dados mockados). Botão "✍️ Novo Contrato" abre modal. |
-| 15 | `/aniversariantes` | `src/app/(motorista)/aniversariantes/page.tsx` | 🔧 | Lista de alunos cujo `data_nascimento` é no mês atual. Cards com foto, nome, data, idade. Se nenhum no mês, mostra empty state elegante. Usar `mockAlunos` filtrando por mês. |
+| # | Rota | Arquivo | Status | Propósito / Descrição |
+|---|------|---------|--------|-----------------------|
+| 6 | `/dashboard` | `src/app/(motorista)/dashboard/page.tsx` | 🔧 | **Painel Geral:** Central de comando. Cartões de estatísticas, botão de pulso "Iniciar Rota", mini-chamada da rota ativa e atalhos rápidos. |
+| 7 | `/dashboard/cadastro` | `src/app/(motorista)/dashboard/cadastro/page.tsx` | 🔧 | **Onboarding / KYC:** Funil de 3 passos para envio de documentos. Dados pessoais, fotos CNH/Van, dados bancários (Asaas) e distinção entre "Autônomo" ou "Dono de Frota". |
+| 8 | `/dashboard/frota/nova` | `src/app/(motorista)/dashboard/frota/nova/page.tsx` | 🔧 | **Cadastro de Veículo:** Formulário com 4 abas para cadastrar novos veículos na frota (CRLV, fotos, turnos). |
+| 9 | `/chamada` | `src/app/(motorista)/chamada/page.tsx` | 🔧 | **Mesa de Chamada:** Offline-first. Leitor de QR Code integrado na tela, lista de alunos com botões de status (Aguardando, Embarcado, Desembarcado, Faltou). Gatilho do áudio "Olha a van!". |
+| 10 | `/chamada/scanner` | `src/app/(motorista)/chamada/scanner/page.tsx` | 🆕 | **Scanner Adicional:** Tela inteira de leitor de QR Code usando câmera para check-in rápido de alunos. |
+| 11 | `/alunos` | `src/app/(motorista)/alunos/page.tsx` | 🔧 | **Gestão da Clientela:** Tabela com ficha de alunos, observações médicas/ficha de cada um, e botão "Gerar Link de Convite" (gera rota `/convite/[token]`). |
+| 12 | `/rotas` | `src/app/(motorista)/rotas/page.tsx` | 🔧 | **Planejamento de Trajetos:** Ordem de paradas baseada nos endereços dos alunos. Mapa interativo com pins (ou placeholder de mapa elegante). |
+| 13 | `/financeiro` | `src/app/(motorista)/financeiro/page.tsx` | 🔧 | **Meu Caixa:** Gestão de boletos/Pix gerados pelo Asaas. Listagem de cobranças pagas/pendentes, inadimplência e registro de despesas operacionais (combustível/manutenção). |
+| 14 | `/ocorrencias` | `src/app/(motorista)/ocorrencias/page.tsx` | 🔧 | **Livro de Bordo:** Registro de ocorrências ou incidentes para notificação e comunicação oficial aos responsáveis. |
+| 15 | `/contratos` | `src/app/(motorista)/contratos/page.tsx` | 🔧 | **Gestão de Contratos:** Geração de contrato base em PDF usando `@react-pdf/renderer` com dados mockados. |
+| 16 | `/aniversariantes` | `src/app/(motorista)/aniversariantes/page.tsx` | 🔧 | **Aniversariantes do Mês:** Visualização rápida de aniversariantes da rota para engajamento e relacionamento. |
+| 17 | `/minha-frota` | `src/app/(motorista)/minha-frota/page.tsx` | 🆕 | **Gestão de Equipe (Dono de Frota):** Gestão de motoristas empregados, veículos (placas/CRLV), delegação de rotas por van e relatórios financeiros independentes por veículo. |
 
 ---
 
 ### 👨‍👩‍👧‍👦 Grupo Responsável `(responsavel)`
 
-**Layout:** `src/app/(responsavel)/layout.tsx` — Layout simplificado (header horizontal, sem sidebar). Precisa criar.
+**Layout:** `src/app/(responsavel)/layout.tsx` — PWA Mobile-First simplificado (sem sidebar, header horizontal).
 
-| # | Rota | Arquivo | Status | Descrição |
-|---|------|---------|--------|-----------|
-| 16 | `/meu-painel` | `src/app/(responsavel)/meu-painel/page.tsx` | 🆕 | Dashboard do pai: cards com info do(s) filho(s) (nome, escola, motorista, status do dia). Card de "Próxima Cobrança" com valor e vencimento. Card "Status da Van" (simulação de "Van a caminho" ou "Van parada"). |
-| 17 | `/meus-filhos` | `src/app/(responsavel)/meus-filhos/page.tsx` | 🆕 | Lista de filhos com cards detalhados: foto, nome, escola, série, rota, motorista, observações médicas. Botão "Ver Histórico de Viagens" (mock). |
-| 18 | `/mensalidades` | `src/app/(responsavel)/mensalidades/page.tsx` | 🆕 | Tabela de faturas: mês ref, valor, vencimento, status (pill). Botão "💳 Pagar via Pix" — **MOCKAR:** abre modal com QR Code fake (usar `qrcode.react` gerando um QR com texto "MOCK_PIX_PAYMENT"). |
+| # | Rota | Arquivo | Status | Propósito / Descrição |
+|---|------|---------|--------|-----------------------|
+| 18 | `/meu-painel` | `src/app/(responsavel)/meu-painel/page.tsx` | 🆕 | **Central do Pai:** Visão geral da rotina do filho. Status da van em tempo real ("Na van agora", "Chegou na escola"), foto e dados do motorista, e atalho rápido do WhatsApp. |
+| 19 | `/meus-filhos` | `src/app/(responsavel)/meus-filhos/page.tsx` | 🆕 | **Lista de Filhos:** Fichas de cadastro individuais dos filhos com escola, série, rota associada e anotações médicas. |
+| 20 | `/meu-painel/cracha` | `src/app/(responsavel)/meu-painel/cracha/page.tsx` | 🆕 | **Crachá de Embarque (Passe Digital):** Exibição em tela cheia do QR Code único do aluno com brilho máximo configurado para leitura fácil pelo motorista. |
+| 21 | `/meu-painel/avisos` | `src/app/(responsavel)/meu-painel/avisos/page.tsx` | 🆕 | **Central de Notificações:** Histórico de alertas de chegada/partida, avisos gerais e botão para justificar falta do dia. |
+| 22 | `/meu-painel/financeiro` | `src/app/(responsavel)/meu-painel/financeiro/page.tsx` | 🆕 | **Mensalidades / Pagamento:** Histórico de boletos/Pix, botão de copiar Pix Copia e Cola, modal com QR Code simulado de pagamento via `qrcode.react`. |
 
 ---
 
-### 🛡️ Grupo Admin `(admin)`
+### 🛡️ Grupo Administrativo `(admin)`
 
-**Layout:** `src/app/(admin)/layout.tsx` — Sidebar admin (pode ser mais simples) + Header. Precisa refatorar.
+**Layout:** `src/app/(admin)/layout.tsx` — Sidebar admin + Header. Design focado em **Soft UI com fundos claros**, elementos limpos e sem cores escuras cansativas.
 
-| # | Rota | Arquivo | Status | Descrição |
-|---|------|---------|--------|-----------|
-| 19 | `/admin` | `src/app/(admin)/admin/page.tsx` | 🔧 | Dashboard master: stat cards (total motoristas, total alunos, total receita plataforma, motoristas pendentes KYC). Gráfico de crescimento mensal (Recharts). Lista de "Últimas Ações" (mock). |
-| 20 | `/admin/usuarios` | `src/app/(admin)/admin/usuarios/page.tsx` | 🆕 | Tabela de todos os usuários (motoristas + responsáveis). Colunas: nome, email, tipo, status onboarding, data cadastro. Filtros por tipo. Botão "Ver Perfil" abre detalhes em modal. |
-| 21 | `/admin/financeiro` | `src/app/(admin)/admin/financeiro/page.tsx` | 🆕 | Visão financeira global: receita total, comissão da plataforma (5% mock), gráficos. Tabela de transações recentes. |
-| 22 | `/admin/auditoria` | `src/app/(admin)/admin/auditoria/page.tsx` | 🆕 | Log de ações do sistema (mock): quem fez o quê, quando. Tabela com filtros por tipo de ação e data. |
+| # | Rota | Arquivo | Status | Propósito / Descrição |
+|---|------|---------|--------|-----------------------|
+| 23 | `/admin` | `src/app/(admin)/admin/page.tsx` | 🔧 | **Cockpit Master (BI):** Gráficos de crescimento de usuários, mapa de calor de vans, split Asaas e relatórios globais de saúde da plataforma. |
+| 24 | `/admin/usuarios` | `src/app/(admin)/admin/usuarios/page.tsx` | 🆕 | **Moderação KYC:** Mesa de análise de CNH e fotos das vans enviadas no onboarding. Botão de aprovação e painel de suspensão de contas. |
+| 25 | `/admin/frotas` | `src/app/(admin)/admin/frotas/page.tsx` | 🆕 | **Auditoria de Frotas:** Lista de Donos de Frota cadastrados, quantidade de vans ativas sob cada CNPJ e faturamento acumulado. |
+| 26 | `/admin/financeiro` | `src/app/(admin)/admin/financeiro/page.tsx` | 🆕 | **Receita da Plataforma:** Relatórios de extrato de splits (5% da taxa do SaaS) e previsibilidade de caixa. |
+| 27 | `/admin/configuracoes` | `src/app/(admin)/admin/configuracoes/page.tsx` | 🆕 | **Parametrização:** Configuração de split de tarifas, chaves de API do Asaas/Evolution e gestão de contas de administradores. |
+| 28 | `/admin/auditoria` | `src/app/(admin)/admin/auditoria/page.tsx` | 🆕 | **Log de Ações:** Log de segurança e auditoria do sistema (ações executadas por operadores do sistema). |
 
 ---
 
@@ -337,9 +336,14 @@ src/
 │   │   └── admin/
 │   │       ├── page.tsx
 │   │       ├── auditoria/page.tsx
+│   │       ├── configuracoes/page.tsx
 │   │       ├── financeiro/page.tsx
+│   │       ├── frotas/page.tsx
 │   │       └── usuarios/page.tsx
 │   ├── (auth)/
+│   │   ├── convite/
+│   │   │   └── [token]/
+│   │   │       └── page.tsx
 │   │   ├── login/page.tsx
 │   │   └── signup/page.tsx
 │   ├── (motorista)/
@@ -355,12 +359,17 @@ src/
 │   │   │   ├── cadastro/page.tsx
 │   │   │   └── frota/nova/page.tsx
 │   │   ├── financeiro/page.tsx
+│   │   ├── minha-frota/
+│   │   │   └── page.tsx
 │   │   ├── ocorrencias/page.tsx
 │   │   └── rotas/page.tsx
 │   ├── (responsavel)/
 │   │   ├── layout.tsx
-│   │   ├── mensalidades/page.tsx
-│   │   ├── meu-painel/page.tsx
+│   │   ├── meu-painel/
+│   │   │   ├── page.tsx
+│   │   │   ├── cracha/page.tsx
+│   │   │   ├── avisos/page.tsx
+│   │   │   └── financeiro/page.tsx
 │   │   └── meus-filhos/page.tsx
 │   ├── api/webhooks/asaas/route.ts
 │   ├── vans/page.tsx
@@ -394,8 +403,60 @@ src/
 
 ---
 
+## [CHECKLIST DO STATUS DA IMPLEMENTAÇÃO]
+
+O Agente Autônomo deve preencher e atualizar este checklist ao final do seu trabalho, indicando quais rotas estão 100% integradas, testadas e quais ainda dependem de backend Supabase real:
+
+### 🔄 Checklist de Navegabilidade & Fluxo (100% Funcional)
+- [ ] **Navegação Home:** Todas as páginas internas possuem botões de retorno (Home, Back) e links de navegação 100% funcionais no Sidebar/Header.
+- [ ] **Histórico e Fallbacks:** Verificação de estados vazios (empty states) para listagens vazias e toasts/mensagens de fallback apropriadas se recursos não forem encontrados.
+- [ ] **Botões de Desfazer:** Modais e formulários incluem botões de "Voltar", "Cancelar" ou "Desfazer Ação" visíveis e clicáveis.
+- [ ] **Responsividade:** Layouts adaptados para mobile-first (principalmente no grupo `responsavel` e fluxo de `chamada` do motorista).
+
+### 🌐 Páginas Públicas & Auth
+- [ ] `/` (Landing Page & Marketplace) - [x] Integrado e preservado (NÃO ALTERAR)
+- [ ] `/vans` (Lista de vans) - [ ] Integrado e com filtros
+- [ ] `/login` (Portal Soft UI) - [ ] Google Auth & e-mail integrado
+- [ ] `/signup` (Registro de Perfil) - [ ] Seleção de perfil funcionando
+- [ ] `/convite/[token]` (Landing de convite) - [ ] Form de cadastro vinculado à van ativa
+
+### 🚐 Painel do Motorista (`(motorista)`)
+- [ ] Layout principal com Sidebar e Header robusto - [ ] Concluído
+- [ ] `/dashboard` (Comandos rápidos e estatísticas) - [ ] Concluído
+- [ ] `/dashboard/cadastro` (Funil KYC 3 etapas) - [ ] Concluído
+- [ ] `/dashboard/frota/nova` (Cadastro de veículo com 4 abas) - [ ] Concluído
+- [ ] `/chamada` (Leitor QR integrado, lista de alunos, som trigger) - [ ] Concluído
+- [ ] `/chamada/scanner` (Câmera cheia de scanner QR) - [ ] Concluído
+- [ ] `/alunos` (Ficha, observações e botão gerar convite) - [ ] Concluído
+- [ ] `/rotas` (Ordenação e mapa interativo) - [ ] Concluído
+- [ ] `/financeiro` (Receitas Asaas, inadimplência, despesas) - [ ] Concluído
+- [ ] `/ocorrencias` (Timeline de registro) - [ ] Concluído
+- [ ] `/contratos` (Geração de PDF mockado) - [ ] Concluído
+- [ ] `/aniversariantes` (Aniversariantes do mês) - [ ] Concluído
+- [ ] `/minha-frota` (Vans, CRLV, equipe, faturamento independente) - [ ] Concluído
+
+### 👨‍👩‍👧‍👦 Painel do Responsável (`(responsavel)`)
+- [ ] Layout PWA mobile-first horizontal - [ ] Concluído
+- [ ] `/meu-painel` (Fila de status da van e dados do motorista) - [ ] Concluído
+- [ ] `/meus-filhos` (Fichas e observações médicas) - [ ] Concluído
+- [ ] `/meu-painel/cracha` (QR code tela cheia e brilho máximo) - [ ] Concluído
+- [ ] `/meu-painel/avisos` (Central de notificações de chegada) - [ ] Concluído
+- [ ] `/meu-painel/financeiro` (Histórico Pix copia e cola, adimplência) - [ ] Concluído
+
+### 🛡️ Painel Admin (`(admin)`)
+- [ ] Layout Soft UI claro (sem modo escuro ativo por padrão) - [ ] Concluído
+- [ ] `/admin` (Auditoria Asaas, gráficos gerais) - [ ] Concluído
+- [ ] `/admin/usuarios` (Mesa de moderação KYC e aprovação CNH) - [ ] Concluído
+- [ ] `/admin/frotas` (Listagem de CNPJ e faturamento das vans) - [ ] Concluído
+- [ ] `/admin/financeiro` (Comissões split de 5%) - [ ] Concluído
+- [ ] `/admin/configuracoes` (Configurações globais e chaves de API) - [ ] Concluído
+- [ ] `/admin/auditoria` (Trilha de auditoria operacional) - [ ] Concluído
+
+---
+
 > [!IMPORTANT]
 > **Prioridade absoluta:** O código deve COMPILAR (`npm run build`) sem erros. Se houver conflito entre "visual perfeito" e "compila sem erro", escolha "compila sem erro".
 
 > [!WARNING]
 > **Leia `_docs/0101_Troubleshooting_CSS.md` ANTES de tocar no `globals.css`.** Edições acumuladas nesse arquivo já causaram crash total do CSS uma vez. Nunca duplique imports. Nunca ultrapasse 400 linhas.
+
