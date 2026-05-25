@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Tio da Van - Transporte Escolar Elite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#2d4b73",
+                        "surface-tint": "#426089",
+                        "error": "#ba1a1a",
+                        "secondary": "#845400",
+                        "secondary-fixed-dim": "#fdba5f",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#e0c482",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "on-primary-container": "#9ebbea",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeef0",
+                        "on-secondary-fixed": "#2a1800",
+                        "surface-variant": "#e1e2e4",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#fdba5f",
+                        "outline-variant": "#c3c6cf",
+                        "surface": "#f8f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "outline": "#74777f",
+                        "on-background": "#191c1e",
+                        "primary-fixed": "#d4e3ff",
+                        "on-tertiary-fixed": "#251a00",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "surface-container-high": "#e7e8ea",
+                        "primary-fixed-dim": "#abc8f7",
+                        "tertiary-container": "#c3a96a",
+                        "tertiary": "#715c25",
+                        "surface-bright": "#f8f9fb",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9fb",
+                        "on-tertiary-container": "#4f3d08",
+                        "inverse-surface": "#2e3132",
+                        "inverse-primary": "#abc8f7",
+                        "secondary-fixed": "#ffddb6",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#fddf9c",
+                        "on-secondary-container": "#744900",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001c3a",
+                        "surface-dim": "#d9dadc",
+                        "on-primary-fixed-variant": "#294870",
+                        "primary": "#13345b",
+                        "on-tertiary-fixed-variant": "#57440f",
+                        "surface-container-highest": "#e1e2e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "container-margin": "20px",
+                        "card-padding": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-lg": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "label-md": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+<!-- 1. STICKY NAVBAR -->
+<nav class="bg-surface/95 dark:bg-surface-container-highest/95 backdrop-blur-md fixed top-0 w-full z-50 bg-surface dark:bg-surface-container shadow-sm border-b-0">
+<div class="flex justify-between items-center h-16 px-gutter max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Tio da Van</span>
+</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-secondary font-body-md text-body-md" href="#">Como Funciona</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-body-md text-body-md" href="#">Para Motoristas</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-body-md text-body-md" href="#">Para Famílias</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 font-body-md text-body-md" href="#">Preços</a>
+</div>
+<div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-lg text-label-lg hover:bg-surface-tint transition-colors scale-95 active:scale-90">Entrar</button>
+</div>
+</div>
+</nav>
+<!-- 2. HERO SECTION -->
+<section class="bg-primary-container text-on-primary pb-24 pt-28 px-container-margin relative overflow-hidden">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 space-y-8">
+<img alt="Logo Tio da Van" class="w-full h-auto object-contain max-w-[480px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz6MnYmhdQzfLbtWatEQ4mRZBgughzncA7jS8uRpjdLMefJfzAnkT8QAsS02GvWZXueot_D49MrPSp7b21VG4fm0dpl_8KL2t36oC-Elf0oAu0HVp497Fjmhw1gpPyQya1mfZTW-v5U7z5JWiy1fW4dxAJN1ky1aPHbfkedLYh8Hym62nSOrRKAL3YKEWWyiEH_Ij1HOWJ4Yw4r7VBOERU5Kf2Zbx_zLLd4lA1N2gmk5lQWzDLSYXx5FcBF_wAy2F0aCMk4xPm9ZKHoQ">
+<div class="space-y-4 flex flex-col items-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-[40px] md:leading-[48px] text-on-primary max-w-3xl">O Transporte Escolar Que Sua Família Merece</h1>
+<p class="font-body-lg text-body-lg text-on-primary-container max-w-2xl">Motoristas verificados, rastreamento em tempo real e tranquilidade para o seu dia a dia. A escolha certa para o transporte escolar.</p>
+</div>
+<div class="flex flex-col items-center space-y-6 w-full pt-2">
+<button class="bg-secondary-container text-on-secondary-container font-headline-sm text-headline-sm py-4 px-8 rounded-lg hover:bg-secondary-fixed-dim transition-colors shadow-sm">Buscar Van no Meu Bairro</button>
+<div class="flex flex-wrap justify-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+<span class="font-label-lg text-label-lg text-on-primary-container">Motoristas Verificados</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+<span class="font-label-lg text-label-lg text-on-primary-container">Rastreamento Live</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SEARCH SECTION -->
+<section class="py-16 px-container-margin bg-surface-container-low relative -mt-10 z-20">
+<div class="max-w-4xl mx-auto bg-surface rounded-xl shadow-sm border border-outline-variant p-6 md:p-8">
+<h2 class="font-headline-md text-headline-md text-center text-on-surface mb-6">Sou Pai — Encontre a Van Ideal para Seu Filho</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">school</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md bg-surface" placeholder="Nome da Escola" type="text">
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md bg-surface" placeholder="Seu Bairro" type="text">
+</div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-headline-sm text-headline-sm py-3 rounded-lg hover:bg-secondary-fixed-dim transition-colors shadow-sm">Ver Vans Disponíveis</button>
+<div class="mt-6 flex flex-wrap justify-center gap-2">
+<span class="bg-surface-container-high px-3 py-1 rounded-full font-label-md text-label-md text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors">Colégio Objetivo</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full font-label-md text-label-md text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors">Escola Americana</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full font-label-md text-label-md text-on-surface-variant cursor-pointer hover:bg-surface-variant transition-colors">Colégio Bandeirantes</span>
+</div>
+</div><div class="max-w-4xl mx-auto mt-8 bg-[#eef3fa] rounded-xl shadow-sm border border-outline-variant p-6 md:p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="space-y-4">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-lg text-label-lg font-bold mb-2">
+                ᄅᄂ Para Motoristas e Donos de Frota
+            </span>
+<h2 class="font-['Manrope'] font-bold text-[28px] leading-[36px] text-[#2d4b73]">Sou Motorista — Cadastre Sua Van ou Frota</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Cadastre suas rotas, horrios, fotos do veculo e aparea para centenas de famlias da sua regio. Verificao rpida e gratuita.
+            </p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[#16a34a]" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+                    Perfil verificado (KYC)
+                </li>
+<li class="flex items-center gap-2 font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[#16a34a]" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+                    Aparea na busca das famlias
+                </li>
+<li class="flex items-center gap-2 font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[#16a34a]" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+                    Gerencie cobranas e rotas
+                </li>
+<li class="flex items-center gap-2 font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[#16a34a]" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+                    Gratuito para comear
+                </li>
+</ul>
+</div>
+<div class="flex flex-col items-center justify-center space-y-3">
+<button class="w-full bg-secondary-container text-on-secondary-container font-headline-sm text-headline-sm py-4 rounded-lg hover:bg-secondary-fixed-dim transition-all shadow-sm flex items-center justify-center gap-2">
+                ᄅᄂ Cadastrar Minha Van Agora
+            </button>
+<p class="font-label-md text-label-md text-outline">
+                Leva menos de 5 minutos. Sem taxa de cadastro.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. VAN CARDS -->
+<section class="py-16 px-container-margin max-w-7xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8 text-center">Motoristas em Destaque</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] overflow-hidden">
+<div class="p-card-padding border-b border-surface-variant flex gap-4">
+<img alt="Driver" class="w-16 h-16 rounded-lg object-cover" data-alt="A professional headshot of a mature, friendly male driver wearing a neat dark blue polo shirt. The lighting is even and studio-quality, conveying reliability and trust. The background is a soft, out-of-focus light gray. The image aligns with a high-end corporate logistics aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKJZiAf-4F8V3sqXoBBAHgX6d8bHC66izDxTzqqzob158PonPu3MnhMvIOMinREsMEI1ktfsb_sLhgJ5Pd3E50EQXIjiPFBFHTzBXk_PlGSw8zxdxV_7eO-2W2XVpxj19BokB7g3GoKu7w4Em0eE5_G2Win97qqTElbhb90ieky14rxCtTaCXZaRx-KHQzYWa7kw7AnpoCyVOthpuVIBdXx0av4Oz6B_5GEYeIGjfmepPHKlaCE6iWssPYzOWOtxJr1DWonXo-qVM">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Carlos Silva</h3>
+<div class="flex items-center gap-1 text-secondary-container mt-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.9</span>
+</div>
+<span class="inline-block mt-2 bg-[#dcfce7] text-[#166534] px-2 py-0.5 rounded text-xs font-semibold">2 vagas disponíveis</span>
+</div>
+</div>
+<div class="p-card-padding space-y-3 bg-surface-bright">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">school</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Colégio Objetivo, Escola Múltipla</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">map</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Vila Mariana, Paraíso, Aclimação</p>
+</div>
+</div>
+<div class="p-card-padding">
+<button class="w-full bg-[#25D366] text-white font-label-lg text-label-lg py-3 rounded-lg hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">chat</span> Contatar via WhatsApp
+                    </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] overflow-hidden">
+<div class="p-card-padding border-b border-surface-variant flex gap-4">
+<img alt="Driver" class="w-16 h-16 rounded-lg object-cover" data-alt="A professional headshot of a mature, friendly female driver wearing a neat dark blue collared shirt. The lighting is even and studio-quality, conveying reliability and trust. The background is a soft, out-of-focus light gray. The image aligns with a high-end corporate logistics aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe9SnyO5xaYlI3bQv-a2lcrCHwHnimEO45l5UMljgSNY66tXAktZ-YT7iuPJcRTVg0p_j7IA8h9WbX4xT-gjyAWGXIiyXFaVsZa53_hxTUEL4J4B_spycdaMaETbYJPnMFWuTVFYX71oaM5l2ez-brRhsNuHymjxB3Xhc25W0siqxw_q88KkCPfH2rVRBjGcKeXyTZeGZiBp5NmlXjOmW9tdhX1aY8upyNmc7FLZjliEAg4fEVzmXq536KLa7VN_k1UZ8crBcCL3Y">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Ana Rodrigues</h3>
+<div class="flex items-center gap-1 text-secondary-container mt-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">5.0</span>
+</div>
+<span class="inline-block mt-2 bg-[#dcfce7] text-[#166534] px-2 py-0.5 rounded text-xs font-semibold">1 vaga disponível</span>
+</div>
+</div>
+<div class="p-card-padding space-y-3 bg-surface-bright">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">school</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Colégio Bandeirantes</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">map</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Moema, Itaim Bibi</p>
+</div>
+</div>
+<div class="p-card-padding">
+<button class="w-full bg-[#25D366] text-white font-label-lg text-label-lg py-3 rounded-lg hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">chat</span> Contatar via WhatsApp
+                    </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] overflow-hidden hidden lg:block">
+<div class="p-card-padding border-b border-surface-variant flex gap-4">
+<img alt="Driver" class="w-16 h-16 rounded-lg object-cover" data-alt="A professional headshot of a younger, friendly male driver wearing a clean dark blue shirt. The lighting is bright and studio-quality, conveying efficiency and modern professionalism. The background is a soft, out-of-focus light gray. The image aligns with a high-end corporate logistics aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGxHmy-RhTuGS1uT7dz8g19CT45-Hp5rai9Phx5Qa6-NcmFTBC-NFt1TzUflymTFbig1oba3VJMQwMylAl8mYfD7X7XqGFQgczMDI0uRe9-DyzHX7MqC0JSSGjWvn_pJGU1vUgcr4EceUz5N21ztefBqY_SIeAiBdDMeEhcyl1n6irCb4IX08hb24vWv13XTWqHoV_MlCD8to6UNulR5ju6SU5qCH7FkHojOmQyvrQtJyK5ADQXQdmvtAPLOLmD4CnhXN7Dd6eqlk">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Roberto Mendes</h3>
+<div class="flex items-center gap-1 text-secondary-container mt-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.8</span>
+</div>
+<span class="inline-block mt-2 bg-[#fee2e2] text-[#991b1b] px-2 py-0.5 rounded text-xs font-semibold">Lotado</span>
+</div>
+</div>
+<div class="p-card-padding space-y-3 bg-surface-bright">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">school</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Escola Americana, Dante</p>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">map</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Jardins, Pinheiros</p>
+</div>
+</div>
+<div class="p-card-padding">
+<button class="w-full bg-surface-variant text-on-surface-variant font-label-lg text-label-lg py-3 rounded-lg cursor-not-allowed flex items-center justify-center gap-2">
+                        Lista de Espera
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. HOW IT WORKS -->
+<section class="py-16 px-container-margin bg-surface-container-low border-y border-surface-variant">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-center text-on-surface mb-12">Sou Pai — Encontre a Van Ideal para Seu Filho</h2>
+<div class="relative flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0">
+<!-- Connecting Line (Desktop) -->
+<div class="hidden md:block absolute top-12 left-[15%] right-[15%] h-0.5 border-t-2 border-dashed border-outline-variant z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center w-full md:w-1/3">
+<div class="w-24 h-24 bg-tertiary-fixed flex items-center justify-center rounded-full mb-4 shadow-sm border-4 border-surface-container-low">
+<span class="material-symbols-outlined text-tertiary-container text-[40px]">search</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">1. Busque</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[250px]">Encontre vans disponíveis na sua região que atendam a escola do seu filho.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center w-full md:w-1/3">
+<div class="w-24 h-24 bg-tertiary-fixed flex items-center justify-center rounded-full mb-4 shadow-sm border-4 border-surface-container-low">
+<span class="material-symbols-outlined text-tertiary-container text-[40px]">handshake</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">2. Conecte</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[250px]">Fale diretamente com o motorista pelo app ou WhatsApp e feche o contrato.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center w-full md:w-1/3">
+<div class="w-24 h-24 bg-tertiary-fixed flex items-center justify-center rounded-full mb-4 shadow-sm border-4 border-surface-container-low">
+<span class="material-symbols-outlined text-tertiary-container text-[40px]">security</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">3. Confie</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[250px]">Acompanhe as viagens em tempo real e pague de forma segura pelo app.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. FEATURES GRID -->
+<section class="py-20 px-container-margin max-w-7xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12 text-center">Tecnologia Elite para Sua Tranquilidade</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-surface p-6 rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] hover:border-primary-fixed transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container">my_location</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Rastreamento GPS</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Saiba exatamente onde a van está durante todo o trajeto.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] hover:border-primary-fixed transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container">qr_code_scanner</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Embarque com QR Code</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Confirmação digital de entrada e saída da escola e de casa.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] hover:border-primary-fixed transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container">payments</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Pagamento Integrado via Pix</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestão financeira fácil e sem atrasos através da plataforma.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] hover:border-primary-fixed transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container">notifications_active</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Notificações Automáticas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Avisos de 'Van Chegando' e confirmações de desembarque.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] hover:border-primary-fixed transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container">verified_user</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Verificação KYC Rigorosa</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Antecedentes criminais e CNH checados regularmente.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-surface-variant shadow-[0px_4px_12px_rgba(45,75,115,0.04)] hover:border-primary-fixed transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary-container">receipt_long</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Relatórios Transparentes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Histórico completo de viagens e pagamentos no aplicativo.</p>
+</div>
+</div>
+</section>
+<!-- 7. FOOTER -->
+<footer class="bg-primary dark:bg-surface-container-lowest border-t border-outline-variant w-full">
+<div class="flex flex-col md:flex-row justify-between items-center py-12 px-gutter max-w-7xl mx-auto gap-base">
+<div class="font-headline-sm text-headline-sm font-bold text-on-primary dark:text-primary opacity-80 hover:opacity-100 transition-opacity">
+                Tio da Van
+            </div>
+<div class="flex flex-wrap justify-center gap-6 my-4 md:my-0">
+<a class="font-body-md text-body-md text-on-primary/80 dark:text-on-surface-variant hover:text-secondary-fixed-dim dark:hover:text-secondary transition-colors" href="#">Termos de Uso</a>
+<a class="font-body-md text-body-md text-on-primary/80 dark:text-on-surface-variant hover:text-secondary-fixed-dim dark:hover:text-secondary transition-colors" href="#">Privacidade</a>
+<a class="font-body-md text-body-md text-on-primary/80 dark:text-on-surface-variant hover:text-secondary-fixed-dim dark:hover:text-secondary transition-colors" href="#">Contato</a>
+<a class="font-body-md text-body-md text-on-primary/80 dark:text-on-surface-variant hover:text-secondary-fixed-dim dark:hover:text-secondary transition-colors" href="#">Suporte</a>
+</div>
+<div class="font-body-md text-body-md text-on-primary dark:text-on-surface opacity-80 hover:opacity-100 transition-opacity text-center md:text-right">
+                © 2024 Tio da Van 2.0 Elite. Todos os direitos reservados.
+            </div>
+</div>
+</footer>
+
+
+</body></html>

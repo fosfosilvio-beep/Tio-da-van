@@ -37,6 +37,13 @@ export async function middleware(request: NextRequest) {
     tipo = perfil?.tipo || null
   }
 
+  // Rotas públicas — NÃO redirecionar (Landing Page e Marketplace)
+  const publicPaths = ['/', '/vans']
+  const isPublicPath = publicPaths.some(path =>
+    request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith('/vans')
+  )
+  if (isPublicPath) return supabaseResponse
+
   // Rotas protegidas — redireciona para login se não autenticado
   const protectedPaths = ['/dashboard', '/rotas', '/chamada', '/financeiro', '/alunos', '/ocorrencias', '/contratos', '/aniversariantes', '/meu-painel', '/meus-filhos', '/mensalidades', '/admin']
   const isProtected = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))

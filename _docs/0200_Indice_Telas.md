@@ -28,3 +28,23 @@ Painel Master para gestão global do sistema.
 ## 🔐 Grupo Auth `(auth)`
 - `/login` — Rota pública com redirecionamento inteligente pós-login.
 - `/signup` — Rota de cadastro.
+
+## 🌐 Páginas Públicas (Raiz / Marketplace)
+Rotas públicas sem autenticação, voltadas para conversão de novos usuários.
+- `0204_LandingPage.md` — Landing Page de conversão e Marketplace.
+  - `/` — Landing Page (Hero, Seção "Sou Pai" + Seção "Sou Motorista", Features)
+  - Stitch: `d1319a777e254549a11a7ed4fe1645a7`
+- `0205_ListaVansPublica.md` — Lista pública de vans disponíveis por região.
+  - `/vans?escola=...&bairro=...` — Resultados de busca com cards de motorista + WhatsApp CTA
+  - Stitch: `717a244e4b11491c8b52737d8fb57dea`
+
+## 🚐 Onboarding & KYC do Motorista
+Fluxo exclusivo do primeiro acesso do motorista.
+- `0206_OnboardingMotorista.md` — Dashboard com popup + Formulário KYC completo.
+  - `/dashboard` (1ª visita) — Popup de boas-vindas + Card de aviso persistente
+  - Stitch: `8a43eab7679043ce8117849fcc0b245e`
+  - `/dashboard/cadastro` — Formulário KYC: Dados Pessoais, RG, CPF, CNH, selfie, Pix
+  - Stitch: `86463eddc24c4f6ab59b7ff4ea0df665`
+- `0207_CadastroVanFrota.md` — Cadastro de Van ou Frota.
+  - `/dashboard/frota/nova` — Formulário com 4 abas: Dados, Fotos, Rotas, Documentos
+  - Stitch: `dc2fc73290904a89822d1eedc2bf407e`

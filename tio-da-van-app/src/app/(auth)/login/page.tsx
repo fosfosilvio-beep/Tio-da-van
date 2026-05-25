@@ -38,14 +38,14 @@ export default function LoginPage() {
           .single()
 
         if (p?.tipo === 'admin') {
-          router.push('/admin')
+          window.location.href = '/admin'
         } else if (p?.tipo === 'responsavel') {
-          router.push('/meu-painel')
+          window.location.href = '/meu-painel'
         } else {
-          router.push('/dashboard')
+          window.location.href = '/dashboard'
         }
       } else {
-        router.push('/dashboard')
+        window.location.href = '/dashboard'
       }
     }
   }
