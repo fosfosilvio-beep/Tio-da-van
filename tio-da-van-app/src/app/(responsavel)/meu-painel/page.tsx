@@ -81,89 +81,104 @@ export default function MeuPainelResponsavel() {
   const firstName = perfil?.nome?.split(' ')[0] || 'Usuário'
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 1400, margin: '0 auto', fontFamily: 'Manrope, sans-serif', position: 'relative' }}>
+    <div className="flex flex-col gap-6 relative w-full h-full">
       
       {/* ===== AVISO NENHUM FILHO ===== */}
       {!loading && filhos.length === 0 && (
-        <div style={{ background: '#fffbf0', border: '1px solid #ffb74d', borderLeft: '4px solid #ffb74d', borderRadius: 8, padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: 20 }}>⚠️</span>
+        <div className="bg-amber-500/10 border border-amber-500/50 rounded-2xl p-4 flex items-center justify-between gap-4 flex-wrap shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+          <div className="flex items-center gap-4">
+            <span className="text-2xl">⚠️</span>
             <div>
-              <span style={{ fontWeight: 700, color: '#1a1c1e', fontSize: '0.9rem' }}>Nenhum filho vinculado — </span>
-              <span style={{ color: '#4a5568', fontSize: '0.9rem' }}>Vincule seus filhos para acompanhar o transporte em tempo real.</span>
+              <span className="font-bold text-amber-400 text-sm tracking-wide">ALERTA DO SISTEMA: Nenhum perfil vinculado — </span>
+              <span className="text-amber-400/80 text-sm">Vincule os passageiros para iniciar o monitoramento em tempo real.</span>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={() => setModalVincularOpen(true)} style={{ padding: '10px 20px', background: '#ffb74d', borderRadius: 8, color: '#1a1c1e', fontWeight: 700, fontSize: '0.875rem', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
-              Vincular Agora
-            </button>
-          </div>
+          <button onClick={() => setModalVincularOpen(true)} className="px-5 py-2.5 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 rounded-xl text-amber-400 font-bold text-sm transition-all shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+            INICIAR VÍNCULO
+          </button>
         </div>
       )}
 
       {/* ===== SAUDAÇÃO ===== */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+      <div className="flex items-center justify-between flex-wrap gap-4 pt-2">
         <div>
-          <h1 style={{ fontWeight: 800, fontSize: '1.6rem', color: '#1a1c1e', margin: '0 0 4px' }}>
-            Bom dia, {firstName} 👋
+          <h1 className="font-black text-2xl md:text-3xl text-white tracking-wide mb-1 flex items-center gap-3">
+            BEM-VINDO, {firstName.toUpperCase()}
+            <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,1)] animate-pulse"></span>
           </h1>
-          <p style={{ color: '#718096', fontSize: '0.875rem', margin: 0, textTransform: 'capitalize' }}>
-            {renderDate()}
+          <p className="text-slate-400 text-xs font-mono uppercase tracking-widest">
+            {renderDate()} // SYNC: ONLINE
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 12 }}>
-          <button onClick={() => setModalQrOpen(true)} style={{ padding: '10px 20px', background: 'transparent', color: '#2d4b73', border: '1px solid #2d4b73', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontFamily: 'Manrope, sans-serif', display: 'flex', alignItems: 'center', gap: 8 }}>
-            📱 Crachá QR
+        <div className="flex gap-3">
+          <button onClick={() => setModalQrOpen(true)} className="px-5 py-2.5 bg-slate-800/80 border border-slate-700/50 hover:border-cyan-500/50 hover:bg-slate-800 text-cyan-400 rounded-xl font-bold flex items-center gap-2 transition-all backdrop-blur-md">
+            <span>📱</span> CRACHÁ QR
           </button>
-          <button onClick={() => setModalVincularOpen(true)} style={{ padding: '10px 20px', background: '#2d4b73', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', fontFamily: 'Manrope, sans-serif', display: 'flex', alignItems: 'center', gap: 8 }}>
-            ➕ Novo Filho
+          <button onClick={() => setModalVincularOpen(true)} className="px-5 py-2.5 bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20 text-cyan-400 rounded-xl font-bold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+            <span>➕</span> ADICIONAR
           </button>
         </div>
       </div>
 
-      {/* ===== KPI CARDS ===== */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(200px, 1fr))', gap: 16 }}>
+      {/* ===== KPI CARDS (HUD STYLE) ===== */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Filhos Vinculados', value: filhos.length.toString(), sub: 'Ativos na plataforma', color: '#2d4b73', bg: '#eef3fa', icon: '👦' },
-          { label: 'Mensalidade Atual', value: formatCurrency(450), sub: 'Vence em 10/06', color: '#e74c3c', bg: '#fdf0ef', icon: '💰' },
-          { label: 'Viagens Hoje', value: filhos.length.toString(), sub: 'Monitoramento ativo', color: '#2ecc71', bg: '#eafaf1', icon: '🚐' },
-          { label: 'Avisos', value: '2', sub: 'Não lidos', color: '#f39c12', bg: '#fffbf0', icon: '🔔' },
+          { label: 'PASSAGEIROS', value: filhos.length.toString(), sub: 'ATIVOS NA REDE', color: 'text-cyan-400', bgGlow: 'shadow-[0_0_20px_rgba(34,211,238,0.15)]', border: 'border-cyan-500/30', icon: '👦' },
+          { label: 'FATURA ATUAL', value: formatCurrency(450), sub: 'VENCE EM 10/06', color: 'text-rose-400', bgGlow: 'shadow-[0_0_20px_rgba(244,63,94,0.15)]', border: 'border-rose-500/30', icon: '💳' },
+          { label: 'VIAGENS HOJE', value: filhos.length.toString(), sub: 'MONITORAMENTO', color: 'text-emerald-400', bgGlow: 'shadow-[0_0_20px_rgba(52,211,153,0.15)]', border: 'border-emerald-500/30', icon: '🚐' },
+          { label: 'ALERTAS', value: '2', sub: 'NÃO LIDOS', color: 'text-amber-400', bgGlow: 'shadow-[0_0_20px_rgba(251,191,36,0.15)]', border: 'border-amber-500/30', icon: '🔔' },
         ].map(card => (
-          <div key={card.label} style={{ background: '#fff', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(45,75,115,0.06)' }}>
-            <div style={{ width: 44, height: 44, borderRadius: 10, background: card.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, marginBottom: 12 }}>{card.icon}</div>
-            <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#1a1c1e', marginBottom: 4 }}>{card.value}</div>
-            <div style={{ fontSize: '0.8rem', color: '#718096', fontWeight: 500 }}>{card.label}</div>
-            {card.sub && <div style={{ fontSize: '0.75rem', color: '#718096', marginTop: 2 }}>{card.sub}</div>}
+          <div key={card.label} className={`bg-slate-800/60 backdrop-blur-xl rounded-2xl p-5 border border-slate-700/50 relative overflow-hidden group hover:${card.border} transition-colors ${card.bgGlow}`}>
+            {/* Background Gradient */}
+            <div className={`absolute -right-6 -top-6 w-24 h-24 bg-current opacity-10 rounded-full blur-2xl ${card.color}`}></div>
+            
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-10 h-10 rounded-xl bg-slate-900/80 border border-slate-700/50 flex items-center justify-center text-xl shadow-inner">
+                {card.icon}
+              </div>
+              <span className={`text-[10px] font-bold tracking-widest uppercase ${card.color}`}>{card.label}</span>
+            </div>
+            <div className="text-2xl font-black text-white mb-1 tracking-tight">{card.value}</div>
+            <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">{card.sub}</div>
           </div>
         ))}
       </div>
 
       {/* ===== GRADE INFERIOR ===== */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
         {/* Status Hoje */}
-        <div style={{ background: '#fff', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(45,75,115,0.06)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-            <h2 style={{ fontWeight: 700, fontSize: '1rem', color: '#1a1c1e', margin: 0 }}>Status de Transporte Hoje</h2>
-            <Link href="/meus-filhos" style={{ fontSize: '0.8rem', color: '#2d4b73', textDecoration: 'none', fontWeight: 600 }}>Acompanhar no mapa →</Link>
+        <div className="lg:col-span-2 bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 shadow-xl relative overflow-hidden">
+          <div className="flex justify-between items-center mb-6 border-b border-slate-700/50 pb-4">
+            <h2 className="font-bold text-sm tracking-widest uppercase text-white flex items-center gap-2">
+              <span className="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              Rastreamento Ativo
+            </h2>
+            <Link href="/meus-filhos" className="text-xs text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider transition-colors">Abrir Mapa</Link>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          
+          <div className="flex flex-col gap-4">
             {filhos.length === 0 && (
-              <div style={{ padding: '20px', textAlign: 'center', color: '#718096', fontSize: '0.9rem' }}>
-                Nenhum filho para acompanhar hoje.
+              <div className="py-8 text-center text-slate-500 font-mono text-xs uppercase tracking-wider">
+                -- Nenhum alvo detectado na área --
               </div>
             )}
             {filhos.map(filho => (
-              <div key={filho.id} style={{ display: 'flex', alignItems: 'center', gap: 12, paddingBottom: 10, borderBottom: '1px solid #eef0f4' }}>
-                <img src={filho.foto_url ?? `https://ui-avatars.com/api/?name=${filho.nome}&background=2d4b73&color=fff&size=40`} alt={filho.nome} style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover' }} />
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1a1c1e' }}>{filho.nome}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#718096' }}>{filho.escola ?? 'Escola Elite'}</div>
+              <div key={filho.id} className="flex items-center gap-4 p-4 rounded-xl bg-slate-900/50 border border-slate-700/30 hover:border-cyan-500/30 transition-all group">
+                <img src={filho.foto_url ?? `https://ui-avatars.com/api/?name=${filho.nome}&background=0f172a&color=22d3ee&size=40`} alt={filho.nome} className="w-10 h-10 rounded-lg object-cover border border-slate-700 group-hover:border-cyan-500/50 transition-colors" />
+                <div className="flex-1">
+                  <div className="font-bold text-sm text-slate-200 uppercase tracking-wide">{filho.nome}</div>
+                  <div className="text-[10px] font-mono text-slate-500 mt-1 uppercase">LOC: {filho.escola ?? 'ESCOLA ELITE'}</div>
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <span style={{ padding: '3px 10px', borderRadius: 99, fontSize: '0.75rem', fontWeight: 700, background: filho.status_checkin === 'embarcado' ? '#eafaf1' : filho.status_checkin === 'desembarcado' ? '#f8f9fb' : '#fffbf0', color: filho.status_checkin === 'embarcado' ? '#2ecc71' : filho.status_checkin === 'desembarcado' ? '#718096' : '#f39c12' }}>
-                    {filho.status_checkin === 'embarcado' ? '🚐 Em Trânsito' : filho.status_checkin === 'desembarcado' ? '✅ No Destino' : '⏳ Aguardando'}
+                <div className="text-right">
+                  <span className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest border
+                    ${filho.status_checkin === 'embarcado' ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.1)]' : 
+                      filho.status_checkin === 'desembarcado' ? 'bg-slate-800 text-slate-400 border-slate-700' : 
+                      'bg-amber-500/10 text-amber-400 border-amber-500/30'}
+                  `}>
+                    {filho.status_checkin === 'embarcado' ? 'EM TRÂNSITO' : filho.status_checkin === 'desembarcado' ? 'NO DESTINO' : 'AGUARDANDO'}
                   </span>
-                  <div style={{ fontSize: '0.7rem', color: '#718096', marginTop: 4 }}>Previsão: 12:45</div>
+                  <div className="text-[10px] font-mono text-slate-500 mt-2">ETA: 12:45</div>
                 </div>
               </div>
             ))}
@@ -171,21 +186,25 @@ export default function MeuPainelResponsavel() {
         </div>
 
         {/* Avisos Recentes */}
-        <div style={{ background: '#fff', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(45,75,115,0.06)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-            <h2 style={{ fontWeight: 700, fontSize: '1rem', color: '#1a1c1e', margin: 0 }}>Avisos Recentes</h2>
-            <span style={{ fontSize: '0.8rem', color: '#2d4b73', fontWeight: 600, cursor: 'pointer' }}>Ver tudo →</span>
+        <div className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50 shadow-xl">
+          <div className="flex justify-between items-center mb-6 border-b border-slate-700/50 pb-4">
+            <h2 className="font-bold text-sm tracking-widest uppercase text-white flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></span>
+              Transmissões
+            </h2>
+            <span className="text-xs text-slate-400 hover:text-white font-bold uppercase tracking-wider cursor-pointer">Ver Log</span>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          
+          <div className="flex flex-col gap-4">
             {[
-              { id: 1, title: 'Atraso devido à chuva', time: 'Hoje, 11:30', urgent: true },
-              { id: 2, title: 'Mensalidade Vencendo', time: 'Ontem, 09:00', urgent: false },
+              { id: 1, title: 'ATRASO DE ROTA (CHUVA)', time: 'T-00:30', urgent: true },
+              { id: 2, title: 'FATURA PENDENTE', time: 'T-24:00', urgent: false },
             ].map(aviso => (
-              <div key={aviso.id} style={{ display: 'flex', alignItems: 'center', gap: 10, paddingBottom: 10, borderBottom: '1px solid #eef0f4' }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: aviso.urgent ? '#e74c3c' : '#718096' }}></div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, fontSize: '0.875rem', color: '#1a1c1e' }}>{aviso.title}</div>
-                  <div style={{ fontSize: '0.75rem', color: '#718096' }}>{aviso.time}</div>
+              <div key={aviso.id} className="flex items-start gap-3 p-3 rounded-xl bg-slate-900/30 border border-slate-700/30">
+                <div className={`mt-1 w-1.5 h-1.5 rounded-full ${aviso.urgent ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 'bg-slate-500'}`}></div>
+                <div className="flex-1">
+                  <div className="font-bold text-xs text-slate-300 uppercase tracking-wide">{aviso.title}</div>
+                  <div className="text-[10px] font-mono text-slate-500 mt-1">{aviso.time}</div>
                 </div>
               </div>
             ))}
@@ -193,16 +212,20 @@ export default function MeuPainelResponsavel() {
         </div>
       </div>
 
-      {/* ===== MODAIS ===== */}
-      {/* Modal Vincular Filho */}
+      {/* ===== MODAIS (HUD Style) ===== */}
+      {/* Modal Vincular */}
       {modalVincularOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)' }}>
-          <div style={{ background: '#fff', borderRadius: 16, padding: 32, maxWidth: 400, width: '90%', position: 'relative' }}>
-            <button onClick={() => setModalVincularOpen(false)} style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', cursor: 'pointer', fontSize: 20, color: '#718096' }}>✕</button>
-            <div style={{ textAlign: 'center', marginBottom: 24 }}>
-              <div style={{ width: 56, height: 56, borderRadius: 12, background: '#eef3fa', color: '#2d4b73', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: 24 }}>🚐</div>
-              <h2 style={{ fontWeight: 800, fontSize: '1.25rem', color: '#1a1c1e', margin: '0 0 8px' }}>Vincular à Van</h2>
-              <p style={{ color: '#718096', fontSize: '0.875rem', margin: 0 }}>Insira o código fornecido pelo Tio da Van.</p>
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 backdrop-blur-md bg-slate-950/80">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-indigo-500"></div>
+            <button onClick={() => setModalVincularOpen(false)} className="absolute top-6 right-6 text-slate-500 hover:text-white">✕</button>
+            
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-4 text-3xl shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                🔗
+              </div>
+              <h2 className="font-black text-xl text-white tracking-widest uppercase">Vincular Módulo</h2>
+              <p className="text-slate-400 text-xs mt-2 font-mono uppercase">Insira a chave de acesso do motorista</p>
             </div>
             
             <input 
@@ -214,7 +237,7 @@ export default function MeuPainelResponsavel() {
                 if (val.length > 3) val = val.slice(0,3) + '-' + val.slice(3)
                 setCodigoVan(val.slice(0, 7))
               }}
-              style={{ width: '100%', background: '#f8f9fb', border: '1px solid #dde1e7', textAlign: 'center', fontSize: '1.5rem', fontFamily: 'monospace', letterSpacing: '0.2em', textTransform: 'uppercase', borderRadius: 12, padding: '16px', marginBottom: 24, outline: 'none' }}
+              className="w-full bg-slate-950 border border-slate-700 text-center text-3xl font-mono text-cyan-400 tracking-[0.3em] uppercase rounded-xl p-5 mb-8 outline-none focus:border-cyan-500 focus:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all placeholder:text-slate-700"
               maxLength={7}
             />
             
@@ -231,122 +254,128 @@ export default function MeuPainelResponsavel() {
                 setModalNovoAlunoOpen(true)
               }}
               disabled={buscando || codigoVan.length < 6}
-              style={{ width: '100%', background: '#2d4b73', color: '#fff', padding: '14px', borderRadius: 8, fontWeight: 700, border: 'none', cursor: buscando || codigoVan.length < 6 ? 'not-allowed' : 'pointer', opacity: buscando || codigoVan.length < 6 ? 0.5 : 1 }}
+              className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest transition-all ${
+                buscando || codigoVan.length < 6 
+                  ? 'bg-slate-800 text-slate-500 cursor-not-allowed' 
+                  : 'bg-cyan-500 text-slate-900 hover:bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+              }`}
             >
-              {buscando ? 'Buscando...' : 'Buscar Van'}
+              {buscando ? 'BUSCANDO DADOS...' : 'AUTENTICAR'}
             </button>
           </div>
         </div>
       )}
 
-      {/* Modal Crachá QR Code */}
+      {/* Modal QR */}
       {modalQrOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)' }}>
-          <div style={{ background: '#2d4b73', borderRadius: 16, padding: 32, maxWidth: 360, width: '90%', position: 'relative', textAlign: 'center' }}>
-            <button onClick={() => setModalQrOpen(false)} style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(255,255,255,0.1)', border: 'none', cursor: 'pointer', fontSize: 16, color: '#fff', width: 32, height: 32, borderRadius: '50%' }}>✕</button>
-            <h2 style={{ fontWeight: 800, fontSize: '1.25rem', color: '#fff', margin: '0 0 24px' }}>Crachá Digital</h2>
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 backdrop-blur-md bg-slate-950/80">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-sm w-full relative shadow-[0_0_50px_rgba(0,0,0,0.5)] text-center">
+            <button onClick={() => setModalQrOpen(false)} className="absolute top-6 right-6 text-slate-500 hover:text-white">✕</button>
+            <h2 className="font-black text-xl text-white tracking-widest uppercase mb-6">Identificador</h2>
             
-            <div style={{ background: '#fff', padding: 20, borderRadius: 16, display: 'inline-block', marginBottom: 24 }}>
-              <QRCodeSVG value={filhos.length > 0 ? filhos[0].id : 'MOCK-QR-CODE'} size={180} />
+            <div className="bg-white p-4 rounded-2xl inline-block mb-6 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+              <QRCodeSVG value={filhos.length > 0 ? filhos[0].id : 'MOCK-QR'} size={200} />
             </div>
             
-            <p style={{ color: '#abc8f7', fontSize: '0.875rem', margin: '0 0 24px' }}>Apresente ao motorista no embarque.</p>
+            <p className="text-cyan-400 text-xs font-mono uppercase mb-8 tracking-widest">Scanner Autorizado</p>
             
-            <button onClick={() => setModalQrOpen(false)} style={{ width: '100%', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '14px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>
-              Fechar Crachá
+            <button onClick={() => setModalQrOpen(false)} className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-bold uppercase tracking-widest transition-all">
+              FECHAR PAINEL
             </button>
           </div>
         </div>
       )}
 
-      {/* Modal Cadastro Novo Aluno */}
+      {/* Modal Novo Aluno HUD */}
       {modalNovoAlunoOpen && motoristaVinculado && user && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)' }}>
-          <div style={{ background: '#fff', borderRadius: 16, padding: 32, maxWidth: 480, width: '90%', position: 'relative', maxHeight: '90vh', overflowY: 'auto' }}>
-            <h2 style={{ fontWeight: 800, fontSize: '1.25rem', color: '#1a1c1e', margin: '0 0 8px' }}>Cadastrar Aluno</h2>
-            <p style={{ color: '#718096', fontSize: '0.875rem', margin: '0 0 24px' }}>Vinculando ao Tio: <strong>{motoristaVinculado.nome}</strong></p>
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 backdrop-blur-md bg-slate-950/80">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-lg w-full relative shadow-[0_0_50px_rgba(0,0,0,0.5)] max-h-[90vh] overflow-y-auto">
+             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-indigo-500"></div>
+             <h2 className="font-black text-xl text-white tracking-widest uppercase mb-1">Registro de Alvo</h2>
+             <p className="text-slate-400 text-xs font-mono uppercase mb-8">Vínculo Mestre: <strong className="text-cyan-400">{motoristaVinculado.nome}</strong></p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+             <div className="space-y-5">
               <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#4a5568', marginBottom: 4 }}>Nome Completo *</label>
+                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Designação Completa *</label>
                 <input 
                   type="text" 
                   value={formAluno.nome}
                   onChange={e => setFormAluno({...formAluno, nome: e.target.value})}
-                  style={{ width: '100%', background: '#f8f9fb', border: '1px solid #dde1e7', padding: '10px 14px', borderRadius: 8, outline: 'none', fontFamily: 'inherit' }} 
-                  placeholder="Nome do aluno" 
+                  className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 outline-none focus:border-cyan-500 focus:shadow-[0_0_10px_rgba(34,211,238,0.1)] transition-all font-mono text-sm placeholder:text-slate-600" 
+                  placeholder="Nome do passageiro" 
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#4a5568', marginBottom: 4 }}>Escola</label>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Setor (Escola)</label>
                   <input 
                     type="text" 
                     value={formAluno.escola}
                     onChange={e => setFormAluno({...formAluno, escola: e.target.value})}
-                    style={{ width: '100%', background: '#f8f9fb', border: '1px solid #dde1e7', padding: '10px 14px', borderRadius: 8, outline: 'none', fontFamily: 'inherit' }} 
+                    className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 outline-none focus:border-cyan-500 font-mono text-sm" 
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#4a5568', marginBottom: 4 }}>Série / Ano</label>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Nível (Série)</label>
                   <input 
                     type="text" 
                     value={formAluno.serie}
                     onChange={e => setFormAluno({...formAluno, serie: e.target.value})}
-                    style={{ width: '100%', background: '#f8f9fb', border: '1px solid #dde1e7', padding: '10px 14px', borderRadius: 8, outline: 'none', fontFamily: 'inherit' }} 
+                    className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 outline-none focus:border-cyan-500 font-mono text-sm" 
                   />
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#4a5568', marginBottom: 4 }}>Nascimento</label>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Criação (Nasc.)</label>
                   <input 
                     type="date" 
                     value={formAluno.data_nascimento}
                     onChange={e => setFormAluno({...formAluno, data_nascimento: e.target.value})}
-                    style={{ width: '100%', background: '#f8f9fb', border: '1px solid #dde1e7', padding: '10px 14px', borderRadius: 8, outline: 'none', fontFamily: 'inherit' }} 
+                    className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 outline-none focus:border-cyan-500 font-mono text-sm [color-scheme:dark]" 
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: '#4a5568', marginBottom: 4 }}>Turno</label>
+                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Ciclo (Turno)</label>
                   <select 
                     value={formAluno.turno}
                     onChange={e => setFormAluno({...formAluno, turno: e.target.value})}
-                    style={{ width: '100%', background: '#f8f9fb', border: '1px solid #dde1e7', padding: '10px 14px', borderRadius: 8, outline: 'none', fontFamily: 'inherit' }}
+                    className="w-full bg-slate-950 border border-slate-700 text-white rounded-xl p-3 outline-none focus:border-cyan-500 font-mono text-sm appearance-none"
                   >
-                    <option value="manha">Manhã</option>
-                    <option value="almoco">Almoço</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="noite">Noite</option>
+                    <option value="manha">Matutino</option>
+                    <option value="almoco">Intermediário</option>
+                    <option value="tarde">Vespertino</option>
+                    <option value="noite">Noturno</option>
                   </select>
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: 12, marginTop: 32 }}>
-              <button onClick={() => setModalNovoAlunoOpen(false)} disabled={salvando} style={{ flex: 1, background: '#fff', border: '1px solid #dde1e7', color: '#4a5568', padding: '12px', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>
-                Cancelar
+            <div className="flex gap-4 mt-8">
+              <button onClick={() => setModalNovoAlunoOpen(false)} disabled={salvando} className="flex-1 py-4 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white rounded-xl font-bold uppercase tracking-widest text-xs transition-all">
+                ABORTAR
               </button>
               <button 
                 onClick={async () => {
-                  if (!formAluno.nome) return alert('Preencha o nome.')
+                  if (!formAluno.nome) return alert('Designação obrigatória.')
                   setSalvando(true)
                   const { error } = await cadastrarFilhoComVinculo({...formAluno, responsavel_id: user.id} as any, motoristaVinculado.id)
                   setSalvando(false)
-                  if (error) alert('Erro: ' + error)
+                  if (error) alert('Falha: ' + error)
                   else { setModalNovoAlunoOpen(false); carregar() }
                 }}
                 disabled={salvando}
-                style={{ flex: 1, background: '#2d4b73', color: '#fff', border: 'none', padding: '12px', borderRadius: 8, fontWeight: 700, cursor: salvando ? 'not-allowed' : 'pointer' }}
+                className="flex-1 py-4 bg-cyan-500 text-slate-900 hover:bg-cyan-400 rounded-xl font-bold uppercase tracking-widest text-xs shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all"
               >
-                {salvando ? 'Salvando...' : 'Cadastrar'}
+                {salvando ? 'PROCESSANDO...' : 'CONFIRMAR'}
               </button>
             </div>
           </div>
         </div>
       )}
+
     </div>
   )
 }
