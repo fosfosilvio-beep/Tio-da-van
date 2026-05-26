@@ -12,8 +12,38 @@ export type Ocorrencia = Tables<'ocorrencias'>
 export type Contrato = Tables<'contratos'>
 export type Notificacao = Tables<'notificacoes'>
 
+// --- Tipo Veículo ---
+export interface Veiculo {
+  id: string
+  motorista_id: string
+  placa: string
+  modelo: string
+  ano: number
+  cor: string
+  capacidade: number
+  tipo: 'van' | 'kombi' | 'micro_onibus' | 'onibus'
+  valor_mensalidade: number
+  turnos: ('manha' | 'tarde' | 'integral' | 'noturno')[]
+  descricao?: string
+  bairros_atendidos: string[]
+  escolas_atendidas: string[]
+  horario_manha?: string
+  horario_tarde?: string
+  dias_semana: ('seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab')[]
+  fotos_urls: string[]
+  url_crlv?: string
+  url_laudo?: string
+  url_seguro?: string
+  status_publicado: boolean
+  status_verificado: boolean
+  created_at: string
+  updated_at: string
+}
+
 // Tipos compostos (joins comuns)
-export type AlunoComRota = Aluno & {
+export type AlunoComRota = Omit<Aluno, 'rota_id' | 'ponto_embarque_id'> & {
+  rota_id?: string | null
+  ponto_embarque_id?: string | null
   rotas: Pick<Rota, 'nome_rota' | 'turno' | 'horario_inicio'> | null
   pontos_embarque: Pick<PontoEmbarque, 'nome' | 'lat' | 'lng'> | null
 }

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import { ResponsavelHeader } from '@/components/layout/ResponsavelHeader'
 
 export const metadata: Metadata = {
   title: 'Meu Painel | Tio da Van',
@@ -7,8 +8,11 @@ export const metadata: Metadata = {
 
 export default function ResponsavelLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#0B0F19] flex items-center justify-center p-0 md:p-6">
-      {children}
+    <div className="min-h-screen bg-[#f8f9fb]">
+      <ResponsavelHeader />
+      <main className="max-w-4xl mx-auto p-4 md:p-6 pb-24">
+        {children}
+      </main>
     </div>
   )
 }
