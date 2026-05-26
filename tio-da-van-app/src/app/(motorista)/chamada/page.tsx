@@ -32,7 +32,7 @@ export default function ChamadaPage() {
           <h1 className="page-title"><Van weight="fill" size={28} /> Chamada Diária</h1>
           <p className="page-sub">Check-in e check-out dos alunos em tempo real</p>
         </div>
-        <Link href="/chamada/scanner" className="btn-primary" style={{ textDecoration: 'none', background: 'var(--gradient-primary)', display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', borderRadius: 'var(--radius-md)', fontWeight: 'bold' }}>
+        <Link href="/chamada/scanner" className="btn btn-primary btn-md" style={{ textDecoration: 'none', background: 'var(--gradient-primary)' }}>
           <Camera size={20} weight="fill" /> Embarque Expresso (Scanner)
         </Link>
       </div>
@@ -55,7 +55,7 @@ export default function ChamadaPage() {
           {rotaId && (
             <button
               id={`btn-rota-${rotaAtiva ? 'encerrar' : 'iniciar'}`}
-              className={rotaAtiva ? 'btn-danger' : 'btn-primary'}
+              className={rotaAtiva ? 'btn btn-danger btn-md' : 'btn btn-primary btn-md'}
               onClick={rotaAtiva ? encerrarRota : iniciarRota}
             >
               {rotaAtiva ? <><Stop size={18} weight="fill" /> Encerrar rota</> : <><Play size={18} weight="fill" /> Iniciar rota</>}
@@ -131,7 +131,7 @@ export default function ChamadaPage() {
                     {aluno.status_checkin === 'aguardando' && (
                       <button
                         id={`btn-embarque-${aluno.id}`}
-                        className="btn-primary acao-btn"
+                        className="btn btn-primary btn-sm acao-btn"
                         onClick={() => fazerCheckin(aluno.id, 'embarque')}
                         disabled={isPending}
                       >
@@ -141,8 +141,8 @@ export default function ChamadaPage() {
                     {aluno.status_checkin === 'embarcado' && (
                       <button
                         id={`btn-desembarque-${aluno.id}`}
-                        className="btn-primary acao-btn"
-                        style={{ background: 'var(--gradient-secondary)' }}
+                        className="btn btn-primary btn-sm acao-btn"
+                        style={{ background: 'var(--gradient-primary)' }}
                         onClick={() => fazerCheckin(aluno.id, 'desembarque')}
                         disabled={isPending}
                       >

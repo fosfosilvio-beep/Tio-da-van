@@ -68,7 +68,7 @@ export default function RotasPage() {
           <h1 className="page-title"><MapPin weight="fill" size={28} /> Gestão de Rotas</h1>
           <p className="page-sub">Gerencie suas rotas e pontos de embarque</p>
         </div>
-        <button className="btn-primary" onClick={() => setShowNovaRota(true)}>
+        <button className="btn btn-primary btn-md" onClick={() => setShowNovaRota(true)}>
           <Plus size={18} weight="bold" /> Nova rota
         </button>
       </div>
@@ -84,7 +84,7 @@ export default function RotasPage() {
             <div className="empty-state glass-card">
               <MapTrifold size={48} color="var(--text-muted)" />
               <p>Nenhuma rota cadastrada.</p>
-              <button className="btn-primary" onClick={() => setShowNovaRota(true)}>
+              <button className="btn btn-primary btn-md" onClick={() => setShowNovaRota(true)}>
                 <Plus size={16} /> Criar primeira rota
               </button>
             </div>
@@ -186,7 +186,7 @@ export default function RotasPage() {
               </div>
               <input className="input-dark" placeholder="Raio geofence (metros)" type="number" style={{ marginBottom: 12 }}
                 value={novoPonto.raio} onChange={e => setNovoPonto(p => ({ ...p, raio: e.target.value }))} />
-              <button className="btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={handleCriarPonto} disabled={salvando}>
+              <button className="btn btn-primary btn-md" style={{ width: '100%', justifyContent: 'center' }} onClick={handleCriarPonto} disabled={salvando}>
                 <Plus size={16} /> Adicionar ponto
               </button>
             </div>
@@ -210,8 +210,8 @@ export default function RotasPage() {
                 onChange={e => setNovaRota(p => ({ ...p, horario_inicio: e.target.value }))} />
             </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
-              <button className="btn-ghost" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setShowNovaRota(false)}>Cancelar</button>
-              <button className="btn-primary" style={{ flex: 1, justifyContent: 'center' }} onClick={handleCriarRota} disabled={salvando}>
+              <button className="btn btn-ghost btn-md" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setShowNovaRota(false)}>Cancelar</button>
+              <button className="btn btn-primary btn-md" style={{ flex: 1, justifyContent: 'center' }} onClick={handleCriarRota} disabled={salvando}>
                 {salvando ? 'Criando...' : <><Plus size={16} /> Criar rota</>}
               </button>
             </div>

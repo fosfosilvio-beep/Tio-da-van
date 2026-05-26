@@ -61,7 +61,7 @@ export default function OcorrenciasPage() {
           <h1 className="page-title"><Warning weight="fill" size={28} /> Ocorrências</h1>
           <p className="page-sub">Registro de incidentes e anotações</p>
         </div>
-        <button className="btn-primary" onClick={() => setShowModal(true)}>
+        <button className="btn btn-primary btn-md" onClick={() => setShowModal(true)}>
           <Plus size={18} weight="bold" /> Nova ocorrência
         </button>
       </div>
@@ -189,8 +189,8 @@ export default function OcorrenciasPage() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
-              <button className="btn-ghost" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setShowModal(false)}>Cancelar</button>
-              <button className="btn-primary" style={{ flex: 1, justifyContent: 'center' }} onClick={handleCriar} disabled={salvando}>
+              <button className="btn btn-ghost btn-md" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setShowModal(false)}>Cancelar</button>
+              <button className="btn btn-primary btn-md" style={{ flex: 1, justifyContent: 'center' }} onClick={handleCriar} disabled={salvando}>
                 {salvando ? 'Salvando...' : <><Plus size={16} /> Registrar</>}
               </button>
             </div>

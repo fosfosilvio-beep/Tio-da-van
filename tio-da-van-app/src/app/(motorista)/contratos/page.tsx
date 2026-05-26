@@ -63,7 +63,7 @@ export default function ContratosPage() {
           <h1 className="page-title"><FileText weight="fill" size={28} /> Contratos</h1>
           <p className="page-sub">{totalAtivos} ativos · Receita mensal: {fmt(receitaMensal)}</p>
         </div>
-        <button className="btn-primary" onClick={() => setShowModal(true)}>
+        <button className="btn btn-primary btn-md" onClick={() => setShowModal(true)}>
           <Plus size={18} weight="bold" /> Novo contrato
         </button>
       </div>
@@ -88,7 +88,7 @@ export default function ContratosPage() {
         <div className="empty-state glass-card animate-fade-in">
           <FileText size={56} color="var(--text-muted)" weight="thin" />
           <p style={{ color: 'var(--text-muted)' }}>Nenhum contrato cadastrado.</p>
-          <button className="btn-primary" onClick={() => setShowModal(true)}><Plus size={16} /> Criar contrato</button>
+          <button className="btn btn-primary btn-md" onClick={() => setShowModal(true)}><Plus size={16} /> Criar contrato</button>
         </div>
       ) : (
         <div className="contratos-list stagger-children">
@@ -125,7 +125,7 @@ export default function ContratosPage() {
                 </div>
                 {contrato.status === 'ativo' && (
                   <button
-                    className="btn-ghost contrato-encerrar"
+                    className="btn btn-ghost btn-sm contrato-encerrar"
                     onClick={() => handleEncerrar(contrato.id!)}
                     title="Encerrar contrato"
                   >
@@ -183,8 +183,8 @@ export default function ContratosPage() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 20 }}>
-              <button className="btn-ghost" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setShowModal(false)}>Cancelar</button>
-              <button className="btn-primary" style={{ flex: 1, justifyContent: 'center' }} onClick={handleCriar} disabled={salvando}>
+              <button className="btn btn-ghost btn-md" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setShowModal(false)}>Cancelar</button>
+              <button className="btn btn-primary btn-md" style={{ flex: 1, justifyContent: 'center' }} onClick={handleCriar} disabled={salvando}>
                 {salvando ? 'Salvando...' : <><Plus size={16} /> Criar contrato</>}
               </button>
             </div>

@@ -145,7 +145,7 @@ export default function FinanceiroPage() {
           ) : (
             <div className="table-list">
               <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:12 }}>
-                <button className="btn-primary" style={{ fontSize:'0.82rem', padding:'7px 14px' }} onClick={() => setShowNovaDespesa(true)}>
+                <button className="btn btn-primary btn-sm" onClick={() => setShowNovaDespesa(true)}>
                   <Plus size={14} /> Nova despesa
                 </button>
               </div>
@@ -179,8 +179,8 @@ export default function FinanceiroPage() {
               <input className="input-dark" type="date" value={novaDespesa.data_despesa} onChange={e => setNovaDespesa(p => ({ ...p, data_despesa: e.target.value }))} />
             </div>
             <div style={{ display:'flex', gap:8, marginTop:20 }}>
-              <button className="btn-ghost" style={{ flex:1, justifyContent:'center' }} onClick={() => setShowNovaDespesa(false)}>Cancelar</button>
-              <button className="btn-primary" style={{ flex:1, justifyContent:'center' }} onClick={handleCriarDespesa}>
+              <button className="btn btn-ghost btn-md" style={{ flex:1, justifyContent:'center' }} onClick={() => setShowNovaDespesa(false)}>Cancelar</button>
+              <button className="btn btn-primary btn-md" style={{ flex:1, justifyContent:'center' }} onClick={handleCriarDespesa}>
                 <Plus size={14} /> Salvar
               </button>
             </div>

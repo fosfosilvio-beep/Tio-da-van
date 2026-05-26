@@ -2,7 +2,7 @@
    IMPORTS — devem vir primeiro antes de qualquer regra CSS
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
@@ -146,8 +146,22 @@ body {
 
 /* Material Symbols */
 .material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  font-family: 'Material Symbols Outlined', sans-serif;
 }
 
 /* ============================================================
@@ -218,13 +232,54 @@ body {
   --glass-border: rgba(255, 255, 255, 0.12);
 
   --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #8c52ff 100%);
-  --gradient-sidebar: linear-gradient(180deg, #13345b 0%, #1e3350 100%);
+  --gradient-sidebar: linear-gradient(180deg, #2d4b73 0%, #1e3350 100%);
   --gradient-accent: linear-gradient(135deg, #ffb74d 0%, #f09000 100%);
 
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-full: 9999px;
+
+  /* Variáveis de Autenticação */
+  --bg-primary: #0a0a0f;
+  --text-disabled: #4a5568;
+  --border-glass: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   GLASS CARD & INPUT DARK SYSTEM
+   ============================================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(45, 75, 115, 0.08);
+  box-shadow: 0 4px 16px rgba(45, 75, 115, 0.04);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-smooth);
+}
+.glass-card:hover {
+  border-color: rgba(45, 75, 115, 0.15);
+  box-shadow: 0 8px 24px rgba(45, 75, 115, 0.08);
+}
+
+.input-dark {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  padding: 10px 14px;
+  transition: var(--transition-smooth);
+  outline: none;
+}
+.input-dark::placeholder { color: var(--text-muted); }
+.input-dark:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
 }
 
 /* ============================================================
@@ -458,12 +513,12 @@ tbody tr:hover { background: rgba(45,75,115,0.03); }
 
 .sidebar-logo-icon {
   width: 40px; height: 40px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-glow-purple);
+  box-shadow: 0 2px 8px rgba(255,183,77,0.3);
   flex-shrink: 0;
 }
 
@@ -471,10 +526,7 @@ tbody tr:hover { background: rgba(45,75,115,0.03); }
   font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 800;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   flex: 1;
 }
 

@@ -53,7 +53,7 @@ export default function AlunosPage() {
           <h1 className="page-title"><Student weight="fill" size={28} /> Alunos</h1>
           <p className="page-sub">{totalAtivos} ativos · {totalEmbarcados} no trajeto agora</p>
         </div>
-        <button className="btn-primary" onClick={() => setModalConvite(true)}>
+        <button className="btn btn-primary btn-md" onClick={() => setModalConvite(true)}>
           <ShareNetwork size={18} weight="bold" /> Gerar Código
         </button>
       </div>
@@ -103,7 +103,7 @@ export default function AlunosPage() {
         <div className="empty-state glass-card">
           <Student size={56} color="var(--text-muted)" weight="thin" />
           <p style={{ color: 'var(--text-muted)' }}>Nenhum aluno encontrado.</p>
-          <button className="btn-primary" onClick={() => setModalConvite(true)}>
+          <button className="btn btn-primary btn-md" onClick={() => setModalConvite(true)}>
             <ShareNetwork size={16} /> Enviar Convite
           </button>
         </div>
@@ -144,16 +144,16 @@ export default function AlunosPage() {
                 <div className="aluno-card-actions">
                   <button
                     id={`btn-editar-${aluno.id}`}
-                    className="btn-ghost"
-                    style={{ flex: 1, justifyContent: 'center', fontSize: '0.8rem', padding: '7px' }}
+                    className="btn btn-ghost btn-sm"
+                    style={{ flex: 1, justifyContent: 'center', fontSize: '0.8rem' }}
                     onClick={() => setAlunoSelecionado(aluno.id)}
                   >
                     <PencilSimple size={14} /> Editar
                   </button>
                   <button
                     id={`btn-deletar-${aluno.id}`}
-                    className="btn-ghost"
-                    style={{ padding: '7px 10px', color: 'var(--accent-warning)' }}
+                    className="btn btn-ghost btn-sm"
+                    style={{ color: 'var(--accent-warning)' }}
                     onClick={() => handleDeletar(aluno.id)}
                   >
                     <Trash size={14} />
@@ -187,8 +187,8 @@ export default function AlunosPage() {
             </div>
 
             <button 
-              className="btn-primary w-full" 
-              style={{ justifyContent: 'center', padding: '14px' }}
+              className="btn btn-primary btn-md w-full" 
+              style={{ justifyContent: 'center' }}
               onClick={() => {
                 navigator.clipboard.writeText(`Baixe o app Tio da Van e use o código para vincular seu filho à minha Van!\nCódigo: ${codigoFormatado}`)
                 alert('Código copiado para a área de transferência!')
