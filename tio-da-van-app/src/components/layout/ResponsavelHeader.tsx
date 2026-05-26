@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/providers/AuthProvider'
-import { List, Bell, MagnifyingGlass, User, SignOut, X, SquaresFour, Users, CurrencyDollar, ChatText, Headset } from '@phosphor-icons/react/dist/ssr'
+import { List, Bell, MagnifyingGlass, User, SignOut, X, SquaresFour, Users, CurrencyDollar, ChatText, Headset, CaretDown } from '@phosphor-icons/react/dist/ssr'
 
 export function ResponsavelHeader() {
   const { perfil, signOut } = useAuth()
@@ -12,78 +12,82 @@ export function ResponsavelHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   // Title logic
-  let pageTitle = 'Painel Principal'
+  let pageTitle = 'Dashboard'
   if (pathname.includes('/meus-filhos')) pageTitle = 'Rastreamento Global'
-  if (pathname.includes('/mensalidades')) pageTitle = 'Hub Financeiro'
+  if (pathname.includes('/mensalidades')) pageTitle = 'Área Financeira'
 
   const navItems = [
-    { href: '/meu-painel', icon: SquaresFour, label: 'Dashboard' },
-    { href: '/meus-filhos', icon: Users, label: 'Rastreamento' },
-    { href: '/mensalidades', icon: CurrencyDollar, label: 'Financeiro' },
-    { href: '/mensagens', icon: ChatText, label: 'Mensagens' },
+    { href: '/meu-painel', icon: SquaresFour, label: 'Dashboard Principal' },
+    { href: '/meus-filhos', icon: Users, label: 'Acompanhar Trajeto' },
+    { href: '/mensalidades', icon: CurrencyDollar, label: 'Área Financeira' },
+    { href: '/mensagens', icon: ChatText, label: 'Chat & Avisos' },
   ]
 
   return (
     <>
-      {/* Wowdash Floating Glass Header */}
-      <header className="fixed top-4 w-[calc(100%-2rem)] md:w-[calc(100%-21rem)] md:left-[19rem] mx-4 z-50">
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] px-6 py-4 flex justify-between items-center h-16">
+      {/* Wowdash Clean White Header */}
+      <header className="fixed top-0 left-0 md:left-72 right-0 z-40 bg-white/80 backdrop-blur-lg border-b border-slate-200">
+        <div className="flex justify-between items-center h-20 px-6 lg:px-8">
           
           <div className="flex items-center gap-4">
-            <button className="md:hidden text-cyan-400 active:scale-95 duration-200" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="md:hidden text-slate-500 active:scale-95 duration-200" onClick={() => setMenuOpen(!menuOpen)}>
               <List size={28} weight="bold" />
             </button>
-            <span className="text-lg font-bold text-slate-200 tracking-wide">{pageTitle}</span>
+            <h2 className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">{pageTitle}</h2>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center bg-slate-800/50 border border-slate-700/50 rounded-xl px-4 py-2 gap-2 w-64 focus-within:border-cyan-500/50 focus-within:bg-slate-800 transition-all">
+          <div className="flex items-center gap-5">
+            {/* Search Bar */}
+            <div className="hidden lg:flex items-center bg-slate-100 rounded-full px-5 py-2.5 gap-3 w-72 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-500 border border-transparent transition-all">
               <MagnifyingGlass size={18} className="text-slate-400" />
-              <input type="text" placeholder="Buscar módulos..." className="bg-transparent border-none outline-none text-sm text-slate-200 w-full placeholder:text-slate-500" />
+              <input type="text" placeholder="Buscar informações..." className="bg-transparent border-none outline-none text-sm text-slate-700 w-full placeholder:text-slate-400" />
             </div>
 
-            <div className="flex gap-3">
-              <button className="relative p-2 rounded-xl hover:bg-slate-800 border border-transparent hover:border-slate-700 transition-all active:scale-95 duration-200 text-slate-400 hover:text-cyan-400 group">
-                <Bell size={24} weight="fill" />
-                <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-900 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+            <div className="flex items-center gap-2">
+              <button className="relative p-2.5 rounded-full hover:bg-slate-100 transition-all active:scale-95 duration-200 text-slate-500 hover:text-blue-600">
+                <Bell size={22} weight="fill" />
+                <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
               </button>
             </div>
             
-            <div className="flex items-center gap-3 pl-3 border-l border-slate-700/50">
-              <div className="hidden md:block text-right">
-                <p className="text-sm font-bold text-slate-200">{perfil?.nome?.split(' ')[0] || 'Usuário'}</p>
-                <p className="text-[11px] text-cyan-500 font-medium tracking-wider">RESPONSÁVEL</p>
-              </div>
-              <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center overflow-hidden border border-cyan-500/30 cursor-pointer shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+            <div className="h-8 w-px bg-slate-200 mx-1"></div>
+
+            <div className="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-1.5 pr-3 rounded-full transition-colors border border-transparent hover:border-slate-200">
+              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center overflow-hidden border border-slate-200">
                 {perfil?.avatar_url ? (
                    <img src={perfil.avatar_url} alt={perfil.nome} className="w-full h-full object-cover" />
                 ) : (
-                   <User size={20} weight="fill" className="text-cyan-400" />
+                   <User size={20} weight="fill" className="text-blue-600" />
                 )}
               </div>
+              <div className="hidden md:flex flex-col">
+                <span className="text-sm font-bold text-slate-800">{perfil?.nome?.split(' ')[0] || 'Usuário'}</span>
+                <span className="text-[11px] text-slate-500 font-medium">Responsável</span>
+              </div>
+              <CaretDown size={14} className="text-slate-400 hidden md:block ml-1" />
             </div>
           </div>
 
         </div>
       </header>
       
-      {/* Mobile Menu Drawer (Dark HUD Theme) */}
+      {/* Mobile Menu Drawer (Light Theme) */}
       <div className={`fixed inset-0 z-[60] transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 md:hidden`}>
-        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
-        <aside className="absolute left-0 top-0 bottom-0 w-72 bg-slate-900 border-r border-slate-800 flex flex-col shadow-2xl z-50">
-          <div className="flex justify-between items-center p-6 border-b border-slate-800">
-            <div>
-              <h1 className="text-2xl font-black text-white tracking-wider flex items-center gap-2">
-                <span className="text-cyan-400">ELITE</span>
-                <span className="font-light text-slate-400">HUD</span>
-              </h1>
-            </div>
-            <button onClick={() => setMenuOpen(false)} className="text-slate-500 hover:text-white bg-slate-800 p-2 rounded-xl">
+        <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+        <aside className="absolute left-0 top-0 bottom-0 w-72 bg-white border-r border-slate-200 flex flex-col shadow-2xl z-50">
+          <div className="flex justify-between items-center p-6 border-b border-slate-100">
+            <h1 className="text-2xl font-bold text-slate-800 tracking-tight flex items-center gap-2">
+              <span className="bg-blue-600 text-white p-1.5 rounded-lg">
+                <Users size={20} weight="fill" />
+              </span>
+              <span>TioDaVan</span>
+            </h1>
+            <button onClick={() => setMenuOpen(false)} className="text-slate-400 hover:text-slate-700 bg-slate-100 p-2 rounded-full">
               <X size={20} weight="bold" />
             </button>
           </div>
           
-          <nav className="flex-1 space-y-2 p-4">
+          <nav className="flex-1 space-y-1.5 p-4">
             {navItems.map(({ href, icon: Icon, label }) => {
               const isActive = pathname === href || pathname.startsWith(`${href}/`)
               return (
@@ -91,27 +95,26 @@ export function ResponsavelHeader() {
                   key={href} 
                   href={href} 
                   onClick={() => setMenuOpen(false)}
-                  className={`flex items-center gap-4 p-4 rounded-2xl transition-all ${
+                  className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all ${
                     isActive 
-                      ? 'bg-slate-800/80 border border-slate-700/50 text-cyan-400 font-bold shadow-[0_0_20px_rgba(34,211,238,0.15)] relative overflow-hidden' 
-                      : 'text-slate-400 hover:bg-slate-800/40 hover:text-white font-medium border border-transparent'
+                      ? 'bg-blue-50 text-blue-700 font-semibold' 
+                      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 font-medium'
                   }`}
                 >
-                  {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,1)]"></div>}
-                  <Icon size={24} weight={isActive ? 'fill' : 'regular'} className="relative z-10" />
-                  <span className="text-sm tracking-wide relative z-10">{label}</span>
+                  <Icon size={22} weight={isActive ? 'fill' : 'regular'} className={isActive ? 'text-blue-600' : 'text-slate-400'} />
+                  <span className="text-[14px]">{label}</span>
                 </Link>
               )
             })}
           </nav>
           
-          <div className="p-4 space-y-3">
-            <button className="w-full flex justify-center items-center gap-3 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-sm font-bold py-4 rounded-2xl hover:bg-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.1)]">
-              <Headset size={20} weight="fill" /> Suporte Tático
+          <div className="p-4 space-y-2 border-t border-slate-100">
+            <button className="w-full flex justify-center items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-semibold py-3.5 rounded-2xl hover:bg-indigo-100 transition-all">
+              <Headset size={20} weight="fill" /> Suporte ao Cliente
             </button>
-            <button onClick={signOut} className="w-full flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-red-500/10 hover:text-red-400 hover:border-red-500/20 border border-transparent transition-all">
-              <SignOut size={24} weight="bold" />
-              <span className="text-sm font-medium tracking-wide">Desconectar</span>
+            <button onClick={signOut} className="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl text-slate-500 hover:bg-red-50 hover:text-red-600 font-medium transition-all group">
+              <SignOut size={22} weight="regular" className="text-slate-400 group-hover:text-red-500 transition-colors" />
+              <span className="text-[14px]">Sair da Conta</span>
             </button>
           </div>
         </aside>
