@@ -11,10 +11,10 @@ export default function MeusFilhosPage() {
         <p className="text-sm text-[#43474e] mt-1">Acompanhe a localização e o status atual do transporte.</p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
-        
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
         {/* Left Area (Map Slot + Info) */}
-        <div className="xl:col-span-8 flex flex-col gap-4">
+        <div className="lg:col-span-8 flex flex-col gap-4">
           <div className="bg-[#e1e2e4] rounded-[24px] border border-[#c3c6cf] shadow-inner h-[500px] flex items-center justify-center relative overflow-hidden bg-cover bg-center">
              {/* Map Placeholder */}
              <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=-23.5505,-46.6333&zoom=14&size=800x500&maptype=roadmap&style=feature:all|element:labels.text.fill|color:0x8ec3b9&style=feature:all|element:labels.icon|visibility:off&style=feature:landscape|element:geometry|color:0xf8f9fb&style=feature:water|element:geometry|color:0xd4e3ff')] bg-cover bg-center opacity-60"></div>
@@ -33,7 +33,7 @@ export default function MeusFilhosPage() {
         </div>
 
         {/* Right Sidebar (Timeline) */}
-        <div className="xl:col-span-4 bg-white rounded-[24px] shadow-sm border border-[#e1e2e4] p-6 flex flex-col">
+        <div className="lg:col-span-4 bg-white rounded-[24px] shadow-sm border border-[#e1e2e4] p-6 flex flex-col">
           
           {/* Profile */}
           <div className="flex items-center gap-4 border-b border-[#e1e2e4] pb-6 mb-6">

@@ -15,7 +15,7 @@ export default function ResponsavelLayout({ children }: { children: ReactNode })
       <ResponsavelSidebar />
       <div className="flex-1 md:ml-64 flex flex-col min-h-screen">
         <ResponsavelHeader />
-        <main className="flex-1 p-4 md:p-6 pt-24 max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-4 md:p-6 pt-20 w-full">
           {children}
         </main>
       </div>

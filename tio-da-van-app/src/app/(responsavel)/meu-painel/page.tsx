@@ -99,10 +99,10 @@ export default function MeuPainelMobile() {
           {[1,2].map(i => <div key={i} className="h-40 rounded-xl bg-[#e1e2e4] animate-pulse" />)}
         </div>
       ) : (
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
           {/* Coluna Principal */}
-          <div className="xl:col-span-8 flex flex-col gap-6">
+          <div className="lg:col-span-8 flex flex-col gap-6">
             
             {/* Status Hoje */}
             <div>
@@ -194,7 +194,7 @@ export default function MeuPainelMobile() {
           </div>
 
           {/* Sidebar Direita */}
-          <div className="xl:col-span-4 flex flex-col gap-6">
+          <div className="lg:col-span-4 flex flex-col gap-6">
             
             {/* Avisos Recentes */}
             <div className="bg-white rounded-xl shadow-sm border border-[#e1e2e4] p-5">
