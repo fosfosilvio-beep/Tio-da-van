@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/providers/AuthProvider'
 import { mockDashboardStats, mockAlunos, mockCobrancas } from '@/lib/mocks'
 import Link from 'next/link'
@@ -18,11 +18,9 @@ export default function DashboardPage() {
   const cadastroCompleto = SIMULAR_CADASTRO_COMPLETO
   const [isMounted, setIsMounted] = useState(false)
 
-  import('react').then(React => {
-    React.useEffect(() => {
-      setIsMounted(true)
-    }, [])
-  })
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const formatCurrency = (val: number) =>
     val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -181,7 +179,7 @@ export default function DashboardPage() {
         <div style={{ background: '#fff', borderRadius: 12, padding: 20, boxShadow: '0 2px 8px rgba(45,75,115,0.06)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
             <h2 style={{ fontWeight: 700, fontSize: '1rem', color: '#1a1c1e', margin: 0 }}>Cobranças</h2>
-            <Link href="/financeiro/cobrancas" style={{ fontSize: '0.8rem', color: '#2d4b73', textDecoration: 'none', fontWeight: 600 }}>Ver tudo →</Link>
+            <Link href="/financeiro" style={{ fontSize: '0.8rem', color: '#2d4b73', textDecoration: 'none', fontWeight: 600 }}>Ver tudo →</Link>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {cobrancas.slice(0, 4).map(cob => {

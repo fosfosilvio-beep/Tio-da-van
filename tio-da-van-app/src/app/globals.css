@@ -184,14 +184,47 @@ body {
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
   --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-xl: 0 16px 40px rgba(0,0,0,0.18);
   --shadow-card: 0 2px 8px rgba(45,75,115,0.08);
   --shadow-card-hover: 0 6px 20px rgba(45,75,115,0.15);
+  --shadow-glow-purple: 0 0 20px rgba(108,99,255,0.35);
   --font-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sidebar-width: 260px;
   --header-height: 64px;
   --transition-fast: all 0.15s ease;
   --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+     ALIASES — Design System Escuro (Jules / Dark Premium)
+     Permitem que páginas com var(--text-primary) etc. funcionem
+     ============================================================ */
+  --text-primary: #1a1c1e;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  --text-on-primary: #ffffff;
+
+  --accent-primary: #6c63ff;
+  --accent-success: #2ecc71;
+  --accent-warning: #ffb74d;
+  --accent-danger: #e74c3c;
+  --accent-info: #3498db;
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-default: #dde1e7;
+
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+
+  --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #8c52ff 100%);
+  --gradient-sidebar: linear-gradient(180deg, #13345b 0%, #1e3350 100%);
+  --gradient-accent: linear-gradient(135deg, #ffb74d 0%, #f09000 100%);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
 }
 
 /* ============================================================
@@ -377,3 +410,316 @@ tbody tr:hover { background: rgba(45,75,115,0.03); }
 .divider { height: 1px; background: var(--color-border); margin: 16px 0; }
 .section-title { font-size: 18px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.01em; }
 .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+
+/* ============================================================
+   SIDEBAR (Motorista — Dark Premium)
+   Migrado de styled-jsx → global para compatibilidade App Router
+   ============================================================ */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .sidebar-overlay { display: block; }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--gradient-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); box-shadow: var(--shadow-xl); }
+  .sidebar.sidebar-open { transform: translateX(0); }
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 16px;
+}
+
+.sidebar-logo-icon {
+  width: 40px; height: 40px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow-purple);
+  flex-shrink: 0;
+}
+
+.sidebar-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  flex: 1;
+}
+
+.sidebar-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: none;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.sidebar-close-btn:hover { color: var(--text-primary); }
+
+@media (max-width: 1024px) {
+  .sidebar-close-btn { display: flex; }
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  margin: 4px 12px 0;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.sidebar-avatar {
+  width: 38px; height: 38px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.sidebar-profile-info { display: flex; flex-direction: column; gap: 2px; overflow: hidden; }
+
+.sidebar-profile-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-profile-role { font-size: 0.75rem; color: var(--accent-primary); font-weight: 500; }
+
+.sidebar-divider { height: 1px; background: var(--border-subtle); margin: 16px 20px; }
+
+.sidebar-nav {
+  flex: 1;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-nav-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 8px;
+  margin: 0 0 8px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-nav-item:hover { background: var(--glass-bg); color: white; }
+
+.sidebar-nav-item-active {
+  background: rgba(108, 99, 255, 0.15);
+  color: var(--accent-primary);
+  border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+.sidebar-nav-item-active:hover { background: rgba(108, 99, 255, 0.2); color: var(--accent-primary); }
+
+.sidebar-nav-indicator {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  background: var(--accent-primary);
+  border-radius: 3px 0 0 3px;
+}
+
+.sidebar-footer { padding: 0 0 16px; }
+
+.sidebar-signout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  font-family: var(--font-primary);
+}
+
+.sidebar-signout:hover { color: var(--accent-warning); }
+
+/* ============================================================
+   HEADER (Motorista — Dark Glass)
+   Migrado de styled-jsx → global para compatibilidade App Router
+   ============================================================ */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  height: var(--header-height);
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 30;
+  transition: left var(--transition-smooth);
+}
+
+@media (max-width: 1024px) {
+  .app-header { left: 0; }
+}
+
+.header-left { display: flex; align-items: center; gap: 16px; }
+
+.header-menu-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  display: none;
+  transition: var(--transition-fast);
+}
+
+.header-menu-btn:hover { color: var(--text-primary); background: var(--glass-bg); }
+
+@media (max-width: 1024px) {
+  .header-menu-btn { display: flex; }
+}
+
+.header-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.header-right { display: flex; align-items: center; gap: 8px; }
+
+.header-icon-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header-icon-btn:hover { color: white; background: var(--glass-bg); }
+
+.notif-badge {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 16px; height: 16px;
+  background: var(--accent-warning);
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-accent 2s infinite;
+}
+
+.header-avatar {
+  width: 36px; height: 36px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: white;
+  overflow: hidden;
+  text-decoration: none;
+  border: 2px solid rgba(108, 99, 255, 0.4);
+  transition: var(--transition-fast);
+  margin-left: 8px;
+}
+
+.header-avatar:hover { border-color: var(--accent-primary); }
+.header-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================================
+   RESPONSÁVEL HEADER
+   ============================================================ */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(108,99,255,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(108,99,255,0); }
+}

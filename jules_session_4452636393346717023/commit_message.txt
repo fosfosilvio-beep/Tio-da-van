@@ -1,0 +1,22 @@
+feat: implementacao completa das telas e fluxos (motorista, responsavel, admin, auth, public)
+
+Este PR finaliza a implementação das telas do Tio da Van 2.0 Elite.
+
+- Layout e Design System:
+  - Sidebar e Header refatorados para o tema Soft UI/Elite Logistics System.
+  - Criado novo layout Mobile-First PWA para o Painel do Responsável.
+  - Criado o Cockpit Master UI claro para o Admin.
+- Páginas de Motorista:
+  - Telas de Dashboard, Funil de Cadastro (KYC) em 3 steps, Cadastro de nova Frota, Chamada com Grid de Alunos e Scanner QR, Rotas, Financeiro, Ocorrências, Contratos, e Minha Frota implementadas.
+- Páginas de Responsável:
+  - Telas Meu Painel, Meus Filhos e Mensalidades implementadas. Adicionado Crachá QR simulando brilho de tela e mock de envio de faturas via pix.
+- Páginas de Admin:
+  - Adicionado o Olho de Deus no Dashboard Principal, bem como abas para moderação de Motoristas (KYC/Aprovação), controle Financeiro com as taxas de repasse Split (5%), Auditoria de Frota e logs do sistema.
+- Fluxo Público e Auth:
+  - Refatorada a Lista de Vans públicas (`/vans`) para o novo layout.
+  - Criada a página de convite individual do pai.
+- Banco de Dados (Supabase via MCP):
+  - Tabela `veiculos` criada, com constraints, RLS e Policies de segurança.
+- Configuração: O Type Check (tsc) e build do next.js concluíram as rotas statics e dinâmicas com sucesso sem gaps.
+
+Branch: PARA-JULES
