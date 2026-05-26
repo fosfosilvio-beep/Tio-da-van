@@ -165,7 +165,7 @@ export default function MeusPainelMobile() {
                     
                     <button 
                       onClick={() => setModalVincularOpen(true)}
-                      className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl shadow-lg transition-colors"
+                      className="btn btn-primary w-full py-3.5"
                     >
                       <UserPlus size={20} weight="bold" />
                       Vincular Filho à Van
@@ -176,7 +176,7 @@ export default function MeusPainelMobile() {
 
                     <button 
                       onClick={() => setModalQrOpen(true)}
-                      className="w-full flex items-center justify-center gap-2 border border-zinc-700 hover:bg-zinc-800 text-zinc-300 font-semibold py-3.5 rounded-xl mt-6 transition-colors"
+                      className="btn btn-ghost w-full py-3.5 mt-6"
                     >
                       <QrCode size={20} weight="bold" />
                       Gerar Crachá QR Code
@@ -225,7 +225,7 @@ export default function MeusPainelMobile() {
                     {/* Botão extra para quem já tem filho */}
                     <button 
                       onClick={() => setModalQrOpen(true)}
-                      className="w-full flex items-center justify-center gap-2 border border-zinc-700 hover:bg-zinc-800 text-zinc-300 font-semibold py-3.5 rounded-xl mt-6 transition-colors"
+                      className="btn btn-ghost w-full py-3.5 mt-6"
                     >
                       <QrCode size={20} weight="bold" />
                       Gerar Crachá QR Code
@@ -382,7 +382,7 @@ export default function MeusPainelMobile() {
                 setModalNovoAlunoOpen(true)
               }}
               disabled={buscando || codigoVan.length < 6}
-              className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95 flex items-center justify-center"
+              className="btn btn-primary w-full py-4 text-base"
             >
               {buscando ? 'Buscando...' : 'Buscar Van'}
             </button>
@@ -414,7 +414,7 @@ export default function MeusPainelMobile() {
             
             <button 
               onClick={() => setModalQrOpen(false)}
-              className="w-full border-2 border-zinc-700 hover:bg-zinc-800 hover:border-zinc-600 text-white font-bold py-4 rounded-xl transition-all active:scale-95"
+              className="btn btn-ghost w-full py-4 text-base"
             >
               Fechar Crachá
             </button>
@@ -495,7 +495,7 @@ export default function MeusPainelMobile() {
               <button 
                 onClick={() => setModalNovoAlunoOpen(false)}
                 disabled={salvando}
-                className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-4 rounded-xl transition-colors"
+                className="btn btn-ghost flex-1 py-4 text-base"
               >
                 Cancelar
               </button>
@@ -524,7 +524,7 @@ export default function MeusPainelMobile() {
                   }
                 }}
                 disabled={salvando}
-                className="flex-1 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] active:scale-95"
+                className="btn btn-primary flex-1 py-4 text-base"
               >
                 {salvando ? 'Salvando...' : 'Cadastrar Aluno'}
               </button>

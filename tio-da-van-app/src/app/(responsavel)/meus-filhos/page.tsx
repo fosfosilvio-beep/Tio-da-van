@@ -26,7 +26,7 @@ export default function MeusFilhosPage() {
         </div>
         <button 
           onClick={() => setModalOpen(true)}
-          className="bg-[var(--accent-warning)]/10 text-[var(--accent-warning)] border border-[var(--accent-warning)]/30 px-4 py-2 rounded-lg text-sm font-medium hover:bg-[var(--accent-warning)]/20 transition-colors flex items-center justify-center gap-2"
+          className="btn border border-[var(--accent-warning)] text-[var(--accent-warning)] hover:bg-[var(--accent-warning)] hover:text-[var(--bg-primary)] px-4 py-2"
         >
           <Warning weight="bold" />
           Informar Ausência Hoje
@@ -148,7 +148,7 @@ export default function MeusFilhosPage() {
             <div className="flex justify-end gap-3">
               <button 
                 onClick={() => setModalOpen(false)}
-                className="px-4 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-white transition-colors"
+                className="btn btn-ghost px-4 py-2"
               >
                 Cancelar
               </button>
@@ -157,7 +157,7 @@ export default function MeusFilhosPage() {
                   alert("Ausência registrada com sucesso!");
                   setModalOpen(false);
                 }}
-                className="px-4 py-2 text-sm font-bold bg-[var(--accent-warning)] text-[var(--bg-primary)] rounded-lg hover:brightness-110 transition-all"
+                className="btn bg-[var(--accent-warning)] text-[var(--bg-primary)] hover:brightness-110 px-4 py-2"
               >
                 Confirmar Ausência
               </button>

@@ -52,12 +52,12 @@ export default function FinanceiroPaiPage() {
           <div className="w-full md:w-auto flex flex-col gap-3">
             <button 
               onClick={handleCopyPix}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#00b4d8] to-[#0077b6] hover:brightness-110 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-[#00b4d8]/20"
+              className="btn btn-blue w-full py-3 px-6 text-base"
             >
               {copied ? <CheckCircle size={20} weight="bold" /> : <QrCode size={20} weight="bold" />}
               {copied ? 'Código Pix Copiado!' : 'Copiar Pix (Copia e Cola)'}
             </button>
-            <button className="w-full flex items-center justify-center gap-2 bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-primary)] font-bold py-3 px-6 rounded-xl transition-all">
+            <button className="btn btn-ghost w-full py-3 px-6 text-base">
               <FileText size={20} weight="bold" />
               Baixar Boleto PDF
             </button>
@@ -89,7 +89,7 @@ export default function FinanceiroPaiPage() {
                     </span>
                   </td>
                   <td className="p-4 text-right">
-                    <button className="p-2 bg-[var(--bg-secondary)] hover:bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg text-[var(--accent-primary)] transition-colors inline-flex">
+                    <button className="btn btn-ghost p-2">
                       <FileText size={18} />
                     </button>
                   </td>
