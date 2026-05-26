@@ -201,7 +201,7 @@ body {
   --shadow-xl: 0 16px 40px rgba(0,0,0,0.18);
   --shadow-card: 0 2px 8px rgba(45,75,115,0.08);
   --shadow-card-hover: 0 6px 20px rgba(45,75,115,0.15);
-  --shadow-glow-purple: 0 0 20px rgba(108,99,255,0.35);
+  --shadow-glow-primary: 0 0 20px rgba(45,75,115,0.35);
   --font-primary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --sidebar-width: 260px;
@@ -219,7 +219,7 @@ body {
   --text-muted: #718096;
   --text-on-primary: #ffffff;
 
-  --accent-primary: #6c63ff;
+  --accent-primary: #2d4b73;
   --accent-success: #2ecc71;
   --accent-warning: #ffb74d;
   --accent-danger: #e74c3c;
@@ -231,7 +231,7 @@ body {
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.12);
 
-  --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #8c52ff 100%);
+  --gradient-primary: linear-gradient(135deg, #2d4b73 0%, #1e3350 100%);
   --gradient-sidebar: linear-gradient(180deg, #2d4b73 0%, #1e3350 100%);
   --gradient-accent: linear-gradient(135deg, #ffb74d 0%, #f09000 100%);
 
@@ -279,7 +279,7 @@ body {
 .input-dark:focus {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(45, 75, 115, 0.15);
 }
 
 /* ============================================================
@@ -625,12 +625,12 @@ tbody tr:hover { background: rgba(45,75,115,0.03); }
 .sidebar-nav-item:hover { background: var(--glass-bg); color: white; }
 
 .sidebar-nav-item-active {
-  background: rgba(108, 99, 255, 0.15);
-  color: var(--accent-primary);
-  border: 1px solid rgba(108, 99, 255, 0.2);
+  background: rgba(45, 75, 115, 0.15);
+  color: var(--color-accent);
+  border: 1px solid rgba(45, 75, 115, 0.2);
 }
 
-.sidebar-nav-item-active:hover { background: rgba(108, 99, 255, 0.2); color: var(--accent-primary); }
+.sidebar-nav-item-active:hover { background: rgba(45, 75, 115, 0.2); color: var(--color-accent); }
 
 .sidebar-nav-indicator {
   position: absolute;
@@ -760,7 +760,7 @@ tbody tr:hover { background: rgba(45,75,115,0.03); }
   color: white;
   overflow: hidden;
   text-decoration: none;
-  border: 2px solid rgba(108, 99, 255, 0.4);
+  border: 2px solid rgba(45, 75, 115, 0.4);
   transition: var(--transition-fast);
   margin-left: 8px;
 }
@@ -772,6 +772,6 @@ tbody tr:hover { background: rgba(45,75,115,0.03); }
    RESPONSÁVEL HEADER
    ============================================================ */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(108,99,255,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(108,99,255,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,183,77,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255,183,77,0); }
 }

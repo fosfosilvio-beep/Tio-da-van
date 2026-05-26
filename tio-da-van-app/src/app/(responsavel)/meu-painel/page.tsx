@@ -34,7 +34,7 @@ type NotifItem = {
 const STATUS_CONFIG = {
   aguardando:    { label: 'Aguardando van',    icon: <Clock size={20} weight="fill" />,       color: '#ffd93d', bg: 'rgba(255,217,61,0.15)' },
   embarcado:     { label: 'Na van agora',       icon: <Van size={20} weight="fill" />,         color: '#00d4aa', bg: 'rgba(0,212,170,0.15)' },
-  desembarcado:  { label: 'Chegou ao destino', icon: <CheckCircle size={20} weight="fill" />, color: '#6c63ff', bg: 'rgba(108,99,255,0.15)' },
+  desembarcado:  { label: 'Chegou ao destino', icon: <CheckCircle size={20} weight="fill" />, color: '#2d4b73', bg: 'rgba(45,75,115,0.15)' },
 }
 
 const TIPO_ICON: Record<string, string> = {
