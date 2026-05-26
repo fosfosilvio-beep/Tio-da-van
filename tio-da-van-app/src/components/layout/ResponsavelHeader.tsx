@@ -4,307 +4,100 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/providers/AuthProvider'
-import { House, Users, CurrencyDollar, BellSimple, SignOut, List, X, Van } from '@phosphor-icons/react'
+import { List, Bell, Gear, User, SignOut, X, SquaresFour, Users, CurrencyDollar, ChatText, Headset } from '@phosphor-icons/react/dist/ssr'
 
 export function ResponsavelHeader() {
   const { perfil, signOut } = useAuth()
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
 
+  // Title logic
+  let pageTitle = 'Elite Logistics'
+  if (pathname.includes('/meu-painel')) pageTitle = 'Dashboard'
+  if (pathname.includes('/meus-filhos')) pageTitle = 'Meus Filhos'
+  if (pathname.includes('/mensalidades')) pageTitle = 'Financeiro'
+
   const navItems = [
-    { href: '/meu-painel', icon: House, label: 'Painel' },
+    { href: '/meu-painel', icon: SquaresFour, label: 'Dashboard' },
     { href: '/meus-filhos', icon: Users, label: 'Meus Filhos' },
     { href: '/mensalidades', icon: CurrencyDollar, label: 'Financeiro' },
+    { href: '/mensagens', icon: ChatText, label: 'Mensagens' },
+    { href: '/configuracoes', icon: Gear, label: 'Configurações' },
   ]
 
   return (
     <>
-      <header className="responsavel-header">
-        <div className="header-container">
-          <Link href="/meu-painel" className="header-logo">
-            <div className="logo-icon">
-              <Van size={20} weight="fill" color="white" />
+      <header className="bg-[#13345b] text-white fixed top-0 w-full z-50 shadow-md flex justify-between items-center px-4 md:px-8 py-2 md:w-[calc(100%-16rem)] md:left-64 h-16">
+        <div className="flex items-center gap-4">
+          <button className="md:hidden text-white active:scale-95 duration-200" onClick={() => setMenuOpen(!menuOpen)}>
+            <List size={28} weight="bold" />
+          </button>
+          <span className="text-lg font-bold text-white md:hidden">Elite Logistics</span>
+          <span className="text-xl font-bold text-white hidden md:block">{pageTitle}</span>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex gap-2">
+            <button className="p-2 rounded-full hover:bg-[#2d4b73] transition-colors active:scale-95 duration-200">
+              <Bell size={24} weight="fill" />
+            </button>
+            <button className="p-2 rounded-full hover:bg-[#2d4b73] transition-colors active:scale-95 duration-200 hidden md:block">
+              <Gear size={24} weight="fill" />
+            </button>
+          </div>
+          <div className="w-9 h-9 rounded-full bg-[#f2f4f6] flex items-center justify-center overflow-hidden border-2 border-[#2d4b73] cursor-pointer">
+            {perfil?.avatar_url ? (
+               <img src={perfil.avatar_url} alt={perfil.nome} className="w-full h-full object-cover" />
+            ) : (
+               <User size={20} weight="fill" className="text-[#13345b]" />
+            )}
+          </div>
+        </div>
+      </header>
+      
+      {/* Mobile Menu Drawer */}
+      <div className={`fixed inset-0 z-[60] transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 md:hidden`}>
+        <div className="absolute inset-0 bg-black/50" onClick={() => setMenuOpen(false)} />
+        <aside className="absolute left-0 top-0 bottom-0 w-64 bg-white flex flex-col p-4 shadow-xl z-50">
+          <div className="flex justify-between items-center mb-8 px-2">
+            <div>
+              <h1 className="text-xl font-bold text-[#13345b]">Elite Logistics</h1>
+              <p className="text-[12px] font-medium text-[#74777f] mt-1">Gestão de Transporte</p>
             </div>
-            <span className="logo-text">Tio da Van</span>
-          </Link>
-
-          {/* Navegação Desktop */}
-          <nav className="header-nav-desktop">
+            <button onClick={() => setMenuOpen(false)} className="text-[#74777f]">
+              <X size={24} weight="bold" />
+            </button>
+          </div>
+          
+          <nav className="flex-1 space-y-2">
             {navItems.map(({ href, icon: Icon, label }) => {
               const isActive = pathname === href || pathname.startsWith(`${href}/`)
               return (
-                <Link key={href} href={href} className={`nav-link ${isActive ? 'active' : ''}`}>
-                  <Icon size={18} weight={isActive ? 'fill' : 'regular'} />
-                  <span>{label}</span>
+                <Link 
+                  key={href} 
+                  href={href} 
+                  onClick={() => setMenuOpen(false)}
+                  className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
+                    isActive ? 'bg-[#fdba5f] text-[#744900] font-bold' : 'text-[#43474e] hover:bg-[#f2f4f6] font-semibold'
+                  }`}
+                >
+                  <Icon size={24} weight={isActive ? 'fill' : 'regular'} />
+                  <span className="text-sm">{label}</span>
                 </Link>
               )
             })}
           </nav>
-
-          <div className="header-actions">
-            <Link href="/meu-painel/avisos" className="action-btn notif-btn">
-              <BellSimple size={20} />
-              <span className="notif-badge">2</span>
-            </Link>
-
-            <button className="action-btn menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <X size={24} /> : <List size={24} />}
+          
+          <div className="mt-auto pt-4 border-t border-[#e1e2e4]">
+            <button className="w-full flex justify-center items-center gap-2 bg-[#13345b] text-white text-sm font-semibold py-3 rounded-lg hover:bg-[#13345b]/90 transition-colors mb-4">
+              <Headset size={20} weight="fill" /> Suporte
             </button>
-
-            <div className="avatar-wrapper desktop-only">
-              {perfil?.avatar_url ? (
-                <img src={perfil.avatar_url} alt={perfil.nome} className="avatar-img" />
-              ) : (
-                <div className="avatar-fallback">{perfil?.nome?.charAt(0)?.toUpperCase() ?? 'U'}</div>
-              )}
-            </div>
+            <button onClick={signOut} className="w-full flex items-center gap-3 p-3 rounded-lg text-[#43474e] hover:bg-[#f2f4f6] transition-all">
+              <SignOut size={24} weight="bold" />
+              <span className="text-sm font-semibold">Sair</span>
+            </button>
           </div>
-        </div>
-      </header>
-
-      {/* Menu Mobile */}
-      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <div className="mobile-profile">
-          <div className="avatar-wrapper">
-             {perfil?.avatar_url ? (
-                <img src={perfil.avatar_url} alt={perfil.nome} className="avatar-img" />
-              ) : (
-                <div className="avatar-fallback">{perfil?.nome?.charAt(0)?.toUpperCase() ?? 'U'}</div>
-              )}
-          </div>
-          <div className="profile-info">
-            <span className="profile-name">{perfil?.nome}</span>
-            <span className="profile-role">Responsável</span>
-          </div>
-        </div>
-
-        <nav className="mobile-nav">
-          {navItems.map(({ href, icon: Icon, label }) => {
-            const isActive = pathname === href || pathname.startsWith(`${href}/`)
-            return (
-              <Link key={href} href={href} className={`mobile-nav-link ${isActive ? 'active' : ''}`} onClick={() => setMenuOpen(false)}>
-                <Icon size={20} weight={isActive ? 'fill' : 'regular'} />
-                <span>{label}</span>
-              </Link>
-            )
-          })}
-        </nav>
-
-        <button className="mobile-signout" onClick={signOut}>
-          <SignOut size={20} />
-          <span>Sair da conta</span>
-        </button>
+        </aside>
       </div>
-
-      <style jsx>{`
-        .responsavel-header {
-          background: #ffffff;
-          border-bottom: 1px solid #dde1e7;
-          position: sticky;
-          top: 0;
-          z-index: 50;
-        }
-
-        .header-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-          height: 64px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .header-logo {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-        }
-
-        .logo-icon {
-          width: 32px;
-          height: 32px;
-          background: #2d4b73;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .logo-text {
-          font-family: 'Manrope', sans-serif;
-          font-weight: 800;
-          font-size: 1.1rem;
-          color: #2d4b73;
-        }
-
-        .header-nav-desktop {
-          display: flex;
-          align-items: center;
-          gap: 24px;
-        }
-
-        @media (max-width: 768px) {
-          .header-nav-desktop { display: none; }
-        }
-
-        .nav-link {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          text-decoration: none;
-          color: #718096;
-          font-size: 0.9rem;
-          font-weight: 600;
-          transition: all 0.2s;
-        }
-
-        .nav-link:hover { color: #2d4b73; }
-        .nav-link.active { color: #2d4b73; }
-
-        .header-actions {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .action-btn {
-          background: none;
-          border: none;
-          color: #4a5568;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          transition: background 0.2s;
-        }
-
-        .action-btn:hover { background: #f8f9fb; }
-
-        .notif-btn { position: relative; }
-        .notif-badge {
-          position: absolute;
-          top: 4px;
-          right: 4px;
-          width: 14px;
-          height: 14px;
-          background: #e74c3c;
-          border-radius: 50%;
-          font-size: 8px;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: bold;
-        }
-
-        .menu-toggle { display: none; }
-        @media (max-width: 768px) {
-          .menu-toggle { display: flex; }
-        }
-
-        .avatar-wrapper {
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          overflow: hidden;
-          background: #2d4b73;
-        }
-
-        .avatar-img { width: 100%; height: 100%; object-fit: cover; }
-        .avatar-fallback {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-weight: bold;
-          font-size: 14px;
-        }
-
-        .desktop-only { display: block; }
-        @media (max-width: 768px) {
-          .desktop-only { display: none; }
-        }
-
-        /* Menu Mobile */
-        .mobile-menu {
-          position: fixed;
-          top: 64px;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: #ffffff;
-          z-index: 40;
-          transform: translateY(-100%);
-          opacity: 0;
-          visibility: hidden;
-          transition: all 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          padding: 20px;
-        }
-
-        .mobile-menu.open {
-          transform: translateY(0);
-          opacity: 1;
-          visibility: visible;
-        }
-
-        .mobile-profile {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding-bottom: 20px;
-          border-bottom: 1px solid #dde1e7;
-          margin-bottom: 20px;
-        }
-
-        .profile-info { display: flex; flex-direction: column; }
-        .profile-name { font-weight: 700; color: #1a1c1e; }
-        .profile-role { font-size: 0.8rem; color: #718096; }
-
-        .mobile-nav {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          flex: 1;
-        }
-
-        .mobile-nav-link {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 12px;
-          border-radius: 8px;
-          text-decoration: none;
-          color: #4a5568;
-          font-weight: 600;
-        }
-
-        .mobile-nav-link.active {
-          background: #f8f9fb;
-          color: #2d4b73;
-        }
-
-        .mobile-signout {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 12px;
-          background: none;
-          border: none;
-          color: #e74c3c;
-          font-weight: 600;
-          cursor: pointer;
-          margin-top: auto;
-        }
-      `}</style>
     </>
   )
 }
