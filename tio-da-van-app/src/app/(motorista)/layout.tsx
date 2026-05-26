@@ -1,6 +1,8 @@
 import { Header } from '@/components/layout/Header'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: { default: 'Painel', template: '%s | Tio da Van' },
 }

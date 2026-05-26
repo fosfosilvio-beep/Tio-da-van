@@ -2,6 +2,8 @@ import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { ResponsavelHeader } from '@/components/layout/ResponsavelHeader'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Meu Painel | Tio da Van',
 }
