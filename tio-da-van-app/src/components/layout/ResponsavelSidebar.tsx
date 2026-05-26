@@ -3,13 +3,26 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/providers/AuthProvider'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import {
+  LayoutDashboard,
+  MapPinned,
+  Wallet,
+  MessageSquare,
+  Settings,
+  Headset,
+  LogOut,
+  Truck,
+} from 'lucide-react'
 
 const navItems = [
-  { href: '/meu-painel',    icon: 'dashboard',   label: 'Dashboard' },
-  { href: '/meus-filhos',   icon: 'child_care',  label: 'Meus Filhos' },
-  { href: '/mensalidades',  icon: 'payments',    label: 'Financeiro' },
-  { href: '/mensagens',     icon: 'chat',        label: 'Mensagens' },
-  { href: '/configuracoes', icon: 'settings',    label: 'Configurações' },
+  { href: '/meu-painel',    Icon: LayoutDashboard, label: 'Dashboard' },
+  { href: '/meus-filhos',   Icon: MapPinned,       label: 'Rastreamento' },
+  { href: '/mensalidades',  Icon: Wallet,          label: 'Financeiro' },
+  { href: '/mensagens',     Icon: MessageSquare,   label: 'Mensagens' },
+  { href: '/configuracoes', Icon: Settings,        label: 'Configurações' },
 ]
 
 export function ResponsavelSidebar() {
@@ -17,52 +30,55 @@ export function ResponsavelSidebar() {
   const { signOut } = useAuth()
 
   return (
-    <aside className="hidden md:flex flex-col p-card-padding h-full border-r border-outline-variant bg-surface-container-lowest fixed left-0 top-0 w-64 shadow-sm z-40 pt-20">
+    <aside className="hidden md:flex flex-col h-screen border-r border-sidebar-border bg-sidebar text-sidebar-foreground fixed left-0 top-0 w-64 z-40">
 
       {/* Brand */}
-      <div className="mb-8 px-1">
-        <h1 className="text-headline-md font-bold text-primary">Elite Logistics</h1>
-        <p className="text-label-md text-on-surface-variant mt-0.5">Gestão de Transporte</p>
+      <div className="flex items-center gap-3 px-6 py-5 border-b border-sidebar-border">
+        <div className="w-10 h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shrink-0">
+          <Truck className="h-5 w-5" />
+        </div>
+        <div className="min-w-0">
+          <h1 className="text-base font-bold text-sidebar-foreground leading-tight">Elite Logistics</h1>
+          <p className="text-xs text-muted-foreground leading-tight">Transporte Escolar</p>
+        </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 space-y-1">
-        {navItems.map(({ href, icon, label }) => {
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        {navItems.map(({ href, Icon, label }) => {
           const isActive = pathname === href || pathname.startsWith(`${href}/`)
           return (
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
+              className={cn(
+                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
                 isActive
-                  ? 'bg-secondary-container text-on-secondary-container font-bold'
-                  : 'text-on-surface-variant hover:bg-surface-container-high'
-              }`}
+                  ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm'
+                  : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+              )}
             >
-              <span
-                className="material-symbols-outlined text-[22px] shrink-0"
-                style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
-              >
-                {icon}
-              </span>
-              <span className="text-label-lg">{label}</span>
+              <Icon className="h-5 w-5 shrink-0" />
+              <span>{label}</span>
             </Link>
           )
         })}
       </nav>
 
+      <Separator className="bg-sidebar-border" />
+
       {/* Footer */}
-      <div className="pt-4 border-t border-outline-variant space-y-1">
-        <button className="w-full flex justify-center items-center gap-2 bg-primary text-on-primary text-label-lg py-3 rounded-lg hover:bg-primary/90 transition-colors">
-          <span className="material-symbols-outlined text-[18px]">headset_mic</span>
+      <div className="p-3 space-y-1">
+        <Button className="w-full" size="sm">
+          <Headset className="h-4 w-4" />
           Suporte
-        </button>
+        </Button>
         <button
           onClick={signOut}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
         >
-          <span className="material-symbols-outlined text-[22px]">logout</span>
-          <span className="text-label-lg">Sair</span>
+          <LogOut className="h-5 w-5 shrink-0" />
+          Sair
         </button>
       </div>
     </aside>

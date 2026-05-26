@@ -11,12 +11,14 @@ export const metadata: Metadata = {
 
 export default function ResponsavelLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-background text-on-background min-h-screen flex">
+    <div className="min-h-screen bg-background text-foreground">
       <ResponsavelSidebar />
-      <div className="flex-1 md:ml-64 flex flex-col min-h-screen">
+      <div className="md:pl-64 flex flex-col min-h-screen">
         <ResponsavelHeader />
-        <main className="flex-1 p-container-margin pt-24 max-w-7xl mx-auto w-full">
-          {children}
+        <main className="flex-1 p-4 md:p-6 lg:p-8">
+          <div className="mx-auto w-full max-w-7xl">
+            {children}
+          </div>
         </main>
       </div>
     </div>
